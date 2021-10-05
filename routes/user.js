@@ -9,8 +9,8 @@ router.route('/signUp')
 .get(user.getSignUp)
 .post(user.handleSignUp)
 
-router.post("/admin/assign/:id", user.handleAssign)
-
+router.post("/admin/assign/:id", user.handleAssign) 
+ 
 // LOGIN ROUTES
 router.route('/login')
 .get(user.getLogin)

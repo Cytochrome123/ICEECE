@@ -9,11 +9,11 @@ exports.getRegister = (req,res)=>{
 exports.handleRegister = (req,res)=>{
     res.redirect('/regDash')
 }
-exports.getAll = async(req,res)=>{
-    const fil = await cloudinary.api.resources("file");
-    console.log(fil)
-    res.send(fil)
-}
+// exports.getAll = async(req,res)=>{
+//     const fil = await cloudinary.api.resources("file");
+//     console.log(fil)
+//     res.send(fil)
+// }
 exports.getSubmitPaper = (req,res)=>{
     res.render("user/paperSubmission")
 }
@@ -99,19 +99,21 @@ exports.getAllPapers = async(req,res)=>{
     .catch(e => console.log(e))
     
 }
-
+ 
 
 
 exports.getProgress = (req,res)=>{
     res.render("user/progress")
 }
 exports.downloadPaper = async(req,res)=>{
-    await Paper.find({_id: req.params.id}) 
+    await Paper.findById({_id: req.params.id}) 
     .then(doc => {
-        const y = __dirname+"/public/"+doc[2].filePath;
-        res.download(y)
+        res.send(doc)
+        // const y = __dirname+"/public/"+doc.filePath;
+        // res.download(y)
     })
 }
+// C:\Users\Hp\Documents\iii\public\uploads\papers\GPLOADED ZLY 103  PAST QUESTIONS 2015.pdf
 exports.reviewPaper = (req,res)=>{
     res.render("admin/review")
 }

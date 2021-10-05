@@ -27,10 +27,10 @@ exports.handleSignUp = async(req,res)=>{
     } catch (error) {
         console.log(error);
     }
-}
+}  
 exports.handleAssign = async(req,res)=>{
     const {id }= req.params.id
-    const user = await (await User.findByIdAndUpdate(id,{'role': 'admin'})).save()
+    const user = await (await User.findByIdAndUpdate(id,{ $set: { role: 'admin' }}, {new:true})).save()
     .then((us => {
         console.log(us)
         res.redirect("/admin/attendance")

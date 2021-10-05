@@ -9,7 +9,7 @@ router.get('/all', dashboard.getAll)
 // SIGN UP ROUTES
 router.get('/progress', dashboard.getProgress)
 
-
+ 
 // REGISTER ROUTES
 router.route('/submitPaper')
 .get(dashboard.getSubmitPaper)

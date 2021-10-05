@@ -37,9 +37,9 @@ const sessionConfig = {
   
   };
 
-// mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
+mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
  
-mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
+// mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
 
 mongoose.connection.on("error", console.error.bind(console, "connection error"));
 mongoose.connection.once("open", ()=>console.log("Database connected!!!"));
@@ -63,12 +63,6 @@ passportLocalStrategy(passport)
 
 
 
-
-// const storage = multer.memoryStorage({
-//     destination: (req,file,cb)=>{
-//         cb(null,"")
-//     }
-// })
 app.use(function (req, res, next) {
     res.locals.success_msg = req.flash("success_msg");
     res.locals.error_msg = req.flash("error_msg");
@@ -77,24 +71,13 @@ app.use(function (req, res, next) {
     res.locals.path = req.path;
     next();
   });
-// const upload = multer({
-//     storage
-// }).single("file")
+
 
 app.use(require('./routes/user'))
 app.use(require('./routes/dashboard'))
 
-// ******DASHBOARDS******
 
-
-// ********USER**********
-
-
-
-
-
-
-// **********ADMIN************
+// ***ADMIN*****
 
 app.get("/admin/attendance", async(req,res)=>{
   try {
@@ -107,31 +90,7 @@ app.get("/admin/attendance", async(req,res)=>{
   }
 })
 
-app.get("/admin/papers", async(req,res)=>{
-    try {
-    let paper = await Paper.find()
-        console.log("********show")
-        console.log(paper);
-        res.json(paper)
-        // res.render("admin/submissions", {Paper})
-    }catch (error) {
-        console.log(error);
-    }
-    
-})
-app.get("/admin/review", (req,res)=>{
-    res.render("admin/review")
-})
-app.post("/admin/review", (req,res)=>{
-    const {articleName,one,two} = req.body
-    res.json(req.body)
-//     const review = new Review({
-//         name: articleName,
-//         satisfactory: String
-// })
-    // })
-    res.redirect("admin/submissions")
-})
+
+
 
 app.listen(process.env.PORT || 3000, (req,res)=>console.log("hey"))
-
