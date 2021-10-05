@@ -31,7 +31,7 @@ exports.handleSubmitPaper = async(req,res)=>{
             filePath: x
        }).save()
        .then(doc =>{
-           res.redirect("/submitPaper")
+           res.redirect("/progress")
        })
        .catch(e => console.log(e))
 

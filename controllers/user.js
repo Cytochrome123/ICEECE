@@ -28,6 +28,16 @@ exports.handleSignUp = async(req,res)=>{
         console.log(error);
     }
 }  
+exports.getAttendance = async(req,res)=>{
+    try {
+        const users = await  User.find()
+    
+        res.render("admin/attendance", {users})
+      } catch (error) {
+        console.log(error);
+          // new Error(error)
+      }
+}
 exports.handleAssign = async(req,res)=>{
     const {id }= req.params.id
     const user = await (await User.findByIdAndUpdate(id,{ $set: { role: 'admin' }}, {new:true})).save()

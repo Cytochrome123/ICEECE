@@ -4,7 +4,7 @@ const dashboard  = require('../controllers/dashboard')
 
 
 // SIGN UP ROUTES 
-router.get('/all', dashboard.getAll)
+// router.get('/all', dashboard.getAll)
 
 // SIGN UP ROUTES
 router.get('/progress', dashboard.getProgress)
@@ -14,6 +14,8 @@ router.get('/progress', dashboard.getProgress)
 router.route('/submitPaper')
 .get(dashboard.getSubmitPaper)
 .post(upload.single("paper"),dashboard.handleSubmitPaper)
+
+
 
 router.route("/admin/papers")
 .get(dashboard.getAllPapers)

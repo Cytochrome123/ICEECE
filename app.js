@@ -79,16 +79,16 @@ app.use(require('./routes/dashboard'))
 
 // ***ADMIN*****
 
-app.get("/admin/attendance", async(req,res)=>{
-  try {
-    const users = await  User.find()
+// app.get("/admin/attendance", async(req,res)=>{
+//   try {
+//     const users = await  User.find()
 
-    res.render("admin/attendance", {users})
-  } catch (error) {
-    console.log(error);
-      new Error(error)
-  }
-})
+//     res.render("admin/attendance", {users})
+//   } catch (error) {
+//     console.log(error);
+//       // new Error(error)
+//   }
+// })
 
 
 
