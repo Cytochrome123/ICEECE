@@ -7,7 +7,7 @@ const dashboard  = require('../controllers/dashboard')
 // router.get('/all', dashboard.getAll)
 
 // SIGN UP ROUTES
-router.get('/progress', dashboard.getProgress)
+router.get('/progress/:id', dashboard.getProgress)
 
  
 // REGISTER ROUTES
@@ -17,7 +17,7 @@ router.route('/submitPaper')
 
 
 
-router.route("/admin/papers")
+router.route("/papers")
 .get(dashboard.getAllPapers)
 
 router.route("/download/:id")

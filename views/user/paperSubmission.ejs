@@ -289,7 +289,7 @@
 							<span class="nav-text">ICEECE</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="#">Dashboard</a></li>
 						
 						</ul>
                     </li>
@@ -302,7 +302,7 @@
 							<span class="nav-text">Data</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
+                            <li><a href="#">Profile</a></li>
                             
                         </ul>
                     </li>
@@ -313,8 +313,8 @@
 							<span class="nav-text">Sessions</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Conference</a></li>
-                            <li><a href="./chart-morris.html">Finished</a></li>
+                            <li><a href="#">Conference</a></li>
+                            <li><a href="#">Finished</a></li>
                             
                         </ul>
                     </li>
@@ -328,7 +328,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="/submitPaper">Submit a paper</a></li>
-                            
+							<li><a href="/papers">View submissions</a></li>
                         </ul>
                     </li>
                     <% if (User) { %>
@@ -375,59 +375,50 @@
                         <div class="card">
                             <div class="card-body">
                                 <form action="/submitPaper" method="post" enctype="multipart/form-data">
-									<div class="email-left-box px-0 mb-3">
-										<div class="compose-content">
-											<div action="#">
-												<div class="form-group">
+									<!-- <div class="email-left-box px-0 mb-3"> -->
+										<div class="row">
+											<!-- <div action="#" > -->
+												<div class="col-lg-6 form-group">
 													<input type="text" class="form-control bg-transparent" name="fName" placeholder=" First Name">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="text" class="form-control bg-transparent" name="lName" placeholder=" Last Name">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="email" class="form-control bg-transparent" name="email" placeholder=" Email">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="number" class="form-control bg-transparent" name="no" placeholder=" Phone Number">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="text" class="form-control bg-transparent" name="institution" placeholder=" Institution">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="text" class="form-control bg-transparent" name="department" placeholder=" Department">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="text" class="form-control bg-transparent" name="position" placeholder=" Position">
 												</div>
-												<div class="form-group">
+												<div class="col-lg-6 form-group">
 													<input type="text" class="form-control bg-transparent" name="title" placeholder=" Title">
 												</div>
+												
+											<!-- </div> -->
+										</div>
+										<div class="row">
+											<div class="col-lg-6">
+												<div class=" form-group">
+													<label class="text-label"><h5 class="mb-2"><i class="fa fa-paperclip"></i> Passport</h5></label>
+													<input name="file" type="file" multiple class="mb-3 btn btn-outline-primary btn form-control-file"/>
+												</div>
+											</div>
+											<div class="col-lg-6">
 												<div class="form-group">
-													<input type="file" name="image id="">
+													<label class="text-label"><h5 class="mb-2"><i class="fa fa-paperclip"></i> Attachment</h5></label>
+													<input type="file" name="image" id="" multiple class="mb-3 btn btn-outline-primary btn form-control-file">
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="email-right-box ml-0 ml-sm-4 ml-sm-0">
-										
-										<div class="compose-content">
-											<h5 class="mb-4"><i class="fa fa-paperclip"></i> Attatchment</h5>
-											<div class="dropzone">
-												<div class="fallback">
-													<input name="paper" type="file" id="paper" multiple />
-												</div>
-												<div class="dz-message needsclick">
-	
-													<div class="mb-3">
-														<i class="mdi mdi-cloud-upload-outline text-muted display-4"></i>
-													</div>
-						
-													<h4>Drop files here or click to upload.</h4>
-												</div>
-											</div>
-										</div>
-										
-									</div>
 									<div class="text-center mt-4 mb-2 ">
 										<button class="btn btn-primary btn-sl-sm mr-2" type="submit"><span class="mr-2"><i class="fa fa-paper-plane"></i></span>Send</button>
 										<button class="btn btn-danger light btn-sl-sm" type="submit"><span class="mr-2"><i class="fa fa-times" aria-hidden="true"></i></span>Discard</button>

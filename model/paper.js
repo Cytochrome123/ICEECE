@@ -6,7 +6,13 @@ const paperSchema = new mongoose.Schema({
     title:String,
     passport:String,
     fileName: String,
-    filePath:String
+    filePath:String,
+    reviews:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
 })
 
 module.exports = mongoose.model("Paper", paperSchema)

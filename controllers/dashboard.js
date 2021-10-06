@@ -1,6 +1,7 @@
 const {cloudinary} = require("../config/cloudinary");
 
 const Paper = require("../model/paper");
+const Review = require("../model/review")
 
 
 exports.getRegister = (req,res)=>{
@@ -31,7 +32,7 @@ exports.handleSubmitPaper = async(req,res)=>{
             filePath: x
        }).save()
        .then(doc =>{
-           res.redirect("/progress")
+           res.redirect("/papers")
        })
        .catch(e => console.log(e))
 
@@ -94,7 +95,7 @@ exports.getAllPapers = async(req,res)=>{
     const paper = await Paper.find()
     .then(doc => {
         console.log(doc)
-        res.render("admin/submissions", {Paper:doc})
+        res.render("user/submissions", {Paper:doc})
     })
     .catch(e => console.log(e))
     
@@ -102,11 +103,17 @@ exports.getAllPapers = async(req,res)=>{
  
 
 
-exports.getProgress = (req,res)=>{
-    res.render("user/progress")
+exports.getProgress = async(req,res)=>{ 
+    const {id} = req.params
+    const about = await Paper.findById(id).populate("reviews")
+    .then(paper =>{
+        res.render("user/progress", {paper})
+    })
 }
+
+
 exports.downloadPaper = async(req,res)=>{
-    await Paper.findById({_id: req.params.id}) 
+    await Paper.findById({_id: req.params.id})
     .then(doc => {
         res.send(doc)
         // const y = __dirname+"/public/"+doc.filePath;
@@ -117,7 +124,12 @@ exports.downloadPaper = async(req,res)=>{
 exports.reviewPaper = (req,res)=>{
     res.render("admin/review")
 }
-exports.handleReviewPaper = (req,res)=>{
-    const {articleName}= req.body
-    console.log(articleName)
+exports.handleReviewPaper = async(req,res)=>{
+    const {articleName,satisfy,aware,descriptive,reason_to_title,original,significance,clarity,procedure,beneficial,organization,complete,references,read,audience,comment_to_editor,comment_to_author,score,recommendation,re_review,Date} = req.body
+    // console.log(req.body)
+    const rew = new Review(req.body)
+    .save()
+    .then(com => {
+        res.redirect("/progress")
+    })
 }

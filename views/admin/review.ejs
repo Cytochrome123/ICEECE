@@ -10,6 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/images/favicon.png">
     <!-- Form step -->
     <link href="/public/assets/vendor/jquery-smartwizard/dist/css/smart_wizard.min.css" rel="stylesheet">
+	<link href="/public/assets/vendor/dropzone/dist/dropzone.css" rel="stylesheet">
+
     <!-- Custom Stylesheet -->
 	<link href="/public/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/public/assets/css/style.css" rel="stylesheet">
@@ -290,7 +292,7 @@
 							<span class="nav-text">ICEECE</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="#">Dashboard</a></li>
 						
 						</ul>
                     </li>
@@ -303,7 +305,7 @@
 							<span class="nav-text">Data</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
+                            <li><a href="#">Profile</a></li>
                             
                         </ul>
                     </li>
@@ -314,8 +316,8 @@
 							<span class="nav-text">Sessions</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Conference</a></li>
-                            <li><a href="./chart-morris.html">Finished</a></li>
+                            <li><a href="#">Conference</a></li>
+                            <li><a href="#">Finished</a></li>
                             
                         </ul>
                     </li>
@@ -329,7 +331,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="/submitPaper">Submit a paper</a></li>
-                            
+							<li><a href="/papers">View submissions</a></li>
                         </ul>
                     </li>
                     <% if (User) { %>
@@ -408,8 +410,8 @@
 														<div class="form-group">
 															<label class="text-label"> <strong> Title Satisfactory*</strong></label>
 															<div> 
-																<label class="radio-inline mr-3"><input type="radio" value="satisfy" name="one"> Yes</label>
-																<label class="radio-inline mr-3"><input type="radio" value="satisfy" name="two"> No</label>
+																<label class="radio-inline mr-3"><input type="radio" value="Yes" name="satisfy"> Yes</label>
+																<label class="radio-inline mr-3"><input type="radio" value="No" name="satisfy"> No</label>
 															</div>
 														</div>
 													</div>
@@ -432,15 +434,15 @@
 														<div class="form-group">
 															<label class="text-label"> <strong> Is the title well descriptive of the topic?*</strong></label>
 															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="descriptive" name="five"> Yes</label>
-																<label class="radio-inline mr-3"><input type="radio" value="descriptive" name="six"> No</label>
+																<label class="radio-inline mr-3"><input type="radio" value="Yes" name="descriptive"> Yes</label>
+																<label class="radio-inline mr-3"><input type="radio" value="No" name="descriptive"> No</label>
 															</div>
 														</div>
 													</div>
 													<div class="col-lg-12 mb-3">
 														<div class="form-group">
 															<label class="text-label"> <strong> If the answer to (1d) above is NO, please kindly suggest a suitable title for the article *</strong></label>
-															<input type="text" name="place" class="form-control" required>
+															<input type="text" name="reason_t_title" class="form-control" required>
 														</div>
 													</div>
 												
@@ -525,11 +527,11 @@
 														<div class="form-group">
 															<label class="text-label"> <strong>Completeness*</strong></label>
 															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="complte"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="complte"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="complte"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="complte"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="complte"> Not Acceptable(2)</label>
+																<label class="radio-inline mr-3"><input type="radio" value="10" name="complete"> Very High(10)</label>
+																<label class="radio-inline mr-3"><input type="radio" value="8" name="complete"> High(8)</label>
+																<label class="radio-inline mr-3"><input type="radio" value="6" name="complete"> Moderate(6)</label>
+																<label class="radio-inline mr-3"><input type="radio" value="4" name="complete"> Low(4)</label>
+																<label class="radio-inline mr-3"><input type="radio" value="2" name="complete"> Not Acceptable(2)</label>
 															</div>
 														</div>
 													</div>
@@ -620,12 +622,19 @@
 													<div class="form-group">
 														<label class="text-label"><strong>WOULD YOU LIKE TO RE-REVIEW THIS ARTICLE TO ASCERTAIN IF THE AUTHORS MADE THE SUGGESTED CHANGES?*</strong></label>
 														<div>
-															<label class="radio-inline mr-3"><input type="radio" value="Yes" name="again"> Yes</label>
-															<label class="radio-inline mr-3"><input type="radio" value="No" name="again"> No</label>
+															<label class="radio-inline mr-3"><input type="radio" value="Yes" name="re_review"> Yes</label>
+															<label class="radio-inline mr-3"><input type="radio" value="No" name="re_review"> No</label>
 														</div>
 													</div>
 												</div>
+												
 												<div class="col-lg-6 mb-2">
+													<!-- <div id="corrections" class="compose-content"> -->
+														<h5 class="mb-2"><i class="fa fa-paperclip"></i> Upload corrections</h5>
+														<form action="#" class="dropzone">
+																<input name="file" type="file" multiple class="mb-3 btn btn-outline-primary btn form-control-file"/>
+														</form>
+													<!-- </div> -->
 													<label class="text-label"><strong>Date of review*</strong></label>
 													<div>
 														<input type="date" name="Date" id="" class="form-control">
@@ -697,6 +706,8 @@
 
    <!-- Form Steps -->
 	<script src="/public/assets/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js"></script>
+	<script src="/public/assets/vendor/dropzone/dist/dropzone.js"></script>
+
 	
 	<script>
 		$(document).ready(function(){

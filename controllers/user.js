@@ -22,7 +22,7 @@ exports.handleSignUp = async(req,res)=>{
             console.log(user);
 
         passport.authenticate('local')(req,res, ()=>{
-            res.redirect('/userDash')
+            res.redirect('/submitPaper')
         })
     } catch (error) {
         console.log(error);
@@ -40,7 +40,8 @@ exports.getAttendance = async(req,res)=>{
 }
 exports.handleAssign = async(req,res)=>{
     const {id }= req.params.id
-    const user = await (await User.findByIdAndUpdate(id,{ $set: { role: 'admin' }}, {new:true})).save()
+    const {role} = req.body
+    const user = await (await User.findByIdAndUpdate(id,{ $set: { role: role }}, {new:true})).save()
     .then((us => {
         console.log(us)
         res.redirect("/admin/attendance")
@@ -52,7 +53,7 @@ res.render('login')
 }
 exports.handleLogin = (req,res, next)=>{
     passport.authenticate("local", {
-        successRedirect: "/userDash",
+        successRedirect: "/submitPaper",
         failureRedirect: "back",
         failureFlash: true,
         successFlash: true,
