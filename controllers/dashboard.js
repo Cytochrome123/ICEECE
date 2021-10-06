@@ -107,7 +107,7 @@ exports.getProgress = async(req,res)=>{
     const {id} = req.params
     const about = await Paper.findById(id).populate("reviews")
     .then(paper =>{
-        res.render("user/progress", {paper})
+        res.render("user/progress", {paper:paper.reviews})
     })
 }
 

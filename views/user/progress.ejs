@@ -373,28 +373,10 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="email-left-box generic-width px-0 mb-5">
-                                    <!-- <div class="p-0">
-                                        <h3>Title</h3>
-                                        <p>Authors</p>
-                                    </div> -->
-                                    <div class="nav nav-tabs">
-										<div class="mail-list mt-4">
-											<a href="#paper" class="list-group-item active nav-item" data-toggle="tab"><i
-													class="fa fa-inbox font-18 align-middle mr-2"></i> Paper </a>
-											<a href="#status" class="list-group-item"><i
-												class="fa fa-trash font-18 align-middle mr-2"></i>Status</a>
-											<a href="#review" class="list-group-item nav-item"><i
-													class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Reviewers</a>
-											
-											<a href="#corrections" class="list-group-item"><i
-												class="fa fa-trash font-18 align-middle mr-2"></i>Upload corrections</a>
-										</div>
-									</div>
-                                </div>
-                                <div class="email-right-box clear-both ml-0 ml-sm-4 ml-sm-0">
+                               
+                                <!-- <div class="email-right-box clear-both ml-0 ml-sm-4 ml-sm-0"> -->
                                     <div class="tab-content">
-                                        <h3 id="">Title</h3>
+                                        <!-- <h3 id="">Title</h3> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
@@ -402,10 +384,12 @@
                                                 <div class="read-content">
                                                     <div class="media pt-3 d-sm-flex d-block justify-content-between">
 														<div class="clearfix mb-3 d-flex">
-															<img class="mr-3 rounded" width="50" alt="image" src="./images/avatar/1.jpg">
+															<div class="profile-photo">
+																<img src="/public/assets/images/profile/profile.png" class="img-fluid rounded-circle" alt="">
+															</div>
 															<div class="media-body mr-2">
 																<h5 class="text-primary mb-0 mt-1">Title</h5>
-																<p class="mb-0">Authors</p>
+																<sub class="mb-0">Authors</sub>
 															</div>
 														</div>
 													</div>
@@ -431,6 +415,23 @@
                                                     <div id="review" class="read-content-attachment">
                                                         <h6 class="tab-fane"> Reviews <span>(3)</span></h6>
                                                         <div class="row">
+															<%for(pro of paper){%>
+																<div class="col-xl-6">
+																	<div class="card">
+																		<div class="card-header border-0 pb-0">
+																			<h5 class="card-title">pro.articleName</h5>
+																		</div>
+																		<div class="card-body">
+																			<p class="card-text">He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff <br> sections. The bedding was hardly able to cover it and seemed ready to
+																				slide off any moment.
+																			</p>
+																		</div>
+																		<div class="card-footer border-0 pt-0">
+																			<p class="card-text d-inline">Overall rating</p>
+																			<a href="javascript:void()" class="card-link float-right"><i class="fa fa-download mb-2"></i>Link to critique</a>
+																		</div>
+																	</div>
+															<%}%>	
 															<div class="col-xl-6">
 																<div class="card">
 																	<div class="card-header border-0 pb-0">
@@ -467,7 +468,7 @@
                                                     </div>
                                                     <hr>
                                                     <div id="corrections" class="compose-content">
-                                                        <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attatchment</h5>
+                                                        <h5 class="mb-4"><i class="fa fa-paperclip"></i> Upload corrections</h5>
 										                <form action="#" class="dropzone">
 											                <div class="fallback">
 												                <input name="file" type="file" multiple />
@@ -483,7 +484,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>

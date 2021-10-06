@@ -49,7 +49,7 @@ exports.handleAssign = async(req,res)=>{
     .catch(e => console.log(e))
 }
 exports.getLogin = (req,res)=>{
-res.render('login')
+res.render('user/login')
 }
 exports.handleLogin = (req,res, next)=>{
     passport.authenticate("local", {
