@@ -6,6 +6,7 @@ const paperSchema = new mongoose.Schema({
     department:String,
     position:String,
     title:String,
+    author: String,
     passport:String,
     fileName: String,
     filePath:String,

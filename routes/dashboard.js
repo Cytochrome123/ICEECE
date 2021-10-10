@@ -7,7 +7,7 @@ const dashboard  = require('../controllers/dashboard')
 //###########USER####### 
 
 router.route( '/submitPaper') 
-.get(isLoggedIn , dashboard.getSubmitPaper)
+.get( dashboard.getSubmitPaper)
 .post(upload.single("file"),dashboard.handleSubmitPaper)
 
 router.get("/user/paperDetails/:id" , dashboard.getPaperDetails)

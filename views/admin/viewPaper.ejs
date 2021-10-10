@@ -322,7 +322,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="/submitPaper">Submit a paper</a></li>
-							<li><a href="/papers">View submissions</a></li>
+							<li><a href="/admin/papers">View submissions</a></li>
                         </ul>
                     </li>
                     <% if (User) { %>
@@ -356,8 +356,15 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+			
             <!-- row -->
 			<div class="container-fluid">
+				<div class="page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Details</a></li>
+					</ol>
+				</div>
 				<div class="row mb-5">
 					<div class="col-lg-8">
 						<p><strong>Paper Title:</strong></p>
@@ -516,7 +523,218 @@
 									<h5 class="card-title">Ratings</h5>
 								</div>
 								<div class="card-body">
-									<p>Quality <span class=""></span> </p>
+									<div class="row">
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Title satisfactory</a></h4>
+															
+															<span class="price"><%=paper.reviews.satisy%></span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Prior publication elsewhere</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Descriptive title</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Originality</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Significance</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Clarity</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Repeatability of procedure</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Contribution to knowledge</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Good organization</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Completeness</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">References</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Readability</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Reference to target audience</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Paper score</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-2">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Date of review</a></h4>
+															
+															<span class="price">YES</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Recommendation</a></h4>
+															
+															<span class="price">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam impedit reprehenderit nesciunt animi ullam, esse aliquam corporis praesentium earum hic! Cum repudiandae nostrum incidunt eius ex illo, laboriosam consectetur odit!</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

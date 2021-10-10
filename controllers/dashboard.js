@@ -12,13 +12,14 @@ exports.getSubmitPaper = (req,res)=>{
     res.render("user/paperSubmission" , {success : ""})
 }
 exports.handleSubmitPaper = async(req,res)=>{
-    const {fName,lName,email,no,institution,department,position,title,passport,fileName,filePath} = req.body
+    const {fName,lName,email,no,institution,department,position,title,author,passport,fileName,filePath} = req.body
     const x = "uploads/papers/"+req.file.originalname;
     const temp = new Paper({
          institution:institution,
          department:department,
          position:position,
          title:title,
+         author:author,
          passport:passport,
          fileName:fName,
          // filePath: x
@@ -40,6 +41,7 @@ exports.getPaperDetails = async(req,res)=>{
         }else{
             // Paper.populated("reviews")
             console.log(doc)
+            // console.log(Paper.reviews.length
             res.render("user/paperDetails" , {doc})
         }
     })
