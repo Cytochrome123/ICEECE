@@ -1,7 +1,114 @@
 const {cloudinary} = require("../config/cloudinary");
 
+// const User = require("../model/user")
 const Paper = require("../model/paper");
 const Review = require("../model/review")
+
+
+// ########USER#########
+
+exports.getSubmitPaper = (req,res)=>{
+    // console.log(req.User)
+    res.render("user/paperSubmission" , {success : ""})
+}
+exports.handleSubmitPaper = async(req,res)=>{
+    const {fName,lName,email,no,institution,department,position,title,passport,fileName,filePath} = req.body
+    const x = "uploads/papers/"+req.file.originalname;
+    const temp = new Paper({
+         institution:institution,
+         department:department,
+         position:position,
+         title:title,
+         passport:passport,
+         fileName:fName,
+         // filePath: x
+    }).save()
+    .then(doc =>{
+        res.render("user/paperSubmission" , {paper : doc , success : "Submitted successfully : Click to view"})
+    })
+    .catch(e => console.log(e)) 
+
+
+    
+    
+}
+exports.getPaperDetails = async(req,res)=>{
+    const id = req.params.id
+    const work = Paper.findById(id).populate("reviews").exec((err,doc)=>{
+        if(err){
+            console.log(err)
+        }else{
+            // Paper.populated("reviews")
+            console.log(doc)
+            res.render("user/paperDetails" , {doc})
+        }
+    })
+    // .then(doc => {
+    //     console.log(doc)
+    //     res.render("user/paperDetails" , {doc})
+    // })
+    // .catch(e => console.log(e))
+    
+}
+
+// ########REVIEWER########
+
+exports.getAllPapers = async(req,res)=>{
+    const paper = await Paper.find()
+    .then(doc => {
+        console.log(doc)
+        res.render("admin/allSubmissions", {Paper:doc})
+    })
+    .catch(e => console.log(e))
+    
+}
+exports.getDetails = async(req,res)=>{
+    const {id} = req.params
+    const paper = await Paper.findById(id)
+    .then(doc =>{
+        res.render("admin/viewPaper" , {paper:doc})
+    })
+    
+}
+exports.reviewPaper = async(req,res)=>{
+    const {id} = req.params
+    const paper = await Paper.findById(id)
+    .then(doc=>{
+        res.render("admin/review" , {doc})
+    })
+    
+}
+exports.handleReviewPaper = async(req,res)=>{
+    // const {articleName,satisfy,aware,descriptive,reason_to_title,original,significance,clarity,procedure,beneficial,organization,complete,references,read,audience,comment_to_editor,comment_to_author,score,recommendation,re_review,date} = req.body
+    // console.log(req.body)
+    const {id} = req.params
+    const paper = await Paper.findById(id)
+    .then(doc =>{
+        console.log(doc)
+        const rew = new Review(req.body)
+       .save() 
+       .then(com => {
+           doc.reviews.push(com)
+           doc.save()
+           .then(fullDoc =>{
+               console.log(fullDoc)
+               res.redirect("/admin/papers")
+           })
+           .catch(e=>{
+               console.log(e)
+           })
+           
+        })
+    })
+    
+    
+}
+
+
+// ########ADMIN###########
+
+
+
 
 
 exports.getRegister = (req,res)=>{
@@ -15,101 +122,19 @@ exports.handleRegister = (req,res)=>{
 //     console.log(fil)
 //     res.send(fil)
 // }
-exports.getSubmitPaper = (req,res)=>{
-    res.render("user/paperSubmission")
-}
-exports.handleSubmitPaper = async(req,res)=>{
-       const {fName,lName,email,no,institution,department,position,title,passport,fileName,filePath} = req.body
-
-       const x = "uploads/papers/"+req.file.originalname;
-       const temp = new Paper({
-            institution:institution,
-            department:department,
-            position:position,
-            title:title,
-            passport:passport,
-            fileName:fName,
-            filePath: x
-       }).save()
-       .then(doc =>{
-           res.redirect("/papers")
-       })
-       .catch(e => console.log(e))
 
 
-    // console.log(req.file)
-    // const result = await cloudinary.uploader.upload(req.file.path);
-    // console.log("*****above****")
-    // console.log(result)
 
-    // try {
-    //   const {path} = req.file;
-    //   const pName = req.file.originalname.split(".")[0]
-    // let result = await cloudinary.uploader.upload(
-    //   path,
-    //   {
-    //     resource_type : "raw",
-    //     public_id:`paperUploads/${pName}`
-    //   },
-    //   )
-    //   res.json(result)
-    // } catch (error) {
-    //   res.json(error)
-    // }
-
-    // const paper = await  new Paper({
-    //     institution:institution,
-    //     department:department,
-    //     position:position,
-    //     title:title,
-    //     passport:passport,
-    //     fileName:result.original_filename,
-    //     file:result.secure_url
-    //     //  save files later
-    // })
-    // await paper.save()
-    // .then(doc => {
-    //     console.log("********doc")
-    //     console.log(doc)  
-    //     res.redirect("/userDash")
-    // })
-    // .catch(e => console.log(e))
-
-    // console.log(req.file)
-    // try{
-    //     const result = await cloudinary.uploader.upload(req.file.path)
-    //     console.log(result)
-    // }catch(err){
-    //     console.log(err)
-    // }
-
-    // try {
-    //     const result = await cloudinary.uploader.upload(req.file.path)
-    //     await console.log(result)
-    //     res.send("success")
-    // } catch (err) {
-    //     console.log(err);
-    // }
-}
-exports.getAllPapers = async(req,res)=>{
-    const paper = await Paper.find()
-    .then(doc => {
-        console.log(doc)
-        res.render("user/submissions", {Paper:doc})
-    })
-    .catch(e => console.log(e))
-    
-}
  
 
 
-exports.getProgress = async(req,res)=>{ 
-    const {id} = req.params
-    const about = await Paper.findById(id).populate("reviews")
-    .then(paper =>{
-        res.render("user/progress", {paper:paper.reviews})
-    })
-}
+// exports.getProgress = async(req,res)=>{ 
+//     const {id} = req.params
+//     const about = await Paper.findById(id).populate("reviews")
+//     .then(paper =>{
+//         res.render("user/paperDetails", {paper:paper.reviews})
+//     })
+// }
 
 
 exports.downloadPaper = async(req,res)=>{
@@ -121,15 +146,5 @@ exports.downloadPaper = async(req,res)=>{
     })
 }
 // C:\Users\Hp\Documents\iii\public\uploads\papers\GPLOADED ZLY 103  PAST QUESTIONS 2015.pdf
-exports.reviewPaper = (req,res)=>{
-    res.render("admin/review")
-}
-exports.handleReviewPaper = async(req,res)=>{
-    const {articleName,satisfy,aware,descriptive,reason_to_title,original,significance,clarity,procedure,beneficial,organization,complete,references,read,audience,comment_to_editor,comment_to_author,score,recommendation,re_review,Date} = req.body
-    // console.log(req.body)
-    const rew = new Review(req.body)
-    .save()
-    .then(com => {
-        res.redirect("/progress")
-    })
-}
+
+

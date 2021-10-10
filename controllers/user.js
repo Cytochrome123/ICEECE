@@ -4,7 +4,7 @@ const { model } = require('mongoose')
 const User = model('User')
 
 exports.getSignUp = (req,res)=>{
-    res.render('signUp') 
+    res.render('user/signUp') 
 }
 exports.handleSignUp = async(req,res)=>{
     const {fName,lName,email,Username,Password} = req.body

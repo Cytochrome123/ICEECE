@@ -1,4 +1,6 @@
 const mongoose = require("mongoose")
+const time = require("mongoose-timestamp")
+
 const paperSchema = new mongoose.Schema({
     institution:String,
     department:String,
@@ -14,6 +16,8 @@ const paperSchema = new mongoose.Schema({
         }
     ]
 })
+
+paperSchema.plugin(time) 
 
 module.exports = mongoose.model("Paper", paperSchema)
 

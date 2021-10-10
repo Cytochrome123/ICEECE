@@ -1,36 +1,56 @@
 const router = require('express').Router();
 const upload = require("../config/multer")
 const dashboard  = require('../controllers/dashboard')
+// const {isLoggedIn} = require("../app")
 
 
-// SIGN UP ROUTES 
-// router.get('/all', dashboard.getAll)
+//###########USER####### 
 
-// SIGN UP ROUTES
-router.get('/progress/:id', dashboard.getProgress)
+router.route( '/submitPaper') 
+.get(isLoggedIn , dashboard.getSubmitPaper)
+.post(upload.single("file"),dashboard.handleSubmitPaper)
+
+router.get("/user/paperDetails/:id" , dashboard.getPaperDetails)
+
 
  
-// REGISTER ROUTES
-router.route('/submitPaper')
-.get(dashboard.getSubmitPaper)
-.post(upload.single("paper"),dashboard.handleSubmitPaper)
+// ######REVIEWER########### 
 
 
-
-router.route("/papers")
+router.route("/admin/papers")
 .get(dashboard.getAllPapers)
 
-router.route("/download/:id")
-.get(dashboard.downloadPaper)
+router.get('/admin/viewPaper/:id', dashboard.getDetails)
 
-router.route("/admin/review")
+router.route("/admin/review/:id")
 .get(dashboard.reviewPaper)
 .post(dashboard.handleReviewPaper)
+
+
+// ########ADMIN###########
+
+
+
+
+
+
+
 
 // REGISTER ROUTES
 router.route('/register')
 .get(dashboard.getRegister)
 .post(dashboard.handleRegister)
 
+router.route("/download/:id")
+.get(dashboard.downloadPaper)
+
+
+function isLoggedIn(req ,res ,next){
+    if(req.isAuthenticated()){
+        return next();
+
+    }
+    res.redirect("/login")
+}
 
 module.exports =  router

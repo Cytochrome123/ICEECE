@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ICEECE | Paper Review</title>
+    <title>Paper Title</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/images/favicon.png">
-    <!-- Form step -->
-    <link href="/public/assets/vendor/jquery-smartwizard/dist/css/smart_wizard.min.css" rel="stylesheet">
-	<link href="/public/assets/vendor/dropzone/dist/dropzone.css" rel="stylesheet">
-
-    <!-- Custom Stylesheet -->
-	<link href="/public/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link rel="stylesheet" href="/public/assets/vendor/chartist/css/chartist.min.css">
+    <link href="/public/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="/public/assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="/public/assets/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
     <!--*******************
@@ -34,7 +29,6 @@
         Preloader end
     ********************-->
 
-
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -45,9 +39,9 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="/public/assets/images/logo.png" alt="">
-                <img class="logo-compact" src="/public/assets/images/logo-text.png" alt="">
-                <img class="brand-title" src="/public/assets/images/logo-text.png" alt="">
+                <img class="logo-abbr" src="./images/logo.png" alt="">
+                <img class="logo-compact" src="./images/logo-text.png" alt="">
+                <img class="brand-title" src="./images/logo-text.png" alt="">
             </a>
 
             <div class="nav-control">
@@ -67,11 +61,8 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
-
-
 		
-		
-        <!--**********************************
+		<!--**********************************
             Header start
         ***********************************-->
         <div class="header">
@@ -80,7 +71,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="dashboard_bar">
-								Review
+								Paper Title
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -360,326 +351,201 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-
-        <!--**********************************
+		
+		<!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
-            <div class="container-fluid">
-                <div class="page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Review</a></li>
-					</ol>
-                </div>
-                <!-- row -->
-                <div class="row">
-                    <div class="col-xl-12 col-xxl-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Review</h4>
-                            </div>
-							
-                            <form action="/admin/review/<%=doc._id%>" method="post">
+            <!-- row -->
+			<div class="container-fluid">
+				<div class="row mb-5">
+					<div class="col-lg-8">
+						<p><strong>Paper Title:</strong></p>
+						<div><em><%=paper.title%></em></div>
+					</div>
+					<div class="col-lg-4">
+						
+						<div class="d-flex">
+							<h5 class="">Status:</h5>
+							<span class="badge badge-xs light badge-primary">Under review</span>
+						</div>
+						<div ><a href="http://" class="btn btn-outline-primary text-center" >File</a></div>
+						
+						<div class="text-right"><a href="/admin/review/<%=paper._id%>" class="btn">Review Paper</a></div>
+					</div>
+				</div>
+				<%if(paper.reviews){%>
+					<div class="row">
+						<div class="col-xl-12">	
+							<div class="card">
+								<div class="card-header d-sm-flex d-block pb-0 border-0">
+									<div class="mr-auto pr-3">
+										<h4 class="text-black font-w600 fs-20"><em>New update(s) by </em></h4>
+										<p class="fs-13 mb-0 text-black">Lorem ipsum dolor sit amet, consectetur</p>
+									</div>
+									<a href="food-menu.html" class="btn btn-primary rounded d-none d-md-block">Re-Review</a>
+								</div>
+								<div class="card-body pt-2">
+									<div class="testimonial-one owl-carousel">
+										<div class="items">
+											<div class="card text-center">
+												<div class="card-body">
+													<img src="images/testimonial/1.jpg" alt="">
+													<h5 class="fs-16 font-w500 mb-1"><a href="app-profile.html" class="text-black">Roberto Carloz</a></h5>
+													<p class="fs-14">Body Building Trainer</p>
+													<div class="d-flex align-items-center justify-content-center">
+														<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M5.09569 20C4.80437 19.9988 4.51677 19.9344 4.25273 19.8113C3.98868 19.6881 3.75447 19.5091 3.56624 19.2866C3.37801 19.0641 3.24024 18.8034 3.16243 18.5225C3.08462 18.2415 3.06862 17.9471 3.11554 17.6593L3.88905 12.8902L0.569441 9.45986C0.312024 9.19466 0.132451 8.86374 0.0503661 8.50328C-0.0317185 8.14282 -0.0131526 7.76671 0.104033 7.4161C0.221219 7.06549 0.43251 6.75388 0.714792 6.51537C0.997074 6.27685 1.33947 6.12062 1.70453 6.06376L6.20048 5.37325L8.18158 1.13817C8.34755 0.796915 8.60606 0.509234 8.92762 0.307978C9.24917 0.106721 9.6208 0 10.0001 0C10.3793 0 10.751 0.106721 11.0725 0.307978C11.3941 0.509234 11.6526 0.796915 11.8186 1.13817L13.7931 5.36719L18.2955 6.06376C18.6606 6.12062 19.003 6.27685 19.2852 6.51537C19.5675 6.75388 19.7788 7.06549 19.896 7.4161C20.0132 7.76671 20.0318 8.14282 19.9497 8.50328C19.8676 8.86374 19.688 9.19466 19.4306 9.45986L16.1144 12.8765L16.885 17.66C16.9463 18.0327 16.9014 18.4152 16.7556 18.7635C16.6097 19.1119 16.3687 19.4121 16.0602 19.6297C15.7517 19.8473 15.3882 19.9735 15.0113 19.994C14.6344 20.0144 14.2593 19.9281 13.9292 19.7451L10.0026 17.5635L6.07117 19.7451C5.77302 19.9118 5.43724 19.9996 5.09569 20Z" fill="#FFAA29"/>
+														</svg>
+														<span class="fs-14 d-block ml-2 pr-2 mr-2 border-right text-black font-w500">4.4</span>
+														<a href="app-profile.html" class="btn-link fs-14">Send Request</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="items">
+											<div class="card text-center">
+												<div class="card-body">
+													<img src="images/testimonial/2.jpg" alt="">
+													<h5 class="fs-16 font-w500 mb-1"><a href="app-profile.html" class="text-black">Cindy Moss</a></h5>
+													<p class="fs-14">Fat Belly Trainer</p>
+													<div class="d-flex align-items-center justify-content-center">
+														<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M5.09569 20C4.80437 19.9988 4.51677 19.9344 4.25273 19.8113C3.98868 19.6881 3.75447 19.5091 3.56624 19.2866C3.37801 19.0641 3.24024 18.8034 3.16243 18.5225C3.08462 18.2415 3.06862 17.9471 3.11554 17.6593L3.88905 12.8902L0.569441 9.45986C0.312024 9.19466 0.132451 8.86374 0.0503661 8.50328C-0.0317185 8.14282 -0.0131526 7.76671 0.104033 7.4161C0.221219 7.06549 0.43251 6.75388 0.714792 6.51537C0.997074 6.27685 1.33947 6.12062 1.70453 6.06376L6.20048 5.37325L8.18158 1.13817C8.34755 0.796915 8.60606 0.509234 8.92762 0.307978C9.24917 0.106721 9.6208 0 10.0001 0C10.3793 0 10.751 0.106721 11.0725 0.307978C11.3941 0.509234 11.6526 0.796915 11.8186 1.13817L13.7931 5.36719L18.2955 6.06376C18.6606 6.12062 19.003 6.27685 19.2852 6.51537C19.5675 6.75388 19.7788 7.06549 19.896 7.4161C20.0132 7.76671 20.0318 8.14282 19.9497 8.50328C19.8676 8.86374 19.688 9.19466 19.4306 9.45986L16.1144 12.8765L16.885 17.66C16.9463 18.0327 16.9014 18.4152 16.7556 18.7635C16.6097 19.1119 16.3687 19.4121 16.0602 19.6297C15.7517 19.8473 15.3882 19.9735 15.0113 19.994C14.6344 20.0144 14.2593 19.9281 13.9292 19.7451L10.0026 17.5635L6.07117 19.7451C5.77302 19.9118 5.43724 19.9996 5.09569 20Z" fill="#FFAA29"/>
+														</svg>
+														<span class="fs-14 d-block ml-2 pr-2 mr-2 border-right text-black font-w500">4.4</span>
+														<a href="app-profile.html" class="btn-link fs-14">Send Request</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-7">
+							<div class="card">
+								<div class="card-header d-block">
+									<h4 class="card-title">Reviewer's summary</h4>
+									<p class="m-0 subtitle">Default accordion. Add <code>accordion</code> class in root</p>
+								</div>
 								<div class="card-body">
-									<div class="card-content">
-										<p><strong>Paper Title:</strong><%=doc.title%></p>
-										<div class="text-right">
-											<a href="http://" class="btn btn-primary "><%=doc.fileName%></a>
+									<!-- Default accordion -->
+									<div id="accordion-one" class="accordion accordion-primary">
+										<div class="accordion__item">
+											<div class="accordion__header rounded-lg" data-toggle="collapse" data-target="#default_collapseOne">
+												<span class="accordion__header--text">Comment to Editor</span>
+												<span class="accordion__header--indicator"></span>
+											</div>
+											<div id="default_collapseOne" class="collapse accordion__body show" data-parent="#accordion-one">
+												<div class="accordion__body--text">
+													Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+												</div>
+												<div class="text-right"><a href="" class="btn"><i class="fa fa-plus"></i>Add comment</a></div>
+											</div>
+										</div>
+										<div class="accordion__item">
+											<div class="accordion__header collapsed rounded-lg" data-toggle="collapse" data-target="#default_collapseTwo">
+												<span class="accordion__header--text">Comment to Author</span>
+												<span class="accordion__header--indicator"></span>
+											</div>
+											<div id="default_collapseTwo" class="collapse accordion__body" data-parent="#accordion-one">
+												<div class="accordion__body--text">
+													Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+												</div>
+												<div class="accordion__footer--text text-right"><a href="" class="btn"><i class="fa fa-plus"></i>Add comment</a></div>
+											</div>
 										</div>
 									</div>
-									<hr>
-									<div id="smartwizard" class="form-wizard order-create">
-										<ul class="nav nav-wizard">
-											<li><a class="nav-link" href="#wizard_Service"> 
-												<span>1</span> 
-											</a></li>
-											<li><a class="nav-link" href="#wizard_PAPER_QUALITY_ASSESSMENT">
-												<span>2</span>
-											</a></li>
-											<li><a class="nav-link" href="#wizard_CONFIDENTIAL_COMMENTS_TO_THE_EDITOR">
-												<span>3</span>
-											</a></li>
-											<li><a class="nav-link" href="#wizard_Final">
-												<span>4</span>
-											</a></li>
-										</ul>
-										<div class="tab-content">
-										  
-											<div id="wizard_Service" class="tab-pane" role="tabpanel">
-												<div class="row">
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong> Article Name*</strong></label>
-															<input type="text" name="articleName" class="form-control" placeholder="Parsley" required>
+								</div>
+							</div>
+						</div>
+						<div class="col-5">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Uploads</h5>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-6">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrivals-img-contnent">
+															<img class="img-fluid" src="images/product/1.jpg" alt="">
 														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong> Title Satisfactory*</strong></label>
-															<div> 
-																<label class="radio-inline mr-3"><input type="radio" value="Yes" name="satisfy"> Yes</label>
-																<label class="radio-inline mr-3"><input type="radio" value="No" name="satisfy"> No</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-12 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong> ARE YOU AWARE OF A PRIOR PUBLICATION OF THE PAPER ELSEWHERE*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="Yes" name="aware"> Yes</label>
-																<label class="radio-inline mr-3"><input type="radio" value="No" name="aware"> No</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong> IF YES, WHERE?*</strong></label>
-															<input type="text" name="" class="form-control" placeholder="" required>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong> Is the title well descriptive of the topic?*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="Yes" name="descriptive"> Yes</label>
-																<label class="radio-inline mr-3"><input type="radio" value="No" name="descriptive"> No</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-12 mb-3">
-														<div class="form-group">
-															<label class="text-label"> <strong> If the answer to (1d) above is NO, please kindly suggest a suitable title for the article *</strong></label>
-															<input type="text" name="reason_t_title" class="form-control" required>
-														</div>
-													</div>
-												
-												</div>
-											</div>
-											<div id="wizard_PAPER_QUALITY_ASSESSMENT" class="tab-pane" role="tabpanel">
-												<h3 class="mb-5">PAPER QUALITY ASSESSMENT </h3>
-												<div class="row">
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Originality*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="original"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="original"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="original"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="original"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="original"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Significance*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="significance"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="significance"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="significance"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="significance"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="significance"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Clarity*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="clarity"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="clarity"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="clarity"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="clarity"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="clarity"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Repeatability of Procedure*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="procedure"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="procedure"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="procedure"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="procedure"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="procedure"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Contribution to Knowledge*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="beneficial"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="beneficial"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="beneficial"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="beneficial"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="beneficial"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Good Organization*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="organization"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="organization"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="organization"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="organization"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="organization"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Completeness*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="complete"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="complete"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="complete"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="complete"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="complete"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>References*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="references"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="references"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="references"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="references"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="references"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"> <strong>Readability*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="read"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="read"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="read"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="read"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="read"> Not Acceptable(2)</label>
-															</div>
-														</div>
-													</div>
-													<div class="col-lg-6 mb-2">
-														<div class="form-group">
-															<label class="text-label"><strong> Target Audience*</strong></label>
-															<div>
-																<label class="radio-inline mr-3"><input type="radio" value="10" name="audience"> Very High(10)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="8" name="audience"> High(8)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="6" name="audience"> Moderate(6)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="4" name="audience"> Low(4)</label>
-																<label class="radio-inline mr-3"><input type="radio" value="2" name="audience"> Not Acceptable(2)</label>
-															</div>
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Correction 1</a></h4>
+															
+															<span class="price">$761.00</span>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div id="wizard_CONFIDENTIAL_COMMENTS_TO_THE_EDITOR" class="tab-pane" role="tabpanel">
-												<h3 class="mb-5">CONFIDENTIAL COMMENTS TO THE EDITOR</h3>
-												<div class="row">
-													<div class="col-lg-12 mb-2">
-														<div class="form-group">
-															<label class="text-label">In this section, the reviewers can make any comment to the editor that will assist him in deciding the article status. Please feel free to use any kind of language that will convey your review opinion. This information will not be made available to the author(s)*</label>
-															<textarea id="" name="comment_to_editor" class="textarea_editor form-control bg-transparent" rows="7" placeholder="Enter text ..."></textarea>
+										</div>
+										<div class="col-6">
+											<div class="card">
+												<div class="card-body">
+													<div class="new-arrival-product">
+														<div class="new-arrivals-img-contnent">
+															<img class="img-fluid" src="images/product/1.jpg" alt="">
+														</div>
+														<div class="new-arrival-content text-center mt-3">
+															<h4><a href="ecom-product-detail.html">Update 1</a></h4>
+															
+															
+															<span class="price">$761.00</span>
 														</div>
 													</div>
-												</div>
-												<h3 class="mb-5">COMMENTS TO THE AUTHOR</h3>
-												<div class="row">
-													<div class="col-lg-12 mb-2">
-														<div class="form-group">
-															<label class="text-label">The comments made here will be used by the author for modification of the manuscript. In fact this is the place to give reasons for your decisions in a professional manner. Please refer to line numbers or section headings in the manuscript while making your comments and be as detailed as possible. The reasons you give here will justify your overall recommendation below.*</label>
-															<textarea id="" name="comment_to_author" class="textarea_editor form-control bg-transparent" rows="7" placeholder="Enter text ..."></textarea>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div id="wizard_Final" class="tab-pane" role="tabpanel">
-												<div class="col-lg-12 mb-2">
-													<div class="form-group">
-														<label class="text-label"><strong>PAPER SCORE*</strong></label>
-														<div>
-															<label class="radio-inline mr-3"><input type="radio" value="A" name="score"> A(90-100%)</label>
-															<label class="radio-inline mr-3"><input type="radio" value="B" name="score"> B(80-89%)</label>
-															<label class="radio-inline mr-3"><input type="radio" value="C" name="score"> C(70-79%)</label>
-															<label class="radio-inline mr-3"><input type="radio" value="D" name="score"> d(60-69%)</label>
-															<label class="radio-inline mr-3"><input type="radio" value="E" name="score"> E(0-59%)</label>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-12 mb-2">
-													<div class="form-group">
-														<label class="text-label"><strong>Recomendation*</strong></label>
-														<div>
-															<label class="radio-inline mr-3"><input type="radio" value="" name="recommendation"> Accept without change and publish in present form</label>
-															<label class="radio-inline mr-3"><input type="radio" value="" name="recommendation"> Accept with minor changes</label>
-															<label class="radio-inline mr-3"><input type="radio" value="" name="recommendation"> Major changes required as stated above in my comments to Authors</label>
-															<label class="radio-inline mr-3"><input type="radio" value="" name="recommendation"> Revise and resubmit for another round of peer review</label>
-															<label class="radio-inline mr-3"><input type="radio" value="" name="recommendation"> Reject this manuscript outright to save editorial resources</label>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-12 mb-2">
-													<div class="form-group">
-														<label class="text-label"><strong>WOULD YOU LIKE TO RE-REVIEW THIS ARTICLE TO ASCERTAIN IF THE AUTHORS MADE THE SUGGESTED CHANGES?*</strong></label>
-														<div>
-															<label class="radio-inline mr-3"><input type="radio" value="Yes" name="re_review"> Yes</label>
-															<label class="radio-inline mr-3"><input type="radio" value="No" name="re_review"> No</label>
-														</div>
-													</div>
-												</div>
-												
-												<div class="col-lg-6 mb-2">
-													<!-- <div id="corrections" class="compose-content"> -->
-														<h5 class="mb-2"><i class="fa fa-paperclip"></i> Upload corrections</h5>
-														<form action="#" class="dropzone">
-																<input name="file" type="file" multiple class="mb-3 btn btn-outline-primary btn form-control-file"/>
-														</form>
-													<!-- </div> -->
-													<label class="text-label"><strong>Date of review*</strong></label>
-													<div>
-														<input type="date" name="Date" id="" class="form-control">
-													</div>
-													
-												</div>
-												<div class="text-left mt-4 mb-2 ">
-													<button class="btn btn-primary btn-sl-sm mr-2" type="submit"><span class="mr-2"><i class="fa fa-paper-plane"></i></span>Submit</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</form>
-                        </div>
-                    </div>
-                </div>
+							</div>
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Ratings</h5>
+								</div>
+								<div class="card-body">
+									<p>Quality <span class=""></span> </p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				<%}%>
+				
+				
+			</div>
+			<hr>
             </div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
 
-
         <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Hud</p>
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2020</p>
             </div>
         </div>
         <!--**********************************
             Footer end
         ***********************************-->
 
-        <!--**********************************
+		<!--**********************************
            Support ticket button start
         ***********************************-->
 
@@ -687,7 +553,7 @@
            Support ticket button end
         ***********************************-->
 
-        
+
     </div>
     <!--**********************************
         Main wrapper end
@@ -699,31 +565,58 @@
     <!-- Required vendors -->
     <script src="/public/assets/vendor/global/global.min.js"></script>
 	<script src="/public/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="/public/assets/vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="/public/assets/js/custom.min.js"></script>
 	<script src="/public/assets/js/deznav-init.js"></script>
+	<script src="/public/assets/vendor/owl-carousel/owl.carousel.js"></script>
 	
-    
-
-
-    <script src="/public/assets/vendor/jquery-steps/build/jquery.steps.min.js"></script>
-    <script src="/public/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
-    <!-- Form validate init -->
-    <script src="/public/assets/js/plugins-init/jquery.validate-init.js"></script>
-
-
-
-   <!-- Form Steps -->
-	<script src="/public/assets/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js"></script>
-	<script src="/public/assets/vendor/dropzone/dist/dropzone.js"></script>
-
+	<!-- Chart piety plugin files -->
+    <script src="/public/assets/vendor/peity/jquery.peity.min.js"></script>
 	
+	<!-- Apex Chart -->
+	<script src="/public/assets/vendor/apexchart/apexchart.js"></script>
+	
+	<!-- Dashboard 1 -->
+	<script src="/public/assets/js/dashboard/dashboard-1.js"></script>
 	<script>
-		$(document).ready(function(){
-			// SmartWizard initialize
-			$('#smartwizard').smartWizard(); 
+		function carouselReview(){
+			/*  testimonial one function by = owl.carousel.js */
+			jQuery('.testimonial-one').owlCarousel({
+				loop:true,
+				autoplay:true,
+				margin:30,
+				nav:false,
+				dots: false,
+				left:true,
+				navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
+				responsive:{
+					0:{
+						items:1
+					},
+					484:{
+						items:2
+					},
+					882:{
+						items:3
+					},	
+					1200:{
+						items:2
+					},			
+					
+					1540:{
+						items:3
+					},
+					1740:{
+						items:4
+					}
+				}
+			})			
+		}
+		jQuery(window).on('load',function(){
+			setTimeout(function(){
+				carouselReview();
+			}, 1000); 
 		});
 	</script>
-
 </body>
-
 </html>

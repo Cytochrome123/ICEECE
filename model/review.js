@@ -20,7 +20,7 @@ const reviewSchema = new mongoose.Schema({
     score: String,
     recommendation: String,
     re_review: String,
-    Date: String
+    date: String
 })
 
 module.exports = mongoose.model("Review", reviewSchema)

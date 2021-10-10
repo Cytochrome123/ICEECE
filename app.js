@@ -62,7 +62,7 @@ serializeDeserialize(passport)
 passportLocalStrategy(passport)
 
 
-
+ 
 app.use(function (req, res, next) {
     res.locals.success_msg = req.flash("success_msg");
     res.locals.error_msg = req.flash("error_msg");
@@ -73,9 +73,19 @@ app.use(function (req, res, next) {
   });
 
 
+
+
 app.use(require('./routes/user'))
 app.use(require('./routes/dashboard'))
 
+
+module.exports.isLoggedIn = (req ,res ,next)=>{
+  if(req.isAuthenticated()){
+      return next();
+
+  }
+  res.redirect("/login")
+}
 
 // ***ADMIN*****
 

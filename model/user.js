@@ -5,9 +5,15 @@ const userSchema = new mongoose.Schema({
     email: String,
     Username:String,
     Password:String,
+    papers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Paper"
+        }
+    ],
     role: {
         type: String,
-        enum : ['admin', 'user'],
+        enum : ['admin',"reviewer" ,'user'],
         default: "user"
     }
 })
