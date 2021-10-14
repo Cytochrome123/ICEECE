@@ -18,5 +18,8 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+// userSchema.pre('^find', function(next){
+//     Paper.fi
+// })
 
 module.exports = mongoose.model("User", userSchema)

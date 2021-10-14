@@ -1,4 +1,5 @@
 const {cloudinary} = require("../config/cloudinary");
+const path = require("path")
 
 // const User = require("../model/user")
 const Paper = require("../model/paper");
@@ -8,12 +9,12 @@ const Review = require("../model/review")
 // ########USER#########
 
 exports.getSubmitPaper = (req,res)=>{
-    // console.log(req.User)
+    // console.log(req.user)
     res.render("user/paperSubmission" , {success : ""})
 }
 exports.handleSubmitPaper = async(req,res)=>{
     const {fName,lName,email,no,institution,department,position,title,author,passport,fileName,filePath} = req.body
-    const x = "uploads/papers/"+req.file.originalname;
+    const x = "uploads/papers/"+ req.file.originalname;
     const temp = new Paper({
          institution:institution,
          department:department,
@@ -21,16 +22,14 @@ exports.handleSubmitPaper = async(req,res)=>{
          title:title,
          author:author,
          passport:passport,
-         fileName:fName,
-         // filePath: x
+         fileName:req.file.originalname,
+         filePath: x
     }).save()
     .then(doc =>{
         res.render("user/paperSubmission" , {paper : doc , success : "Submitted successfully : Click to view"})
     })
     .catch(e => console.log(e)) 
 
-
-    
     
 }
 exports.getPaperDetails = async(req,res)=>{
@@ -105,11 +104,54 @@ exports.handleReviewPaper = async(req,res)=>{
     
     
 }
+exports.getREreview = async(req,res)=>{
+    const {id} = req.params
+    const paper = await Paper.findById(id)
+    .then(doc=>{
+        res.render("admin/editReview" , {doc})
+    })
+}
+exports.handleREreview = async(req,res)=>{
+    const {id} = req.params
+    const paper = await Paper.findOneAndUpdate({_id : id} , req.body )
+    // console.dir(paper)
+        // if(!err){
+        //     console.log(doc)
+        //    res.redirect("/admin/viewPaper/<%=doc._id%>") 
+        // }else{
+        //     res.send(err)
+        // }
+        
+    // })
+    // let fnc = () =>{
+    //     let data = []
+    // Object.entries(req.body).forEach(([el,val])=>{
+    //     // console.log(el, ":",  val)
+    //     data.push(el)
+    // })
+    // return data
+    // }
+    // console.log(fnc())
+
+}
 
 
 // ########ADMIN###########
 
-
+exports.deletePaper = async(req,res)=>{
+    const {id} = req.params
+    try {
+        await Paper.findByIdAndDelete(id)
+        .then(doc=>{
+            res.redirect("/admin/papers")
+        })
+        
+    } catch (error) {
+        res.send(error)
+    }
+    
+    
+}
 
 
 
@@ -139,14 +181,24 @@ exports.handleRegister = (req,res)=>{
 // }
 
 
-exports.downloadPaper = async(req,res)=>{
-    await Paper.findById({_id: req.params.id})
-    .then(doc => {
-        res.send(doc)
-        // const y = __dirname+"/public/"+doc.filePath;
-        // res.download(y)
-    })
-}
+// exports.downloadPaper = async(req,res)=>{
+//     await Paper.findById({_id: req.params.id})
+//     .then(doc => {
+//         res.send(doc)
+//         // const y = __dirname+"/public/"+doc.filePath;
+//         // res.download(y)
+//     })
+// }
 // C:\Users\Hp\Documents\iii\public\uploads\papers\GPLOADED ZLY 103  PAST QUESTIONS 2015.pdf
 
 
+exports.downloadFile = async(req,res)=>{
+    const {id} = req.params
+    
+    await Paper.findById(id)
+    .then(doc=>{
+        // const x = __dirname + "/public/" + doc.filePath
+        // const y = path.resol
+        res.download(x)
+    })
+}

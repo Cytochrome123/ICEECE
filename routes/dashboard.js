@@ -22,15 +22,21 @@ router.route("/admin/papers")
 
 router.get('/admin/viewPaper/:id', dashboard.getDetails)
 
+router.get("/download/:id" , dashboard.downloadFile)
+
 router.route("/admin/review/:id")
 .get(dashboard.reviewPaper)
 .post(dashboard.handleReviewPaper)
 
+router.route("/admin/review/edit/:id")
+.get(dashboard.getREreview)
+.post(dashboard.handleREreview)
+
 
 // ########ADMIN###########
 
-
-
+router.route("/admin/delete/:id")
+.get(dashboard.deletePaper)
 
 
 
@@ -41,8 +47,7 @@ router.route('/register')
 .get(dashboard.getRegister)
 .post(dashboard.handleRegister)
 
-router.route("/download/:id")
-.get(dashboard.downloadPaper)
+
 
 
 function isLoggedIn(req ,res ,next){

@@ -314,17 +314,26 @@
                     </li>
                     
                       
+                    <% if (User) { %>
+					  	<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+								<i class="flaticon-381-internet"></i>
+								<span class="nav-text">Submissions</span>
+							</a>
+
+							<ul aria-expanded="false">
+								<% if (User.role == "admin" && User.role == "reviewer") { %>
+								 	<li><a href="/admin/papers">View submissions</a></li>
+									 <li><a href="/submitPaper">Submit a paper</a></li>
+								<% }else{%>
+									<li><a href="/submitPaper">Submit a paper</a></li>
+								<%}%>
+								
+								
+							</ul>
+                    	</li>
+					<% } %>
                     
                     
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-internet"></i>
-							<span class="nav-text">Submissions</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="/submitPaper">Submit a paper</a></li>
-							<li><a href="/admin/papers">View submissions</a></li>
-                        </ul>
-                    </li>
                     <% if (User) { %>
                      <% if (User.role === "admin") { %>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -365,6 +374,7 @@
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">All submissions</a></li>
 					</ol>
 				</div>
+				
 				<div class="row">
 					<div class="col-lg-12">
                         <div class="card">
@@ -378,7 +388,7 @@
                                                 <th>S/N</th>
                                                 <th>Date</th>
 												<%if(User){%>
-													<% if (User.role == "reviewer") { %>
+													<% if (User.role == "admin") { %>
 														<th>ID</th>
 														<th>Name</th>
 														<th>Affiliation</th>
@@ -399,7 +409,7 @@
 													<td><strong><%=arr.indexOf(p) + 1 %></strong></td>
 													<td><%=p.createdAt.toLocaleDateString()%></td>
 													<%if(User){%>
-														<% if (User.role == "reviewer") { %>
+														<% if (User.role == "admin") { %>
 															<td><%=p._id%></td>
 															<td><%=User.fName%></td>
 															<td>Affiliation</td>
@@ -421,7 +431,13 @@
 														<div class="d-flex">
 															
 															<a href="/download/<%=p._id%>" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-download"></i></a>
-															<a href="/admin/viewPaper/<%=p._id%>" class="btn btn-primary shadow btn-xs sharp"><i class="fa fa-eye"></i></a>
+															<a href="/admin/viewPaper/<%=p._id%>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
+															<%if(User){%>
+																<% if (User.role == "admin") { %>
+																	<a href="/admin/edit/<%=p._id%>" class="btn btn-danger shadow btn-xs sharp mr-1"><i class="fa fa-edit"></i></a>
+																	<a href="/admin/delete/<%=p._id%>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+																<% } %>
+															<%}%>
 														</div>
 													</td>
 												</tr>

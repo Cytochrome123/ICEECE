@@ -318,17 +318,26 @@
                     </li>
                     
                       
+                    <% if (User) { %>
+					  	<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+								<i class="flaticon-381-internet"></i>
+								<span class="nav-text">Submissions</span>
+							</a>
+
+							<ul aria-expanded="false">
+								<% if (User.role == "admin" && User.role == "reviewer") { %>
+								 	<li><a href="/admin/papers">View submissions</a></li>
+									 <li><a href="/submitPaper">Submit a paper</a></li>
+								<% }else{%>
+									<li><a href="/submitPaper">Submit a paper</a></li>
+								<%}%>
+								
+								
+							</ul>
+                    	</li>
+					<% } %>
                     
                     
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-internet"></i>
-							<span class="nav-text">Submissions</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="/submitPaper">Submit a paper</a></li>
-							<li><a href="/admin/papers">View submissions</a></li>
-                        </ul>
-                    </li>
                     <% if (User) { %>
                      <% if (User.role === "admin") { %>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

@@ -320,17 +320,26 @@
                     </li>
                     
                       
+                    <% if (User) { %>
+					  	<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+								<i class="flaticon-381-internet"></i>
+								<span class="nav-text">Submissions</span>
+							</a>
+
+							<ul aria-expanded="false">
+								<% if (User.role == "admin" && User.role == "reviewer") { %>
+								 	<li><a href="/admin/papers">View submissions</a></li>
+									 <li><a href="/submitPaper">Submit a paper</a></li>
+								<% }else{%>
+									<li><a href="/submitPaper">Submit a paper</a></li>
+								<%}%>
+								
+								
+							</ul>
+                    	</li>
+					<% } %>
                     
                     
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-internet"></i>
-							<span class="nav-text">Submissions</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="/submitPaper">Submit a paper</a></li>
-							<li><a href="/admin/papers">View submissions</a></li>
-                        </ul>
-                    </li>
                     <% if (User) { %>
                      <% if (User.role === "admin") { %>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -425,7 +434,7 @@
 											<div class="col-lg-6">
 												<div class="form-group">
 													<label class="text-label"><h5 class="mb-2"><i class="fa fa-paperclip"></i> Attachment</h5></label>
-													<input type="file" name="file" id="" multiple class="mb-3 btn btn-outline-primary btn form-control-file">
+													<input type="file" name="file" id="" value="Upload Paper" multiple class="mb-3 btn btn-outline-primary btn form-control-file">
 												</div>
 											</div>
 										</div>

@@ -17,15 +17,25 @@ const path = require("path")
 module.exports = multer({
     storage : multer.diskStorage({
         destination:(req,file,cb)=>{
+            // console.log(file)
             cb(null, "./public/uploads/papers")
         },
         filename:(req,file,cb)=>{
+            // console.log(file)
             cb(null, file.originalname)
         }
     })
 })
 
 const upload = multer({storage:multer})
+
+
+// {
+//     fieldname: 'file',
+//     originalname: 'Developer.jpg',
+//     encoding: '7bit',
+//     mimetype: 'image/jpeg'
+//   }
 
 // module.exports = multer({
 //     storage: multer.diskStorage({}),

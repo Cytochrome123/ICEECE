@@ -314,17 +314,26 @@
                     </li>
                     
                       
+                    <% if (User) { %>
+					  	<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+								<i class="flaticon-381-internet"></i>
+								<span class="nav-text">Submissions</span>
+							</a>
+
+							<ul aria-expanded="false">
+								<% if (User.role == "admin" && User.role == "reviewer") { %>
+								 	<li><a href="/admin/papers">View submissions</a></li>
+									 <li><a href="/submitPaper">Submit a paper</a></li>
+								<% }else{%>
+									<li><a href="/submitPaper">Submit a paper</a></li>
+								<%}%>
+								
+								
+							</ul>
+                    	</li>
+					<% } %>
                     
                     
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-internet"></i>
-							<span class="nav-text">Submissions</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="/submitPaper">Submit a paper</a></li>
-							<li><a href="/admin/papers">View submissions</a></li>
-                        </ul>
-                    </li>
                     <% if (User) { %>
                      <% if (User.role === "admin") { %>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -367,7 +376,7 @@
 				</div>
 				<div class="row mb-5">
 					<div class="col-lg-8">
-						<p><strong>Paper Title:</strong></p>
+						<p><strong>Paper Title:  </strong></p>
 						<div><em><%=paper.title%></em></div>
 					</div>
 					<div class="col-lg-4">
@@ -376,8 +385,10 @@
 							<h5 class="">Status:</h5>
 							<span class="badge badge-xs light badge-primary">Under review</span>
 						</div>
-						<div ><a href="http://" class="btn btn-outline-primary text-center" >File</a></div>
-						
+						<div ><a href="/download/<%=paper._id%>" class="btn btn-outline-primary text-center" > <%= paper.fileName %>  </a></div>
+						<!-- <form action="/download/<%=paper._id%>">
+							<input type="submit" name="" id="" value="download">
+						</form> -->
 						<div class="text-right"><a href="/admin/review/<%=paper._id%>" class="btn">Review Paper</a></div>
 					</div>
 				</div>
@@ -390,7 +401,7 @@
 										<h4 class="text-black font-w600 fs-20"><em>New update(s) by </em></h4>
 										<p class="fs-13 mb-0 text-black">Lorem ipsum dolor sit amet, consectetur</p>
 									</div>
-									<a href="food-menu.html" class="btn btn-primary rounded d-none d-md-block">Re-Review</a>
+									<a href="/admin/review/edit/<%= paper._id %> " class="btn btn-primary rounded d-none d-md-block">Re-Review</a>
 								</div>
 								<div class="card-body pt-2">
 									<div class="testimonial-one owl-carousel">
