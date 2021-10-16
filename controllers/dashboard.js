@@ -1,10 +1,27 @@
-const {cloudinary} = require("../config/cloudinary");
+// const {cloudinary} = require("../config/cloudinary");
+const multer = require("multer")
+const {storage,upload} = require("../config/multer")
 const path = require("path")
 
 // const User = require("../model/user")
 const Paper = require("../model/paper");
 const Review = require("../model/review")
 
+
+// const storage = multer.diskStorage({
+//     destination:(req,file,cb)=>{
+//         // console.log(file)
+//         cb(null, "public/uploads/papers")
+//     },
+//     filename:(req,file,cb)=>{
+//         // console.log(file)
+//         const {originalname} = file
+//         cb(null, originalname)
+//     }
+// })
+
+
+// const upload = multer({storage})
 
 // ########USER#########
 
@@ -13,8 +30,9 @@ exports.getSubmitPaper = (req,res)=>{
     res.render("user/paperSubmission" , {success : ""})
 }
 exports.handleSubmitPaper = async(req,res)=>{
+    console.log(req.file)
     const {fName,lName,email,no,institution,department,position,title,author,passport,fileName,filePath} = req.body
-    const x = "uploads/papers/"+ req.file.originalname;
+    const x = req.file.path;
     const temp = new Paper({
          institution:institution,
          department:department,
@@ -53,6 +71,13 @@ exports.getPaperDetails = async(req,res)=>{
 }
 
 // ########REVIEWER########
+
+exports.getAll = async(req,res)=>{
+    await Paper.find()
+    .then(doc=>{
+        res.render("all" , {doc})
+    })
+}
 
 exports.getAllPapers = async(req,res)=>{
     const paper = await Paper.find()
@@ -161,35 +186,8 @@ exports.getRegister = (req,res)=>{
 exports.handleRegister = (req,res)=>{
     res.redirect('/regDash')
 }
-// exports.getAll = async(req,res)=>{
-//     const fil = await cloudinary.api.resources("file");
-//     console.log(fil)
-//     res.send(fil)
-// }
 
 
-
- 
-
-
-// exports.getProgress = async(req,res)=>{ 
-//     const {id} = req.params
-//     const about = await Paper.findById(id).populate("reviews")
-//     .then(paper =>{
-//         res.render("user/paperDetails", {paper:paper.reviews})
-//     })
-// }
-
-
-// exports.downloadPaper = async(req,res)=>{
-//     await Paper.findById({_id: req.params.id})
-//     .then(doc => {
-//         res.send(doc)
-//         // const y = __dirname+"/public/"+doc.filePath;
-//         // res.download(y)
-//     })
-// }
-// C:\Users\Hp\Documents\iii\public\uploads\papers\GPLOADED ZLY 103  PAST QUESTIONS 2015.pdf
 
 
 exports.downloadFile = async(req,res)=>{
@@ -197,7 +195,8 @@ exports.downloadFile = async(req,res)=>{
     
     await Paper.findById(id)
     .then(doc=>{
-        // const x = __dirname + "/public/" + doc.filePath
+        // const x =  __dirname +"\\" + doc.filePath
+        const x =  __dirname + "/public/uploads/papers/Developer.jpg"
         // const y = path.resol
         res.download(x)
     })

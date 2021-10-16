@@ -1,7 +1,13 @@
 const router = require('express').Router();
-const upload = require("../config/multer")
+// const upload = require("../config/multer")
+const multer = require("multer")
+const {storage,upload} = require("../config/multer")
+
 const dashboard  = require('../controllers/dashboard')
 // const {isLoggedIn} = require("../app")
+
+
+
 
 
 //###########USER####### 
@@ -15,6 +21,8 @@ router.get("/user/paperDetails/:id" , dashboard.getPaperDetails)
 
  
 // ######REVIEWER########### 
+router.route("/all")
+.get(dashboard.getAll)
 
 
 router.route("/admin/papers")
@@ -36,7 +44,7 @@ router.route("/admin/review/edit/:id")
 // ########ADMIN###########
 
 router.route("/admin/delete/:id")
-.get(dashboard.deletePaper)
+.get(dashboard.deletePaper) 
 
 
 

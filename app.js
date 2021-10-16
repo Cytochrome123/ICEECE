@@ -54,7 +54,7 @@ app.set('view engine', 'ejs');
 app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+// app.use(express.json())
 app.use(cookieParser())
 app.use(session(sessionConfig))
 app.use(flash())
@@ -67,13 +67,13 @@ passportLocalStrategy(passport)
 
  
 app.use(function (req, res, next) {
-    res.locals.success_msg = req.flash("success_msg");
-    res.locals.error_msg = req.flash("error_msg");
-    res.locals.error = req.flash("error");
-    res.locals.User = req.user;
-    res.locals.path = req.path;
-    next();
-  });
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  res.locals.User = req.user;
+  res.locals.path = req.path;
+  next();
+});
 
 
 
@@ -84,26 +84,15 @@ app.use(require('./routes/dashboard'))
 
 module.exports.isLoggedIn = (req ,res ,next)=>{
   if(req.isAuthenticated()){
-      return next();
+    return next();
 
   }
   res.redirect("/login")
 }
 
-// ***ADMIN*****
-
-// app.get("/admin/attendance", async(req,res)=>{
-//   try {
-//     const users = await  User.find()
-
-//     res.render("admin/attendance", {users})
-//   } catch (error) {
-//     console.log(error);
-//       // new Error(error)
-//   }
-// })
 
 
 
 
-app.listen(process.env.PORT || 3000, (req,res)=>console.log("hey"))
+
+app.listen(process.env.PORT || 3000, ()=>console.log("hey"))

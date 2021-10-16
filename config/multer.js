@@ -14,21 +14,52 @@ const path = require("path")
 // })
 
 
-module.exports = multer({
-    storage : multer.diskStorage({
-        destination:(req,file,cb)=>{
-            // console.log(file)
-            cb(null, "./public/uploads/papers")
-        },
-        filename:(req,file,cb)=>{
-            // console.log(file)
-            cb(null, file.originalname)
-        }
-    })
+// module.exports = multer({
+//     storage : multer.diskStorage({
+//         destination:(req,file,cb)=>{
+//             // console.log(file)
+//             cb(null, "./public/uploads/papers")
+//         },
+//         filename:(req,file,cb)=>{
+//             // console.log(file)
+//             cb(null, file.originalname)
+//         }
+//     })
+// })
+
+const storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        // console.log(file)
+        cb(null, "public/uploads/papers")
+    },
+    filename:(req,file,cb)=>{
+        // console.log(file)
+        const {originalname} = file
+        cb(null, originalname)
+    }
 })
 
-const upload = multer({storage:multer})
 
+const upload = multer({storage})
+
+// const {storage,upload} = module.exports
+
+module.exports = {storage,upload}
+
+// module.exports = {
+//     storage : multer.diskStorage({
+//         destination:(req,file,cb)=>{
+//             // console.log(file)
+//             cb(null, "public/uploads/papers")
+//         },
+//         filename:(req,file,cb)=>{
+//             // console.log(file)
+//             const {originalname} = file
+//             cb(null, originalname)
+//         }
+//     }),    
+//     upload : multer({storage})    
+// }
 
 // {
 //     fieldname: 'file',
