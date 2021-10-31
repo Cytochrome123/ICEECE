@@ -2,6 +2,8 @@ const mongoose = require("mongoose")
 const time = require("mongoose-timestamp")
 
 const paperSchema = new mongoose.Schema({
+    fName: String,
+    lName: String,
     institution:String,
     department:String,
     position:String,
@@ -11,6 +13,18 @@ const paperSchema = new mongoose.Schema({
     fileName: String,
     filePath:String,
     reviews:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ],
+    corrections:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ],
+    updates: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Review"

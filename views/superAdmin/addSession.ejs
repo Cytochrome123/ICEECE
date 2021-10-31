@@ -1,0 +1,64 @@
+<form action="/admin/add-sessions" method="post" class="form-group">
+    <input type="text" name="name"  id="" class="form-control mb-3" placeholder="Session Name">
+    <input type="text" name="type"  id="" class="form-control mb-3" placeholder="Type">
+    <input type="text" name="duration"  id="" class="form-control mb-3" placeholder="Duration">
+    <input type="date" name="startDate"  id="" class="form-control mb-3" placeholder="Start Date">
+    <input type="time" name="startTime" id="" placeholder="Start Time">
+    <input type="date" name="endDate" id="" class="form-control mb-3" placeholder="End Date">
+    <input type="time" name="endTime" id="" class="form-control mb-3" placeholder="End Time">
+    
+
+    <div class="form-group">
+        <label class="text-label"><strong>Access</strong> </label>
+        <div> 
+            <label class="radio-inline mr-3">International Participants<input type="checkbox" value="International Participants" name="access"></label>
+            <label class="radio-inline mr-3">Local Participants<input type="checkbox" value="Local Participants" name="access"></label>
+            <label class="radio-inline mr-3">International Student (Undergraduate)<input type="checkbox" value="International Student (Undergraduate)" name="access"></label>
+            <label class="radio-inline mr-3">Local Student (Undergraduate)<input type="checkbox" value="Local Student (Undergraduate)" name="access"></label>
+            <label class="radio-inline mr-3">International Student (Postgraduate)<input type="checkbox" value="International Student (Postgraduate)" name="access"></label>
+            <label class="radio-inline mr-3">Local Student (Postgraduate)<input type="checkbox" value="Local Student (Postgraduate)" name="access"></label>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="roles"><strong>Roles</strong> </label>
+        <div>
+            <label class="radio-inline mr-3">Speaker<input type="checkbox" value="Speaker" name="role"></label>
+            <label class="radio-inline mr-3">Program Manager<input type="checkbox" value="Program Manager" name="role"></label>
+            <label class="radio-inline mr-3">Protocol Officer<input type="checkbox" value="Protocol Officer" name="role"></label>
+
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label class="text-label"><strong>Moderator</strong> </label>
+        <% for(let user of users){ %> 
+            <% if(user.role == "Program Manager"){ %> 
+                <div> 
+                    <label class="radio-inline mr-3"><input type="checkbox" value="<%= user.lName, user.fName %> " name="moderator"> </label>
+                </div>
+            <% } %> 
+            
+        <% } %> 
+        
+    </div>
+
+    <div class="form-group">
+        <label class="text-label"><strong>Speakers</strong> </label>
+        <% for(let user of users){ %> 
+            <% if(user.role == "Speakers"){ %> 
+                <div> 
+                    <label class="radio-inline mr-3"><input type="checkbox" value="<%= user.lName, user.fName %> " name="speakers"></label>
+                </div>
+            <% } %> 
+            
+        <% } %> 
+        
+    </div>
+
+    
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>

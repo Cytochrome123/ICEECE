@@ -1,18 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ICEECE - Papers</title>
+    <title>ICEECE | Dashboard</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/images/favicon.png">
-	<link rel="stylesheet" href="/public/assets/vendor/chartist/css/chartist.min.css">
-    <link href="/public/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="/public/assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="/public/assets/css/style.css" rel="stylesheet">
+	<link rel="icon" type="image/png" sizes="16x16" href="../public/assets/images/favicon.png">
+	<link href="../public/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="../public/assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+    <link href="../public/assets/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <script src="<a class="vglnk" href="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" rel="nofollow"></script>
+<script type="text/javascript">
+    var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+    scanner.addListener('scan',function(content){
+        alert(content);
+        //window.location.href=content;
+    });
+    Instascan.Camera.getCameras().then(function (cameras){
+        if(cameras.length>0){
+            scanner.start(cameras[0]);
+            $('[name="options"]').on('change',function(){
+                if($(this).val()==1){
+                    if(cameras[0]!=""){
+                        scanner.start(cameras[0]);
+                    }else{
+                        alert('No Front camera found!');
+                    }
+                }else if($(this).val()==2){
+                    if(cameras[1]!=""){
+                        scanner.start(cameras[1]);
+                    }else{
+                        alert('No Back camera found!');
+                    }
+                }
+            });
+        }else{
+            console.error('No cameras found.');
+            alert('No cameras found.');
+        }
+    }).catch(function(e){
+        console.error(e);
+        alert(e);
+    });
+</script>
+
 </head>
+
 <body>
 
     <!--*******************
@@ -24,10 +61,11 @@
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div> 
+    </div>
     <!--*******************
         Preloader end
     ********************-->
+
 
     <!--**********************************
         Main wrapper start
@@ -57,12 +95,15 @@
 		<!--**********************************
             Chat box start
         ***********************************-->
-
+		
 		<!--**********************************
             Chat box End
         ***********************************-->
+
+
 		
-		<!--**********************************
+		
+        <!--**********************************
             Header start
         ***********************************-->
         <div class="header">
@@ -71,7 +112,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="dashboard_bar">
-								Submissions
+								Dashboard
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -278,36 +319,45 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-networking"></i>
 							<span class="nav-text">ICEECE</span>
 						</a>
                         <ul aria-expanded="false">
 							<li><a href="#">Dashboard</a></li>
-						
+							<li><a href="/profile">Profile</a></li>
+							<li><a href="/register">Register</a></li>
 						</ul>
                     </li>
-                <% if (User) { %> 
-                 
-              
-                    <% if (User.role == "admin") { %>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-television"></i>
-							<span class="nav-text">Data</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Profile</a></li>
-                            
-                        </ul>
-                    </li>
-                      <% } %> 
-                       <% } %>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <% if (User) { %> 
+                    
+                
+                        <% if (User.role == "admin" || User.role === "Program Manager") { %>
+                            <li>
+                                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                    <i class="flaticon-381-television"></i>
+                                    <span class="nav-text">Data</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li><a href="/admin/speakers">Speakers</a></li>
+                                    
+                                </ul>
+                            </li>
+                        <% } %> 
+                    <% } %>
+
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-controls-3"></i>
 							<span class="nav-text">Sessions</span>
 						</a>
                         <ul aria-expanded="false">
+                            <% if (User.role == "admin") { %>
+                                <li><a href="/admin/add-sessions">Add Session</a></li>
+                            <% } %>
                             <li><a href="#">Conference</a></li>
+							<li><a href="/user/payment-confirmation">Payment Confirmation</a></li>
                             <li><a href="#">Finished</a></li>
                             
                         </ul>
@@ -315,7 +365,8 @@
                     
                       
                     <% if (User) { %>
-					  	<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+					  	<li>
+                              <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 								<i class="flaticon-381-internet"></i>
 								<span class="nav-text">Submissions</span>
 							</a>
@@ -335,23 +386,31 @@
                     
                     
                     <% if (User) { %>
-                     <% if (User.role === "admin") { %>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-heart"></i>
-							<span class="nav-text">Attendance</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="/admin/attendance">Users</a></li>
-                            <li><a href="#">Registered Users</a></li>
-                            
-                        </ul>
-                    </li>
-                    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Admissions</span>
-						</a>
-					</li> 
-                    <% } %>
+                        <% if (User.role === "admin") { %>
+                            <li>
+                                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                    <i class="flaticon-381-heart"></i>
+                                    <span class="nav-text">Attendance</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li><a href="/admin/attendance">Users</a></li>
+                                    <li><a href="#">Registered Users</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="widget-basic.html" class="has-arrow ai-icon" aria-expanded="false">
+                                    <i class="flaticon-381-settings-2"></i>
+                                    <span class="nav-text">Admissions</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li><a href="/admin/createReviewer">Add Reviewer</a></li>
+                                    <li><a href="#">Registrations</a></li>
+                                    <li><a href="/admin/payments">Payments</a></li>
+                                    
+                                </ul>
+                            </li> 
+                        <% } %>
                    <% } %>
                 </ul>
 				
@@ -360,102 +419,62 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-		
-		<!--**********************************
+
+        <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-			
-            <!-- row -->
-			<div class="container-fluid">
-				<div class="page-titles">
+<div class="content-body">
+            <div class="container-fluid">
+                <div class="page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">All submissions</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Bootstrap</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Card</a></li>
 					</ol>
-				</div>
-				
-				<div class="row">
-					<div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Papers</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-responsive-md">
-                                        <thead>
-											<tr>
-                                                <th>S/N</th>
-                                                <th>Date</th>
-												<%if(User){%>
-													<% if (User.role == "admin") { %>
-														<th>ID</th>
-														<th>Name</th>
-														<th>Affiliation</th>
-														<th>Department</th>
-														<th>Email</th>
-													<%}%>
-												<%}%>
-												
-                                                <th>Paper Title</th>
-                                                <th>Status</th>
-                                                <th>Manage</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-											<% for (let p of Paper){%>
-												<tr>
-													<% let arr = Object.values(Paper)%>
-													<td><strong><%=arr.indexOf(p) + 1 %></strong></td>
-													<td><%=p.createdAt.toLocaleDateString()%></td>
-													<%if(User){%>
-														<% if (User.role == "admin") { %>
-															<td><%=p._id%></td>
-															<td><%=p.fName%></td>
-															<td>Affiliation</td>
-															<td><%=p.department%></td>
-															<td><%=p.email%></td>
-														<%}%>
-													<%}%>
-													<td>
-														<div class="d-flex align-items-center"><img src="images/avatar/2.jpg" class="rounded-lg mr-2" width="24"
-																alt="" /> <span class="w-space-no">
-																<%= p.title %>
-															</span></div>
-													</td>
-													<td>
-														Status
-													</td>
-													
-													<td>
-														<div class="d-flex">
-															
-															<a href="/download/<%=p._id%>" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-download"></i></a>
-															<a href="/admin/viewPaper/<%=p._id%>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
-															<%if(User){%>
-																<% if (User.role == "admin") { %>
-																	<a href="/admin/edit/<%=p._id%>" class="btn btn-danger shadow btn-xs sharp mr-1"><i class="fa fa-edit"></i></a>
-																	<a href="/admin/delete/<%=p._id%>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-																<% } %>
-															<%}%>
-														</div>
-													</td>
-												</tr>
-											<% }%>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                </div>
+
+				<div>
+                    <form action="/mark-attendance" method="post">
+                        <div>
+                            <label for="session">Ongoing Sessions</label>
+                            <select name="session" id="session">
+                                <% for( let session of sessions) { %>
+                                    <option value="<%= session.name %> "><%= session.name %></option>
+                                <% } %>
+                            </select>
                         </div>
-                    </div>
-					
-				</div>
+                        
+                        <div>
+                            <label for="email">Email: </label>
+                            <input type="text" name="email" id="email" placeholder="Email">
+                            <label for="role">Role: </label>
+                            <select name="role" id="role">
+                                <option value="Speaker">Speaker</option>
+                                <option value="Program Manager">Program Manager</option>
+                                <option value="Protocol Officer">Protocol Officer</option>
+                            </select>
+                        </div>
+                    </form>
+                   
+                </div>
+                
+                
+                <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                    <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" value="2" autocomplete="off"> Back Camera
+                </label>
+                </div>
+
+
+
             </div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
+
 
         <!--**********************************
             Footer start
@@ -469,15 +488,8 @@
             Footer end
         ***********************************-->
 
-		<!--**********************************
-           Support ticket button start
-        ***********************************-->
 
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-
+        
     </div>
     <!--**********************************
         Main wrapper end
@@ -487,60 +499,18 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="/public/assets/vendor/global/global.min.js"></script>
-	<script src="/public/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-	<script src="/public/assets/vendor/chart.js/Chart.bundle.min.js"></script>
-    <script src="/public/assets/js/custom.min.js"></script>
-	<script src="/public/assets/js/deznav-init.js"></script>
-	<script src="/public/assets/vendor/owl-carousel/owl.carousel.js"></script>
-	
-	<!-- Chart piety plugin files -->
-    <script src="/public/assets/vendor/peity/jquery.peity.min.js"></script>
-	
-	<!-- Apex Chart -->
-	<script src="/public/assets/vendor/apexchart/apexchart.js"></script>
-	
-	<!-- Dashboard 1 -->
-	<script src="/public/assets/js/dashboard/dashboard-1.js"></script>
-	<script>
-		function carouselReview(){
-			/*  testimonial one function by = owl.carousel.js */
-			jQuery('.testimonial-one').owlCarousel({
-				loop:true,
-				autoplay:true,
-				margin:30,
-				nav:false,
-				dots: false,
-				left:true,
-				navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
-				responsive:{
-					0:{
-						items:1
-					},
-					484:{
-						items:2
-					},
-					882:{
-						items:3
-					},	
-					1200:{
-						items:2
-					},			
-					
-					1540:{
-						items:3
-					},
-					1740:{
-						items:4
-					}
-				}
-			})			
-		}
-		jQuery(window).on('load',function(){
-			setTimeout(function(){
-				carouselReview();
-			}, 1000); 
-		});
-	</script>
+    <script src="../public/assets/vendor/global/global.min.js"></script>
+	<script src="../public/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="../public/assets/js/custom.min.js"></script>
+	<script src="../public/assets/js/deznav-init.js"></script>	
+	<script src="../public/assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
+
+    
+
+
+
+
+
 </body>
+
 </html>

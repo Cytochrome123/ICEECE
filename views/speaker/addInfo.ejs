@@ -1,0 +1,13 @@
+<form action="/speaker/add-info" method="post" class="form-group" enctype="multipart/form-data">
+    <input type="text" name="name"  id="" class="form-control mb-3" placeholder="Session Name" value="<%= session.name %> ">
+    <input type="text" name="type"  id="" class="form-control mb-3" placeholder="Type" value="<%= session.type %> ">
+    <input type="text" name="duration"  id="" class="form-control mb-3" placeholder="Duration" value="<%= session.duration %> ">
+    <input type="time" name="starts"  id="" class="form-control mb-3" placeholder="Starts" value="<%= session.starts %> ">
+    <input type="time" name="ends" id="" class="form-control mb-3" placeholder="Ends" value="<%= session.ends %> ">
+    <input type="text" name="topic" id="" class="form-control mb-3" placeholder="Topic">
+    <input type="text" name="pDetails" id="" class="form-control mb-3" placeholder="Personal Details">
+    <input type="file" name="file" id="" class="form-control mb-3" placeholder="Files">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>

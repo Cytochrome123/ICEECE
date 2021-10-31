@@ -1,0 +1,25 @@
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mode of Payment</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let pay of payment){ %> 
+            <tr>
+                <% let arr = Object.values(payment)%>
+                <td><strong><%=arr.indexOf(pay) + 1 %></strong></td>
+                <td><%= pay.fName %> </td>
+                <td><%= pay.email %> </td>
+                <td><%= pay.mode %> </td>
+                <td><%= pay.amount %> </td>
+                <td><%= pay.status %> </td>
+            </tr> 
+        <% } %> 
+        
+    </tbody>
+</table>

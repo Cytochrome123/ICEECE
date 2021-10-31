@@ -1,0 +1,30 @@
+<% if (typeof isVerified != "undefined") { %>
+    <% if (! isVerified) { %>
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            <strong>Error</strong>
+            Please verify your account <a href="/user/send-verification-email">Re-send verification email</a>
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    <% } %>
+<% } %>
+<% if (typeof emailSent != "undefined") { %>
+    <% if (emailSent) { %>
+        <div class="alert alert-success alert-dismissable fade show" role="alert">
+            <strong>Success</strong>
+            Verification email sent successfully!!!
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    <% } %>
+<% } %>
+<% if (typeof err != "undefined") { %>
+    <% if (err) { %>
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            <strong>Error</strong>
+            <%= err %> 
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    <% } %>
+<% } %>
+<p><%= Username %> </p>
+
+<img src="<%= src %>" alt="QR Code">

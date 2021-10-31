@@ -1,0 +1,63 @@
+<% if (typeof isVerified != "undefined") { %>
+    <% if (! isVerified) { %>
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            <strong>Error</strong>
+            Please verify your account <a href="/user/send-verification-email">Re-send verification email</a>
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    <% } %>
+<% } %>
+<% if (typeof emailSent != "undefined") { %>
+    <% if (emailSent) { %>
+        <div class="alert alert-success alert-dismissable fade show" role="alert">
+            <strong>Success</strong>
+            Verification email sent successfully!!!
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    <% } %>
+<% } %>
+<% if (typeof err != "undefined") { %>
+    <% if (err) { %>
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            <strong>Error</strong>
+            <%= err %> 
+            <button type="button" class="button-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    <% } %>
+<% } %>
+
+
+
+<% if (doc) { %>
+    <p>First Name: <%= doc.fName %> </p>
+    <p><%= doc.lName %> </p>
+    <p><%= doc.Username %> </p>
+    <p>Email: <%= doc.email %> </p>
+    <p><%= doc.phoneNumber %> </p>
+    <p><%= doc.country %> </p>
+    <p><%= doc.institution %> </p>
+    <p><%= doc.department %> </p>
+    <p><%= doc.category %> </p>
+
+    <img src="<%= doc.code %>" alt="QR Code">
+<% }else{%>
+    <p>No profile yet, register to create one</p>
+<%}%>
+
+<h3>Public Profile</h3>
+<form action="/public-profile" method="post">
+    <label for="fName">First Name</label>
+    <input type="checkbox" name="fName" id="fName" value="<%= doc.fName %> ">
+    <label for="lName">Last Name</label>
+    <input type="checkbox" name="lName" id="lName" value="<%= doc.lName %> ">
+    <label for="email">Email</label>
+    <input type="checkbox" name="email" id="email" value="<%= doc.email %> ">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="checkbox" name="phoneNumber" id="phoneNumber" value="<%= doc.phoneNumber %> ">
+    <label for="country">Country</label>
+    <input type="checkbox" name="country" id="country" value="<%= doc.country %> ">
+    <label for="institution"Institution></label>
+    <input type="checkbox" name="institution" id="institution" value="<%= doc.institution %> ">
+    <label for="category">Category</label>
+    <input type="checkbox" name="category" id="category" value="<%= doc.category %> ">
+</form>

@@ -9,7 +9,7 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const passport = require("passport");
 const User = require("./model/User")
-
+const Registration = require("./model/registration")
 const flash = require("connect-flash")
 const http = require('http')
 const fs = require("fs")
@@ -54,7 +54,7 @@ app.set('view engine', 'ejs');
 app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: false }));
-// app.use(express.json())
+app.use(express.json())
 app.use(cookieParser())
 app.use(session(sessionConfig))
 app.use(flash())
