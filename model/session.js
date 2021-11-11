@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const sessionSchema = new mongoose.Schema({
+    day: String,
     name: String,
     type : String,
     duration: String,
@@ -12,7 +13,8 @@ const sessionSchema = new mongoose.Schema({
     moderator: [String],
     speakers: [String],
     topic:String,
-    pDetails:String,
+    fileName: String,
+    filePath:String,
     status : {
         type: String,
         enum : ["ongoing" , "finished"],

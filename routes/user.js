@@ -9,6 +9,7 @@ router.route("/admin/create")
 .get(user.getCreation)
 .post(user.handleCreation)
 
+router.get("/admin/role-player" , user.getRP)
 // SIGN UP ROUTES
 
 // router.route('/signUp') 
@@ -35,7 +36,7 @@ router.route('/login')
 .get(user.getLogin)
 .post(user.handleLogin)
 
-
+router.get("/logout", user.logout)
 
 
 // *******PROFILE*******

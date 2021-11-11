@@ -14,39 +14,40 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <script src="<a class="vglnk" href="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" rel="nofollow"></script>
-<script type="text/javascript">
-    var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
-    scanner.addListener('scan',function(content){
-        alert(content);
-        //window.location.href=content;
-    });
-    Instascan.Camera.getCameras().then(function (cameras){
-        if(cameras.length>0){
-            scanner.start(cameras[0]);
-            $('[name="options"]').on('change',function(){
-                if($(this).val()==1){
-                    if(cameras[0]!=""){
-                        scanner.start(cameras[0]);
-                    }else{
-                        alert('No Front camera found!');
-                    }
-                }else if($(this).val()==2){
-                    if(cameras[1]!=""){
-                        scanner.start(cameras[1]);
-                    }else{
-                        alert('No Back camera found!');
-                    }
-                }
-            });
-        }else{
-            console.error('No cameras found.');
-            alert('No cameras found.');
-        }
-    }).catch(function(e){
-        console.error(e);
-        alert(e);
-    });
-</script>
+    <script src="/public/assets/js/scanner.min.js"></script>
+    <script type="text/javascript">
+//     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+//     scanner.addListener('scan',function(content){
+//         alert(content);
+//         //window.location.href=content;
+//     });
+//     Instascan.Camera.getCameras().then(function (cameras){
+//         if(cameras.length>0){
+//             scanner.start(cameras[0]);
+//             $('[name="options"]').on('change',function(){
+//                 if($(this).val()==1){
+//                     if(cameras[0]!=""){
+//                         scanner.start(cameras[0]);
+//                     }else{
+//                         alert('No Front camera found!');
+//                     }
+//                 }else if($(this).val()==2){
+//                     if(cameras[1]!=""){
+//                         scanner.start(cameras[1]);
+//                     }else{
+//                         alert('No Back camera found!');
+//                     }
+//                 }
+//             });
+//         }else{
+//             console.error('No cameras found.');
+//             alert('No cameras found.');
+//         }
+//     }).catch(function(e){
+//         console.error(e);
+//         alert(e);
+//     });
+// </script>
 
 </head>
 
@@ -285,7 +286,7 @@
                                     <img src="images/profile/17.jpg" width="20" alt=""/>
 									<div class="header-info">
 										<span class="text-black"><strong><%=User ?  User.Username: "" %> </strong></span>
-									  <p class="fs-12 mb-0"> <%=User? User.role == "admin" ? "Super Admin" : "" : ""%></p>  
+									  <p class="fs-12 mb-0"> <%=User.role%></p>  
 									</div>
                                 </a> 
                                 <% } %>
@@ -325,93 +326,139 @@
 							<span class="nav-text">ICEECE</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="#">Dashboard</a></li>
+							<li><a href="/dashboard">Dashboard</a></li>
 							<li><a href="/profile">Profile</a></li>
-							<li><a href="/register">Register</a></li>
 						</ul>
                     </li>
-                    <% if (User) { %> 
-                    
-                
-                        <% if (User.role == "admin" || User.role === "Program Manager") { %>
-                            <li>
-                                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-381-television"></i>
-                                    <span class="nav-text">Data</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="/admin/speakers">Speakers</a></li>
-                                    
-                                </ul>
-                            </li>
-                        <% } %> 
+                    <% if (User.role == "Super Admin") { %>
+                       <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Role Players</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/admin/create">Add Role Player</a></li>
+                                <li><a href="/admin/role-player">View Role Player</a></li>
+                            </ul>
+                        </li> 
                     <% } %>
-
+                    <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Conference Data</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                    <li><a href="/admin/participants">Participants</a></li>
+                                    <li><a href="/admin/speakers">Speakers</a></li>
+                                    <li><a href="/admin/presenters">Presenters</a></li>
+                                    <li><a href="/admin/attendance">Attendance</a></li>
+                                <% } %>
+                                <% if (User.role == "Super Admin") { %>
+                                    <li><a href="/admin/role-player">Role Players</a></li>
+                                    <li><a href="/admin/payments">Payments</a></li>
+                                    <li><a href="#">Material Receipt</a></li>
+                                <% } %>
+                                
+                            </ul>
+                        </li>
+                    <% } %>
+                    
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-controls-3"></i>
-							<span class="nav-text">Sessions</span>
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Session</span>
 						</a>
                         <ul aria-expanded="false">
-                            <% if (User.role == "admin") { %>
-                                <li><a href="/admin/add-sessions">Add Session</a></li>
+                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                <li><a href="#">Session</a></li>
+                                
+                                <li><a href="/admin/speakers">Speakers</a></li>
+                                <li><a href="#">Presenters</a></li>
                             <% } %>
-                            <li><a href="#">Conference</a></li>
-							<li><a href="/user/payment-confirmation">Payment Confirmation</a></li>
-                            <li><a href="#">Finished</a></li>
+							
+                            <% if (User.role == "Speaker" || User.role == "Presenter") { %>
+                                <li><a href="#">Your Session</a></li>
+							    <li><a href="/session">Other Sessions</a></li>
+                            <% } %>
+                            <% if (User.role == "Super Admin" || User.role == "user") { %>
+                                <li><a href="/session">View Sessions</a></li>
+                            <% } %>
+						</ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Live</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                <li><a href="#">Go Live</a></li>
+                            <% } %>
+							
+						</ul>
+                    </li>
+                    <% if (User.role == "Super Admin" || User.role == "Presenter") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Submissions</span>
+                            </a>
+                            <% if (User.role == "Super Admin") { %>
+                                <ul aria-expanded="false">
+                                    <li><a href="/submitPaper">Paper Submissions</a></li>
+                                    <li><a href="/">Reviewers</a></li>
+                                </ul>
+                            <% } %>
+                            <% if (User.role == "Presenter") { %>
+                                <li><a href="/submitPaper">Paper Submissions</a></li>
+                            <% } %>
                             
-                        </ul>
+                        </li>
+                    <% } %>
+                    <% if (User.role == "Super Admin" || User.role == "Program Manager" || User.role == "Protocol Officer") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Attendance</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/admin/attendance">Overview</a></li>
+                                <li><a href="/admin/attendance">Attendance Data</a></li>
+                            </ul>
+                        </li>
+                    <% } %>
+                    
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Payments</span>
+						</a>
+                        
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Sales Manager") { %>
+                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
+                                <li><a href="/admin/payments">Approved Requests</a></li>
+                            <% } %>
+                            <% if (User.role == "user" || User.role == "Presenter") { %>
+                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
+                            <% } %>
+							
+						</ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Others</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="/">Conference Materials</a></li>
+							<li><a href="/profile">Profile</a></li>
+                            <li><a href="/contacts">Contacts</a></li>
+						</ul>
                     </li>
                     
-                      
-                    <% if (User) { %>
-					  	<li>
-                              <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-								<i class="flaticon-381-internet"></i>
-								<span class="nav-text">Submissions</span>
-							</a>
-
-							<ul aria-expanded="false">
-								<% if (User.role == "admin" && User.role == "reviewer") { %>
-								 	<li><a href="/admin/papers">View submissions</a></li>
-									 <li><a href="/submitPaper">Submit a paper</a></li>
-								<% }else{%>
-									<li><a href="/submitPaper">Submit a paper</a></li>
-								<%}%>
-								
-								
-							</ul>
-                    	</li>
-					<% } %>
-                    
-                    
-                    <% if (User) { %>
-                        <% if (User.role === "admin") { %>
-                            <li>
-                                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-381-heart"></i>
-                                    <span class="nav-text">Attendance</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="/admin/attendance">Users</a></li>
-                                    <li><a href="#">Registered Users</a></li>
-                                    
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="widget-basic.html" class="has-arrow ai-icon" aria-expanded="false">
-                                    <i class="flaticon-381-settings-2"></i>
-                                    <span class="nav-text">Admissions</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="/admin/createReviewer">Add Reviewer</a></li>
-                                    <li><a href="#">Registrations</a></li>
-                                    <li><a href="/admin/payments">Payments</a></li>
-                                    
-                                </ul>
-                            </li> 
-                        <% } %>
-                   <% } %>
                 </ul>
 				
 			</div>
@@ -431,23 +478,32 @@
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">Card</a></li>
 					</ol>
                 </div>
-
-				<div>
+                <div>
                     <form action="/mark-attendance" method="post">
                         <div>
                             <label for="session">Ongoing Sessions</label>
-                            <select name="session" id="session">
+                            <select name="session" id="session" class="form-control mb-3">
                                 <% for( let session of sessions) { %>
                                     <option value="<%= session.name %> "><%= session.name %></option>
                                 <% } %>
                             </select>
                         </div>
-                        
+                        <div class="row">
+                    <div class="col">
+                      <div style="width:500px;" id="reader"></div>
+                    </div>
+                    <div class="col" style="padding:30px;">
+                      <h4>SCAN RESULT</h4>
+                      <div id="result">Result Here</div>
+                    </div>
+                        </div>
+                        <hr>
+				
                         <div>
-                            <label for="email">Email: </label>
-                            <input type="text" name="email" id="email" placeholder="Email">
-                            <label for="role">Role: </label>
-                            <select name="role" id="role">
+                            <input type="text" name="name" id="" class="form-control mb-3" placeholder="First Name">
+                            <input type="text" name="email" id="email" class="form-control mb-3" placeholder="Email">
+                            <select name="role" id="role" class="form-control mb-3">
+                                <option name="" id="">Role</option>
                                 <option value="Speaker">Speaker</option>
                                 <option value="Program Manager">Program Manager</option>
                                 <option value="Protocol Officer">Protocol Officer</option>
@@ -458,14 +514,7 @@
                 </div>
                 
                 
-                <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                    <input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="options" value="2" autocomplete="off"> Back Camera
-                </label>
-                </div>
+                
 
 
 
@@ -505,7 +554,17 @@
 	<script src="../public/assets/js/deznav-init.js"></script>	
 	<script src="../public/assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
 
-    
+    <script type="text/javascript">
+        function onScanSuccess(qrCodeMessage) {
+            document.getElementById('result').innerHTML = '<span class="result">'+qrCodeMessage+'</span>';
+        }
+        function onScanError(errorMessage) {
+          //handle scan error
+        }
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
 
 
 

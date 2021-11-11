@@ -10,7 +10,7 @@ const dashboard  = require('../controllers/dashboard')
 
 router.get("/" , dashboard.getHome)
 router.get("/dashboard" , dashboard.getDashboard)
-
+router.get("/contacts" , dashboard.getContacts)
 
 
 //###########USER####### 
@@ -18,6 +18,8 @@ router.get("/dashboard" , dashboard.getDashboard)
 router.route("/user/payment-confirmation")
 .get(dashboard.getPaymentConfirmation)
 .post(dashboard.handlePaymentConfirmation)
+
+router.get("/session" , dashboard.getSession)
 
 router.route( '/submitPaper') 
 .get( dashboard.getSubmitPaper)
@@ -29,8 +31,7 @@ router.post("/user/update/:id" , upload.single("update"), dashboard.handlePaperU
 
  
 // ######REVIEWER########### 
-router.route("/all")
-.get(dashboard.getAll)
+
 
 
 router.route("/admin/papers")
@@ -58,6 +59,11 @@ router.route("/speaker/add-info/:id")
 
 // ########ADMIN###########
 
+router.route("/partcipants")
+.get(dashboard.getAll)
+
+router.get("/admin/presenters", dashboard.getPresenters)
+
 router.get("/admin/speakers", dashboard.getSpeakers)
 
 // router.route("/admin/speaker/:id")
@@ -70,8 +76,13 @@ router.route("/mark-attendance")
 router.get("/admin/attendance" , dashboard.getAttendance)
 
 router.get("/admin/payments" , dashboard.getPayments)
+
+router.route("/admin/approve-payment/:id")
+// .get(dashboard.getAToApprove)
+.post(dashboard.handleApprovePayment)
+
 router.route("/admin/add-sessions")
-.get(dashboard.getAddSession)
+// .get(dashboard.getAddSession)
 .post(dashboard.handleAddSession)
 
 

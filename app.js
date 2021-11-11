@@ -9,7 +9,7 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const passport = require("passport");
 const User = require("./model/User")
-const Registration = require("./model/registration")
+const Contact = require("./model/contact")
 const flash = require("connect-flash")
 const http = require('http')
 const fs = require("fs")
@@ -37,9 +37,9 @@ const sessionConfig = {
   
   };
 
-mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
+// mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
  
-// mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
+mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
 
 mongoose.connection.on("error", console.error.bind(console, "connection error"));
 mongoose.connection.once("open", ()=>console.log("Database connected!!!"));

@@ -250,7 +250,7 @@
                                     <img src="images/profile/17.jpg" width="20" alt=""/>
 									<div class="header-info">
 										<span class="text-black"><strong><%=User ?  User.Username: "" %> </strong></span>
-									  <p class="fs-12 mb-0"> <%=User? User.role == "admin" ? "Super Admin" : "" : ""%></p>  
+									  <p class="fs-12 mb-0"> <%=User.role%></p>  
 									</div>
                                 </a> 
                                 <% } %>
@@ -290,93 +290,139 @@
 							<span class="nav-text">ICEECE</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="#">Dashboard</a></li>
+							<li><a href="/dashboard">Dashboard</a></li>
 							<li><a href="/profile">Profile</a></li>
-							<li><a href="/register">Register</a></li>
 						</ul>
                     </li>
-                    <% if (User) { %> 
-                    
-                
-                        <% if (User.role == "admin" || User.role === "Program Manager") { %>
-                            <li>
-                                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-381-television"></i>
-                                    <span class="nav-text">Data</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="/admin/speakers">Speakers</a></li>
-                                    
-                                </ul>
-                            </li>
-                        <% } %> 
+                    <% if (User.role == "Super Admin") { %>
+                       <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Role Players</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/admin/create">Add Role Player</a></li>
+                                <li><a href="/admin/role-player">View Role Player</a></li>
+                            </ul>
+                        </li> 
                     <% } %>
-
+                    <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Conference Data</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                    <li><a href="/admin/participants">Participants</a></li>
+                                    <li><a href="/admin/speakers">Speakers</a></li>
+                                    <li><a href="/admin/presenters">Presenters</a></li>
+                                    <li><a href="/admin/attendance">Attendance</a></li>
+                                <% } %>
+                                <% if (User.role == "Super Admin") { %>
+                                    <li><a href="/admin/role-player">Role Players</a></li>
+                                    <li><a href="/admin/payments">Payments</a></li>
+                                    <li><a href="#">Material Receipt</a></li>
+                                <% } %>
+                                
+                            </ul>
+                        </li>
+                    <% } %>
+                    
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-controls-3"></i>
-							<span class="nav-text">Sessions</span>
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Session</span>
 						</a>
                         <ul aria-expanded="false">
-                            <% if (User.role == "admin") { %>
-                                <li><a href="/admin/add-sessions">Add Session</a></li>
+                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                <li><a href="#">Session</a></li>
+                                
+                                <li><a href="/admin/speakers">Speakers</a></li>
+                                <li><a href="#">Presenters</a></li>
                             <% } %>
-                            <li><a href="#">Conference</a></li>
-							<li><a href="/user/payment-confirmation">Payment Confirmation</a></li>
-                            <li><a href="#">Finished</a></li>
+							
+                            <% if (User.role == "Speaker" || User.role == "Presenter") { %>
+                                <li><a href="#">Your Session</a></li>
+							    <li><a href="/session">Other Sessions</a></li>
+                            <% } %>
+                            <% if (User.role == "Super Admin" || User.role == "user") { %>
+                                <li><a href="/session">View Sessions</a></li>
+                            <% } %>
+						</ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Live</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                <li><a href="#">Go Live</a></li>
+                            <% } %>
+							
+						</ul>
+                    </li>
+                    <% if (User.role == "Super Admin" || User.role == "Presenter") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Submissions</span>
+                            </a>
+                            <% if (User.role == "Super Admin") { %>
+                                <ul aria-expanded="false">
+                                    <li><a href="/submitPaper">Paper Submissions</a></li>
+                                    <li><a href="/">Reviewers</a></li>
+                                </ul>
+                            <% } %>
+                            <% if (User.role == "Presenter") { %>
+                                <li><a href="/submitPaper">Paper Submissions</a></li>
+                            <% } %>
                             
-                        </ul>
+                        </li>
+                    <% } %>
+                    <% if (User.role == "Super Admin" || User.role == "Program Manager" || User.role == "Protocol Officer") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Attendance</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/admin/attendance">Overview</a></li>
+                                <li><a href="/admin/attendance">Attendance Data</a></li>
+                            </ul>
+                        </li>
+                    <% } %>
+                    
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Payments</span>
+						</a>
+                        
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Sales Manager") { %>
+                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
+                                <li><a href="/admin/payments">Approved Requests</a></li>
+                            <% } %>
+                            <% if (User.role == "user" || User.role == "Presenter") { %>
+                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
+                            <% } %>
+							
+						</ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Others</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="/">Conference Materials</a></li>
+							<li><a href="/profile">Profile</a></li>
+                            <li><a href="/contacts">Contacts</a></li>
+						</ul>
                     </li>
                     
-                      
-                    <% if (User) { %>
-					  	<li>
-                              <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-								<i class="flaticon-381-internet"></i>
-								<span class="nav-text">Submissions</span>
-							</a>
-
-							<ul aria-expanded="false">
-								<% if (User.role == "admin" && User.role == "reviewer") { %>
-								 	<li><a href="/admin/papers">View submissions</a></li>
-									 <li><a href="/submitPaper">Submit a paper</a></li>
-								<% }else{%>
-									<li><a href="/submitPaper">Submit a paper</a></li>
-								<%}%>
-								
-								
-							</ul>
-                    	</li>
-					<% } %>
-                    
-                    
-                    <% if (User) { %>
-                        <% if (User.role === "admin") { %>
-                            <li>
-                                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                    <i class="flaticon-381-heart"></i>
-                                    <span class="nav-text">Attendance</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="/admin/attendance">Users</a></li>
-                                    <li><a href="#">Registered Users</a></li>
-                                    
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="widget-basic.html" class="has-arrow ai-icon" aria-expanded="false">
-                                    <i class="flaticon-381-settings-2"></i>
-                                    <span class="nav-text">Admissions</span>
-                                </a>
-                                <ul aria-expanded="false">
-                                    <li><a href="/admin/createReviewer">Add Reviewer</a></li>
-                                    <li><a href="#">Registrations</a></li>
-                                    <li><a href="/admin/payments">Payments</a></li>
-                                    
-                                </ul>
-                            </li> 
-                        <% } %>
-                   <% } %>
                 </ul>
 				
 			</div>
@@ -388,259 +434,128 @@
         <!--**********************************
             Content body start
         ***********************************-->
-<div class="content-body">
+        <div class="content-body">
             <div class="container-fluid">
                 <div class="page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard/a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Sessions</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
 					</ol>
                 </div>
 
 				<div class="row">
-                    <div class="col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="profile-tab">
-                                    <div class="custom-tab-1">
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item"><a href="#day_1" data-toggle="tab" class="nav-link active show">Day 1</a>
-                                            </li>
-                                            <li class="nav-item"><a href="#day_2" data-toggle="tab" class="nav-link">Day_2</a>
-                                            </li>
-                                            <li class="nav-item"><a href="#day_3" data-toggle="tab" class="nav-link">Day_3</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div id="day_1" class="tab-pane fade active show">
-                                                <% if (User.role == "admin") { %>
-                                                    <a href="/admin/add-sessions" class="btn btn-primary shadow btn-xs sharp mr-1">Add Session</a>
-                                                <% } %>
-
-                                                <div class="modal fade" id="add-session">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    
-                                                            
-                                                        
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Add Session</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="/admin/add-sessions" method="post" class="form-group">
-                                                                    <input type="text" name="name"  id="" class="form-control mb-3" placeholder="Session Name">
-                                                                    <input type="text" name="type"  id="" class="form-control mb-3" placeholder="Type">
-                                                                    <input type="text" name="duration"  id="" class="form-control mb-3" placeholder="Duration">
-                                                                    <input type="time" name="starts"  id="" class="form-control mb-3" placeholder="Starts">
-                                                                    <input type="time" name="ends" id="" class="form-control mb-3" placeholder="Ends">
-                                                                    <select name="access" id="">
-                                                                        <option value=""></option>
-                                                                        <option value="Int">Int</option>
-                                                                    </select>
-                                                                    <select name="roles" id="">
-                                                                        <option value=""></option>
-                                                                        <option value="moderators">Moderators</option>
-                                                                    </select>
-                                                                    <div class="text-left">
-                                                                        <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            
-                                                                
-                                                            
-                                                        </div>
-                                                    
-                                                    </div>
-                                                
-                                                </div>
-
-                                                <div class="row">
-                                                    <% for(let sesn of session){%> 
-                                                        <div class="col-lg-4">
-                                                            <div class="card">
-                                                                    <div class="card-header">
-                                                                        <div>
-                                                                            <h3><strong>Name: </strong><%= sesn.name %></h3>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6">
-                                                                                <div>
-                                                                                    <p><strong>Type: </strong><%= sesn.type %> </p>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <p><strong>Duration: </strong><%= sesn.duration %> </p>
-                                                                                </div>
-                                                                                <div><p><strong>Starts Date: </strong><%= sesn.startDate %> </p></div>
-                                                                                <div><p><strong>Start Time: </strong><%= sesn.startTime %> </p></div>
-                                                                                <div><p><strong>Ends: </strong><%= sesn.ends %> </p></div>
-                                                                                <div><p><strong>Access: </strong><%= sesn.access %> </p></div>
-                                                                                
-                                                                                <div><p><strong>Roles: </strong><%= sesn.roles %> </p></div>
-                                                                            </div>
-                                                                            <div class="col-lg-6">
-                                                                                <div class="profile card card-body px-3 pt-3 pb-0">
-                                                                                    <div class="profile-head">
-                                                                                        <div class="photo-content">
-                                                                                            <div class="cover-photo"></div>
-                                                                                        </div>
-                                                                                        <div class="profile-info">
-                                                                                            <div class="profile-photo">
-                                                                                                <img src="images/profile/profile.png" class="img-fluid rounded-circle" alt="">
-                                                                                            </div>
-                                                                                            <div class="profile-details">
-                                                                                                <div class="profile-name px-3 pt-2">
-                                                                                                    <h4 class="text-primary mb-0">Event 1</h4>
-                                                                                                    <p>Dhgdbtrg</p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="d-flex align-items-center">
-                                                                                                <i class="fa fa-circle text-success mr-1"></i> Ongoing
-                                                                                            </div> 
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div> 
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                    <% if (User.role === "speaker") { %>
-                                                                    
-                                                                    <% } %>
-                                                                    <div class="card-footer text-right">
-                                                                        <a href="/speaker/add-info/<%= sesn._id %>" class="btn btn-primary shadow btn-xs sharp mr-1"  >Add</a>
-                                                                    </div>
-                                                            </div>
-                                                                
-                                                        </div>
-                                                    <% }  %> 
-                                                </div>
+                    <% if (User.role == "Super Admin") { %>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Payments</h4>
+                                            <div>
+                                                <p><%= payment.length %> </p>
                                             </div>
-                                            <div id="day_2" class="tab-pane fade ">
-                                                <div class="profile-about-me">
-                                                    <div class="pt-4 border-bottom-1 pb-3">
-                                                        <h4 class="text-primary">Event 1</h4>
-                                                        <p class="mb-2">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence was created for the bliss of souls like mine.I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</p>
-                                                        <p>A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="profile-personal-info">
-                                                    <h4 class="text-primary mb-4">Personal Information</h4>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-3 col-5">
-                                                            <h5 class="f-w-500">Name <span class="pull-right">:</span>
-                                                            </h5>
-                                                        </div>
-                                                        <div class="col-sm-9 col-7"><span>Mitchell C.Shay</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-3 col-5">
-                                                            <h5 class="f-w-500">Email <span class="pull-right">:</span>
-                                                            </h5>
-                                                        </div>
-                                                        <div class="col-sm-9 col-7"><span>example@examplel.com</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-3 col-5">
-                                                            <h5 class="f-w-500">Availability <span class="pull-right">:</span></h5>
-                                                        </div>
-                                                        <div class="col-sm-9 col-7"><span>Full Time (Free Lancer)</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-3 col-5">
-                                                            <h5 class="f-w-500">Age <span class="pull-right">:</span>
-                                                            </h5>
-                                                        </div>
-                                                        <div class="col-sm-9 col-7"><span>27</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-3 col-5">
-                                                            <h5 class="f-w-500">Location <span class="pull-right">:</span></h5>
-                                                        </div>
-                                                        <div class="col-sm-9 col-7"><span>Rosemont Avenue Melbourne,
-                                                                Florida</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-sm-3 col-5">
-                                                            <h5 class="f-w-500">Year Experience <span class="pull-right">:</span></h5>
-                                                        </div>
-                                                        <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="day_3" class="tab-pane fade">
-                                                <div class="pt-3">
-                                                    <div class="settings-form">
-                                                        <h4 class="text-primary">Account Setting</h4>
-                                                        <form>
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label>Email</label>
-                                                                    <input type="email" placeholder="Email" class="form-control">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label>Password</label>
-                                                                    <input type="password" placeholder="Password" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Address</label>
-                                                                <input type="text" placeholder="1234 Main St" class="form-control">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Address 2</label>
-                                                                <input type="text" placeholder="Apartment, studio, or floor" class="form-control">
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label>City</label>
-                                                                    <input type="text" class="form-control">
-                                                                </div>
-                                                                <div class="form-group col-md-4">
-                                                                    <label>State</label>
-                                                                    <select class="form-control default-select" id="inputState">
-                                                                        <option selected="">Choose...</option>
-                                                                        <option>Option 1</option>
-                                                                        <option>Option 2</option>
-                                                                        <option>Option 3</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group col-md-2">
-                                                                    <label>Zip</label>
-                                                                    <input type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="custom-control custom-checkbox">
-																	<input type="checkbox" class="custom-control-input" id="gridCheck">
-																	<label class="custom-control-label" for="gridCheck"> Check me out</label>
-																</div>
-                                                            </div>
-                                                            <button class="btn btn-primary" type="submit">Sign
-                                                                in</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-responsive-md">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Mode of Payment</th>
+                                                            <th>Amount</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% for(let pay of payment){ %> 
+                                                            <tr>
+                                                                <% let arr = Object.values(payment)%>
+                                                                <td><strong><%=arr.indexOf(pay) + 1 %></strong></td>
+                                                                <td><%= pay.fName %> </td>
+                                                                <td><%= pay.email %> </td>
+                                                                <td><%= pay.mode %> </td>
+                                                                <td><%= pay.amount %> </td>
+                                                                <td><%= pay.status %> </td>
+                                                            </tr> 
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-									<!-- Modal -->
-									
                                 </div>
+                                
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="card mb-3">
+                            
+                                <% for(let sesn of session){%>
+                                    <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Card image cap">
+                                    <div class="card-header">
+                                                    <h5 class="card-title"><strong>Name: </strong><%= sesn.name %></h5>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fa fa-circle text-success text-right mr-1"></i> Ongoing
+                                                    </div> 
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div>
+                                                                <p><strong>Type: </strong><%= sesn.type %> </p>
+                                                            </div>
+                                                            <div>
+                                                                <p><strong>Duration: </strong><%= sesn.duration %> </p>
+                                                            </div>
+                                                            <div><p><strong>Starts Date: </strong><%= sesn.startDate %> </p></div>
+                                                            <div><p><strong>Start Time: </strong><%= sesn.startTime %> </p></div>
+                                                            <div><p><strong>Ends: </strong><%= sesn.ends %> </p></div>
+                                                            <div><p><strong>Access: </strong><%= sesn.access %> </p></div>
+                                                            
+                                                            <div><p><strong>Roles: </strong><%= sesn.roles %> </p></div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="profile card card-body px-3 pt-3 pb-0">
+                                                                <div class="profile-head">
+                                                                    <div class="photo-content">
+                                                                        <div class="cover-photo"></div>
+                                                                    </div>
+                                                                    <div class="profile-info">
+                                                                        <div class="profile-photo">
+                                                                            <img src="/public/assets/images/favicon.png" class="img-fluid rounded-circle" alt="">
+                                                                        </div>
+                                                                        <div class="profile-details">
+                                                                            <div class="profile-name px-3 pt-2">
+                                                                                <h4 class="text-primary mb-0">Speaker 1</h4>
+                                                                                <p><strong>Name: </strong> Bayo Alada</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                                    <% if (User.role == "Speaker" || User.role == "Participant") { %>
+                                                        <a href="/speaker/add-info/<%= sesn._id %>" class="btn btn-primary shadow btn-xs sharp mr-1 card-text d-inline"  >Add</a>
+                                                    <% } %>
+                                                    <a href="javascript:void()" class="card-link float-right">More Details</a>
+                                    </div>
+                                <% }  %>
+                            </div>
+                                        
+                                    
+                            
+                        </div>
+                        
+                    <% }else{ %>
+                    <div class="col-xl-12">
+                        <img src="/public/assets/images/dashboard.jpeg" alt="" style="width: 100%; height: 100%;">
                     </div>
+                    <%}%>
                 </div>
             </div>
         </div>

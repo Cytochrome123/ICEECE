@@ -19,13 +19,20 @@ exports.getHome = (req,res)=>{
 }
 exports.getDashboard = async(req,res)=>{
     console.log(req.user)
-    const session = await Session.find()
-    .then(session=>{
-        res.render("dashboard" , {session})
+    const payment = await Payment.find()
+    .then(payment=>{
+        Session.find()
+        .then(session=>{
+            res.render("dashboard" , {payment , session})
+        })
+        .catch(e=>console.log(e, "in"))
     })
+    .catch(e=>console.log(e, "out"))
     
 }
-
+exports.getContacts = async(req,res)=>{
+    
+}
 
 // ########USER#########
 exports.getPaymentConfirmation = (req,res)=>{
@@ -33,18 +40,43 @@ exports.getPaymentConfirmation = (req,res)=>{
 }
 exports.handlePaymentConfirmation = (req,res)=>{
     // const user = req.user
-    const {mode,amount,proof} = req.body
+    const x = req.file.path;
+    const {mode,rrr,amount,proof} = req.body
     const payment = new Payment({
         fName: req.user.fName,
         email : req.user.email,
         mode: mode,
+        rrr: rrr,
         amount: amount,
-        // proof : proof.
+        proofName:req.file.originalname,
+        proofPath: x
     }).save()
     .then(payment=>{
-        res.redirect("/dashboard")
+        payment.status = "Not Approved"
+        payment.save()
+        .then(pay=>{
+            res.redirect("/dashboard")
+        })
+        
     })
     
+}
+exports.getSession = async(req,res)=>{
+    const session = await Session.find()
+    // .populate({
+    //     path: "session",
+    //     options: {
+    //         sort:{startTime: 1}
+    //     }
+    // }).exec()
+    .then(session=>{
+        User.find()
+        .then(users=>{
+            res.render("session" , {session,users})
+        })
+        // const time = new Date().toLocaleTimeString()
+        
+    }) 
 }
 exports.getMarkAttendance = async(req,res)=>{
     const date = new Date().toDateString()
@@ -64,7 +96,7 @@ exports.getMarkAttendance = async(req,res)=>{
 }
 exports.handleMarkAttendance = async(req,res)=>{
     const {session,email,role} =  req.body
-    const attendance = await new Attendance().save()
+    const attendance = await new Attendance(req.body).save()
     .then(attendance=>{
         res.redirect("/mark-attendance")
     })
@@ -137,12 +169,7 @@ exports.handlePaperUpdate = async(req,res)=>{
 
 // ########REVIEWER########
 
-exports.getAll = async(req,res)=>{
-    await Paper.find()
-    .then(doc=>{
-        res.render("all" , {doc})
-    })
-}
+
 
 exports.getAllPapers = async(req,res)=>{
     const paper = await Paper.find()
@@ -258,9 +285,11 @@ exports.getSpeakerForm = async(req,res)=>{
 exports.handleSpeakerForm = async(req,res)=>{
     const {id} = req.params
     const {name,type,duration,starts,ends,access,roles,topic,pDetails} = req.body
+    const x = req.file.path;
     const session = await Session.findByIdAndUpdate({id:id} , {
         topic:topic,
-        pDetails:pDetails
+        fileName:req.file.originalname,
+        filePath: x
     }).save()
     .then(session=>{
         res.redirect("/dashboard")
@@ -269,6 +298,15 @@ exports.handleSpeakerForm = async(req,res)=>{
 
 // ########ADMIN###########
 
+exports.getAll = async(req,res)=>{
+    await User.find()
+    .then(doc=>{
+        res.render("participants" , {doc})
+    })
+}
+exports.getPresenters = async(req,res)=>{
+
+}
 exports.getSpeakers = async(req,res)=>{
     const speakers = await User.find({role: "Speaker"})
     .then(speakers=>{
@@ -286,25 +324,39 @@ exports.getSpeakers = async(req,res)=>{
 exports.getPayments = async(req,res)=>{
     const payment = await Payment.find()
     .then(payment=>{
-        res.render("admin/payments" , {payment})
+        res.render("superAdmin/payments" , {payment})
     })
     .catch(e=>console.log(e))
     
 }
-exports.getAddSession = async(req,res)=>{
-    const users = await User.find()
-    .then(users=>{
-        res.render("superAdmin/addSession", {users})
+// exports.getAToApprove
+exports.handleApprovePayment = async(req,res)=>{
+    const {id} = req.params
+    const {rrr,status} = req.body
+    const approve = Payment.findById(id)
+    .then(approve=>{
+        approve.status = "Approved"
+        approve.save()
+        .then(updated=>{
+            res.redirect("/admin/payments")
+        })
     })
-    .catch(e=>console.log(e))
+
 }
+// exports.getAddSession = async(req,res)=>{
+//     const users = await User.find()
+//     .then(users=>{
+//         res.render("superAdmin/addSession", {users})
+//     })
+//     .catch(e=>console.log(e))
+// }
 exports.handleAddSession = async(req,res)=>{
-    const {name,type,duration,startDate,startTime,endDate,endTime,access,role,moderator,speakers} = req.body
+    const {day,name,type,duration,startDate,startTime,endDate,endTime,access,role,moderator,speakers} = req.body
     // const start = starts.toDateString()
     // console.log(start)
     const session = new Session(req.body).save()
     .then(session=>{
-        res.redirect("/dashboard")
+        res.redirect("/session")
     })
     
 }

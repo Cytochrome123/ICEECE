@@ -2,107 +2,32 @@ const passport = require('passport')
 const bcrypt = require("bcrypt")
 const { model } = require('mongoose')
 const User = model('User')
-const Registration = require("../model/registration")
+const Contact = require("../model/contact")
 const ResetToken = require("../model/resetToken")
 const crypto = require("crypto")
 const mailer = require("../config/mail")
 const qrcode = require("qrcode")
+const contact = require('../model/contact')
+const sgMail = require("@sendgrid/mail")
+const mail = require("../config/mail")
+const path = require("path");
+const ejs = require("ejs");
 
-// exports.getSignUp = (req,res)=>{
-//     res.render('user/signUp') 
-// }
-// exports.handleSignUp = async(req,res)=>{
-//     const {fName,lName,email,Username,Password} = req.body
-//     try {
-//         let salt = await bcrypt.genSalt()
-//         let password = await bcrypt.hash(Password,salt)
-//         const user = await new User({
-//             fName: fName,
-//             lName: lName,
-//             email: email,
-//             Username:Username,
-//             Password: password
-//         }).save()
-
-//         console.log(user);
-//         res.redirect("/dashboard")
-//         // passport.authenticate('local')(req,res, ()=>{
-//         //     res.redirect('/dashboard')
-//         // })
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-// exports.handleSignUp = async(req,res)=>{
-//     const {fName,lName,email,Username,Password} = req.body
-//     try {
-//         let salt = await bcrypt.genSalt()
-//         let password = await bcrypt.hash(Password,salt)
-//         // const user = await new User({
-//         //         fName: fName,
-//         //         lName: lName,
-//         //         email: email,
-//         //         Username:Username,
-//         //         Password: password
-//         //     }).save()
-  
-//         // console.log(user);
-//         await qrcode.toDataURL(email + password)
-//         .then(src=>{
-//             const user = new User({
-//                 fName: fName,
-//                 lName: lName,
-//                 email: email,
-//                 Username:Username,
-//                 Password: password,
-//                 qrcode: src
-//             }).save()
-  
-//             console.log(user)
-            
-//         })
-//         .catch(e=> console.log(e))
-  
-//         passport.authenticate('local')(req,res, ()=>{
-//             res.redirect('/submitPaper')
-//         })
-  
-//         // qrcode.toDataURL(email , (err,src)=>{
-//         //     if(err){
-//         //         return console.log(err)
-//         //     }
-//         //     passport.authenticate('local')(req,res, ()=>{
-//         //         res.render('/profile' , {src})
-//         //     })
-//         // })
-  
-//         // await qrcode.toDataURL(email + password)
-//         // .then(src=>{
-//             // passport.authenticate('local')(req,res, ()=>{
-//                 // res.render('profile' , {Username,src})
-//             // })
-//         // })
-//         // .catch(e=> console.log(e))
-  
-        
-//     } catch (error) {
-//         console.log(error);
-//     }
-//   }
 exports.getRegister = async(req,res)=>{
-    res.render('register')
+    let pass = crypto.randomBytes(3).toString("hex")
+    res.render('register', {pass})
      
 }
 exports.handleRegister = async(req,res)=>{
-    const {fName,lName,email,Password,country,institution,department,category}= req.body
+    const {fName,lName,email,Password,phoneNumber,country,institution,department,category}= req.body
     
     try{
-        // let Password = crypto.randomBytes(8).toString("hex")
+        // let pass = crypto.randomBytes(8).toString("hex")
         let salt = await bcrypt.genSalt()
         let password = await bcrypt.hash(Password,salt)
-
+        const role = "user"
         const Username = fName
-        const code = await qrcode.toDataURL(email)
+        const code = await qrcode.toDataURL(`<div><p>${fName}</p><br></br><p>${role}</p></div>`)
         
         const user = await new User({
             fName: fName,
@@ -110,20 +35,35 @@ exports.handleRegister = async(req,res)=>{
             email: email,
             Username: Username,
             Password: password,
-            phoneNumber:Password ,
+            phoneNumber:phoneNumber ,
             country: country,
             institution: institution,
             department: department,
             category : category,
             qrcode : code
         }).save()
+        console.log(Password)
+        const message = {
+            from: " 'ICEECE' <hoismail2017@gmail.com>",
+            to: "hoismail1435@gmail.com",
+            subject: "Demo",
+            text:`Your Username is ${email} and Passwprd is ${Password}`,
+            
+            html:`<div><p>Dear ${fName},</p> <br><p>Thank you for registering to participate at the International Conference on Electrical Electronics and Communication Engineering and Allied Multidisciplinary Fields (ICEECE & AMF 2021) organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><p>You can access information about various sessions at the conference as well as your payment status through the Web App.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p></div>`
+           
+
+        };
+
+        await sgMail.send(message)
+        .then(response=> console.log("Email Sent"))
+        .catch(e=>console.log(e.message))
         passport.authenticate('local')(req,res, ()=>{
             res.redirect('/dashboard')
         })
         
         console.log(user)
         console.log(code)
-        
+
     }catch(e){
         console.log(e)
     }
@@ -136,25 +76,41 @@ exports.handleRegister = async(req,res)=>{
     // .catch(e=>console.log(e))
 }
 exports.getCreation = async(req,res)=>{
-    res.render("admin/create")
+    res.render("SuperAdmin/create")
 }
 exports.handleCreation = async(req,res)=>{
-    const {email,Username,role}= req.body
+    const {fName,lName,email,role}= req.body
     try {
-        // let salt = await bcrypt.genSalt()
-        // let password = await bcrypt.hash(Password,salt)
-        const password = crypto.randomBytes("8").toString("hex")
-        const reviewer = await new Registration({
-            
+        const pass = crypto.randomBytes(8).toString("hex")
+        let salt = await bcrypt.genSalt()
+        let password = await bcrypt.hash(pass,salt)
+        const code = await qrcode.toDataURL(email + fName+" "+lName + role)
+        const player = await new User({
+            fName: fName,
+            lName: lName,
             email: email,
-            Username:Username,
+            Username: fName,
             Password: password,
-            role : role
+            qrcode : code,
+            role: role,
+            rp:"rp"
         }).save()
         // const auto 
-        console.log(reviewer);
+        console.log(pass);
+        const message = {
+            from: " 'ICEECE' <hoismail2017@gmail.com>",
+            to: email,
+            subject: "Demo",
+            text:`Your Username is ${email} and Passwprd is ${pass}`,
+            html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p></div>`
 
-        res.redirect('/admin/papers')
+        };
+        
+        await sgMail.send(message)
+        .then(response=> console.log("Email Sent"))
+        .catch(e=>console.log(e.message))
+
+        res.redirect('/admin/role-players')
 
         // passport.authenticate('local')(req,res, ()=>{
         //     res.redirect('/admin/papers')
@@ -163,7 +119,12 @@ exports.handleCreation = async(req,res)=>{
         console.log(error);
     } 
 }
-
+exports.getRP = async(req,res)=>{
+    await User.findOne({rp:"rp"})
+    .then(rp=>{
+        res.render("SuperAdmin/role-player" , {rp})
+    })
+}
 exports.getVerifiedEmail = async(req,res)=>{
     const {Username,isVerified} = req.user
     if(isVerified){
@@ -217,42 +178,28 @@ exports.getLogin = (req,res)=>{
 res.render('user/login')
 }
 exports.handleLogin = async(req,res, next)=>{
-    const email = req.body.email
-    // console.log(req.body)
-    await Registration.findOne(email)
-    .then(doc=>{
-        if(doc.role == "Reviewer" || doc.role == "Admin"){
-            passport.authenticate("local", {
-                successRedirect: "/admin/paper",
-                failureRedirect: "back",
-                failureFlash: true,
-                successFlash: true,
-            })(req, res, next);
-        }else{
-            passport.authenticate("local", {
-                successRedirect: "/dashboard",
-                failureRedirect: "back",
-                failureFlash: true,
-                successFlash: true,
-            })(req, res, next);
-        }
-    })
-    .catch(e=>{
-        passport.authenticate("local", {
-            successRedirect: "/dashboard",
-            failureRedirect: "back",
-            failureFlash: true,
-            successFlash: true,
-        })(req, res, next);
-    })
+    passport.authenticate("local", {
+        successRedirect: "/dashboard",
+        failureRedirect: "back",
+        failureFlash: true,
+        successFlash: true,
+    })(req, res, next);
     
 
+}
+exports.logout = (req,res)=>{
+    req.logout();
+    res.redirect("/login")
 }
 exports.getProfile = async(req,res)=>{
     const {email,Username,isVerified} = req.user 
     await User.findOne({email:req.user.email})
     .then(doc=>{
-        res.render("profile" , {doc , isVerified})
+        Contact.findOne({email:req.user.email})
+        .then(pic=>{
+            res.render("profile" , {doc ,pic, isVerified, msg:""})
+        })
+        
     })
 //     await User.findOne({email:req.user.email})
 //     .then(doc=>{
@@ -260,11 +207,20 @@ exports.getProfile = async(req,res)=>{
 //         })
 }
 exports.handlePublicProfile = async(req,res)=>{
-    const {fName,lName,email,Password,country,institution,department,category}= req.body
-    await User.findOne({email:email})
-    .then(doc=>{
-        // doc.publicProfile.push(req.body)
-        // res.redirect("/profile")
+    const {fName,lName,email,phoneNumber,country,institution,department}= req.body
+    const public = new Contact({
+        fName: fName,
+        lName: lName,
+        email: email,
+        phoneNumber:phoneNumber ,
+        country: country,
+        institution: institution,
+        department: department,
+        fileName:req.file.originalname,
+        filePath: x
+    }).save()
+    .then(public=>{
+        res.redirect("/profile" , {msg:"filled"})
     })
 }
 
