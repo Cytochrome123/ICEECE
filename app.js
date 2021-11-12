@@ -118,4 +118,4 @@ module.exports.isLoggedIn = (req ,res ,next)=>{
 
 
 
-app.listen(process.env.PORT || 8080, ()=>console.log("hey"))
+app.listen(process.env.PORT || 3000, ()=>console.log("hey"))
