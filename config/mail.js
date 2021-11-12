@@ -2,9 +2,7 @@ const nodemailer  = require("nodemailer")
 // const mailGun = require("nodemailer-mailgun-transport")
 const sgMail = require("@sendgrid/mail")
 
-const API_KEY = "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"
-
-sgMail.setApiKey(API_KEY)
+sgMail.setApiKey(process.env.MAIL)
 
 // const message = {
 //     from: "hoismail2017@gmail.com",
@@ -51,7 +49,7 @@ sgMail.setApiKey(API_KEY)
 //     secure: false,
 //     auth:{
 //         user: "hoismail2017@gmail.com",
-//         pass: "olaitan1570"
+//         pass: 
 //     },
 //     tls : {
 //         rejectUnauthorized : false 

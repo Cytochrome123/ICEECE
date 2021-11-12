@@ -37,13 +37,12 @@ const sessionConfig = {
   
   };
 
-// mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
+mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
  
-mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
+// mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
 
 mongoose.connection.on("error", console.error.bind(console, "connection error"));
-mongoose.connection.once("open", ()=>console.log("Database connected!!!"));
-
+mongoose.connection.once("open", ()=>console.log("Database connected!!!"))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
