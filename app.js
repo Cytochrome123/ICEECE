@@ -37,12 +37,36 @@ const sessionConfig = {
   
   };
 
-mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
+// mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
  
-// mongoose.connect("mongodb+srv://ICEECE:iceece@papers.r8aup.mongodb.net/conference?retryWrites=true&w=majority",{useUnifiedTopology: true, useNewUrlParser:true});
+mongoose.connect(process.env.mongoURI,{useUnifiedTopology: true, useNewUrlParser:true});
 
 mongoose.connection.on("error", console.error.bind(console, "connection error"));
 mongoose.connection.once("open", ()=>console.log("Database connected!!!"))
+
+
+//db
+
+// let db 
+// if (process.env.NODE_ENV == "development") {
+//   db = require("./config/config").mongoURI;
+// } else {
+//   db = process.env.mongoURI;
+// }
+
+
+// mongoose
+//   .connect(db, {  
+//      useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false})
+//   .then(process.env.NODE_ENV == "development" ? () => console.log("Database connected") : "")
+//   .catch((error)=>{
+//      new Error(error.message, error.status)
+//   })
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -94,4 +118,4 @@ module.exports.isLoggedIn = (req ,res ,next)=>{
 
 
 
-app.listen(process.env.PORT || 3000, ()=>console.log("hey"))
+app.listen(process.env.PORT || 8080, ()=>console.log("hey"))
