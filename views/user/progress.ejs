@@ -300,8 +300,8 @@
                                 <span class="nav-text">Role Players</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="/admin/create">Add Role Player</a></li>
-                                <li><a href="/admin/role-player">View Role Player</a></li>
+                                <li><a href="/superAdmin/create">Add Role Player</a></li>
+                                <li><a href="/superAdmin/role-player">View Role Player</a></li>
                             </ul>
                         </li> 
                     <% } %>
@@ -313,14 +313,14 @@
                             </a>
                             <ul aria-expanded="false">
                                 <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                                    <li><a href="/admin/participants">Participants</a></li>
-                                    <li><a href="/admin/speakers">Speakers</a></li>
-                                    <li><a href="/admin/presenters">Presenters</a></li>
-                                    <li><a href="/admin/attendance">Attendance</a></li>
+                                    <li><a href="/superAdmin/participants">Participants</a></li>
+                                    <li><a href="/superAdmin/speakers">Speakers</a></li>
+                                    <li><a href="/superAdmin/presenters">Presenters</a></li>
+                                    <li><a href="/superAdmin/attendance">Attendance</a></li>
                                 <% } %>
                                 <% if (User.role == "Super Admin") { %>
-                                    <li><a href="/admin/role-player">Role Players</a></li>
-                                    <li><a href="/admin/payments">Payments</a></li>
+                                    <li><a href="/superAdmin/role-player">Role Players</a></li>
+                                    <li><a href="/superAdmin/payments">Payments</a></li>
                                     <li><a href="#">Material Receipt</a></li>
                                 <% } %>
                                 
@@ -335,9 +335,9 @@
 						</a>
                         <ul aria-expanded="false">
                             <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                                <li><a href="#">Add Session</a></li>
+                                <li><a href="#">Session</a></li>
                                 
-                                <li><a href="/admin/speakers">Speakers</a></li>
+                                <li><a href="/superAdmin/speakers">Speakers</a></li>
                                 <li><a href="#">Presenters</a></li>
                             <% } %>
 							
@@ -345,7 +345,7 @@
                                 <li><a href="#">Your Session</a></li>
 							    <li><a href="/session">Other Sessions</a></li>
                             <% } %>
-                            <% if (User.role == "Super  Admin" && User.role == "user") { %>
+                            <% if (User.role == "Super Admin" || User.role == "user") { %>
                                 <li><a href="/session">View Sessions</a></li>
                             <% } %>
 						</ul>
@@ -387,8 +387,8 @@
                                 <span class="nav-text">Attendance</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="/admin/attendance">Overview</a></li>
-                                <li><a href="/admin/attendance">Attendance Data</a></li>
+                                <li><a href="/superAdmin/attendance">Overview</a></li>
+                                <li><a href="/superAdmin/attendance">Attendance Data</a></li>
                             </ul>
                         </li>
                     <% } %>
@@ -402,7 +402,7 @@
                         <ul aria-expanded="false">
                             <% if (User.role == "Super Admin" || User.role == "Sales Manager") { %>
                                 <li><a href="/user/payment-confirmation">Request Approval</a></li>
-                                <li><a href="/admin/payments">Approved Requests</a></li>
+                                <li><a href="/superAdmin/payments">Approved Requests</a></li>
                             <% } %>
                             <% if (User.role == "user" || User.role == "Presenter") { %>
                                 <li><a href="/user/payment-confirmation">Request Approval</a></li>

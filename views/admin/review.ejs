@@ -287,81 +287,145 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-networking"></i>
 							<span class="nav-text">ICEECE</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="#">Dashboard</a></li>
-						
+							<li><a href="/dashboard">Dashboard</a></li>
+							<li><a href="/profile">Profile</a></li>
 						</ul>
                     </li>
-                <% if (User) { %> 
-                 
-              
-                    <% if (User.role == "admin") { %>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-television"></i>
-							<span class="nav-text">Data</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Profile</a></li>
-                            
-                        </ul>
-                    </li>
-                      <% } %> 
-                       <% } %>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-controls-3"></i>
-							<span class="nav-text">Sessions</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">Conference</a></li>
-                            <li><a href="#">Finished</a></li>
-                            
-                        </ul>
-                    </li>
-                    
-                      
-                    <% if (User) { %>
-					  	<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-								<i class="flaticon-381-internet"></i>
-								<span class="nav-text">Submissions</span>
-							</a>
-
-							<ul aria-expanded="false">
-								<% if (User.role == "admin" && User.role == "reviewer") { %>
-								 	<li><a href="/admin/papers">View submissions</a></li>
-									 <li><a href="/submitPaper">Submit a paper</a></li>
-								<% }else{%>
-									<li><a href="/submitPaper">Submit a paper</a></li>
-								<%}%>
-								
-								
-							</ul>
-                    	</li>
-					<% } %>
-                    
-                    
-                    <% if (User) { %>
-                     <% if (User.role === "admin") { %>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-heart"></i>
-							<span class="nav-text">Attendance</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="/admin/attendance">Users</a></li>
-                            <li><a href="#">Registered Users</a></li>
-                            
-                        </ul>
-                    </li>
-                    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-							<i class="flaticon-381-settings-2"></i>
-							<span class="nav-text">Admissions</span>
-						</a>
-					</li> 
+                    <% if (User.role == "Super Admin") { %>
+                       <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Role Players</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/superAdmin/create">Add Role Player</a></li>
+                                <li><a href="/superAdmin/role-player">View Role Player</a></li>
+                            </ul>
+                        </li> 
                     <% } %>
-                   <% } %>
+                    <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Conference Data</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                    <li><a href="/superAdmin/participants">Participants</a></li>
+                                    <li><a href="/superAdmin/speakers">Speakers</a></li>
+                                    <li><a href="/superAdmin/presenters">Presenters</a></li>
+                                    <li><a href="/superAdmin/attendance">Attendance</a></li>
+                                <% } %>
+                                <% if (User.role == "Super Admin") { %>
+                                    <li><a href="/superAdmin/role-player">Role Players</a></li>
+                                    <li><a href="/superAdmin/payments">Payments</a></li>
+                                    <li><a href="#">Material Receipt</a></li>
+                                <% } %>
+                                
+                            </ul>
+                        </li>
+                    <% } %>
+                    
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Session</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                <li><a href="#">Session</a></li>
+                                
+                                <li><a href="/superAdmin/speakers">Speakers</a></li>
+                                <li><a href="#">Presenters</a></li>
+                            <% } %>
+							
+                            <% if (User.role == "Speaker" || User.role == "Presenter") { %>
+                                <li><a href="#">Your Session</a></li>
+							    <li><a href="/session">Other Sessions</a></li>
+                            <% } %>
+                            <% if (User.role == "Super Admin" || User.role == "user") { %>
+                                <li><a href="/session">View Sessions</a></li>
+                            <% } %>
+						</ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Live</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                <li><a href="#">Go Live</a></li>
+                            <% } %>
+							
+						</ul>
+                    </li>
+                    <% if (User.role == "Super Admin" || User.role == "Presenter") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Submissions</span>
+                            </a>
+                            <% if (User.role == "Super Admin") { %>
+                                <ul aria-expanded="false">
+                                    <li><a href="/submitPaper">Paper Submissions</a></li>
+                                    <li><a href="/">Reviewers</a></li>
+                                </ul>
+                            <% } %>
+                            <% if (User.role == "Presenter") { %>
+                                <li><a href="/submitPaper">Paper Submissions</a></li>
+                            <% } %>
+                            
+                        </li>
+                    <% } %>
+                    <% if (User.role == "Super Admin" || User.role == "Program Manager" || User.role == "Protocol Officer") { %>
+                        <li>
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-381-networking"></i>
+                                <span class="nav-text">Attendance</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="/superAdmin/attendance">Overview</a></li>
+                                <li><a href="/superAdmin/attendance">Attendance Data</a></li>
+                            </ul>
+                        </li>
+                    <% } %>
+                    
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Payments</span>
+						</a>
+                        
+                        <ul aria-expanded="false">
+                            <% if (User.role == "Super Admin" || User.role == "Sales Manager") { %>
+                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
+                                <li><a href="/superAdmin/payments">Approved Requests</a></li>
+                            <% } %>
+                            <% if (User.role == "user" || User.role == "Presenter") { %>
+                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
+                            <% } %>
+							
+						</ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-networking"></i>
+							<span class="nav-text">Others</span>
+						</a>
+                        <ul aria-expanded="false">
+							<li><a href="/">Conference Materials</a></li>
+							<li><a href="/profile">Profile</a></li>
+                            <li><a href="/contacts">Contacts</a></li>
+						</ul>
+                    </li>
+                    
                 </ul>
 				
 			</div>
