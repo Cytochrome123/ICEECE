@@ -20,6 +20,7 @@ router.route("/user/payment-confirmation")
 .post(dashboard.handlePaymentConfirmation)
 
 router.get("/session" , dashboard.getSession)
+router.get("/session/:id" , dashboard.getSessionDetails)
 
 router.route( '/submitPaper') 
 .get( dashboard.getSubmitPaper)
@@ -54,7 +55,7 @@ router.route("/admin/review/edit/:id")
 // ########SPEAKER###########
 
 router.route("/speaker/add-info/:id")
-.get(dashboard.getSpeakerForm)
+// .get(dashboard.getSpeakerForm)
 .post(dashboard.handleSpeakerForm)
 
 // ########ADMIN###########

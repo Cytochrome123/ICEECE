@@ -72,11 +72,18 @@ exports.getSession = async(req,res)=>{
     .then(session=>{
         User.find()
         .then(users=>{
-            res.render("session" , {session,users})
+            res.render("user/session" , {session,users})
         })
         // const time = new Date().toLocaleTimeString()
         
     }) 
+}
+exports.getSessionDetails = async(req,res)=>{
+    const {id} = req.params
+    await Session.findById(id)
+    .then(session=>{
+        res.render("user/sessionDetails" , {session})
+    })
 }
 exports.getMarkAttendance = async(req,res)=>{
     const date = new Date().toDateString()
@@ -275,13 +282,13 @@ exports.handleREreview = async(req,res)=>{
 }
 
 // #######SPEAKER#########
-exports.getSpeakerForm = async(req,res)=>{
-    const {id} = req.params
-    const session = await Session.find({id})
-    .then(session=>{
-        res.render("speaker/addInfo" , {session})
-    })
-}
+// exports.getSpeakerForm = async(req,res)=>{
+//     const {id} = req.params
+//     const session = await Session.find({id})
+//     .then(session=>{
+//         res.render("speaker/addInfo" , {session})
+//     })
+// }
 exports.handleSpeakerForm = async(req,res)=>{
     const {id} = req.params
     const {name,type,duration,starts,ends,access,roles,topic,pDetails} = req.body

@@ -197,7 +197,7 @@ exports.getProfile = async(req,res)=>{
     .then(doc=>{
         Contact.findOne({email:req.user.email})
         .then(pic=>{
-            res.render("profile" , {doc ,pic, isVerified, msg:""})
+            res.render("user/profile" , {doc ,pic, isVerified, msg:""})
         })
         
     })
