@@ -373,6 +373,14 @@ exports.handleEditSession = async(req,res)=>{
     .then(session => res.redirect("/speaker/edit/" + session._id))
     .catch(e=>res.send(e))
 }
+exports.deleteEditSession = async(req,res)=>{
+    const {id} = req.params;
+    const session = await Session.findByIdAndDelete(id)
+    .then(session=>{
+        res.redirect("/speaker/edit/" + session._id)
+    })
+    .catch(e=>res.send(e))
+}
 
 exports.getAttendance = async(req,res)=>{
     const attendance = await Attendance.find()

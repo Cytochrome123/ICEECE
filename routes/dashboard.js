@@ -86,7 +86,8 @@ router.route("/admin/add-sessions")
 // .get(dashboard.getAddSession)
 .post(dashboard.handleAddSession)
 
-router.put("admin/session/:id" , dashboard.handleEditSession)
+router.put("/admin/session/:id" , dashboard.handleEditSession)
+router.delete("/admin/session/:id" , dashboard.deleteEditSession)
 
 router.route("/admin/delete/:id")
 .get(dashboard.deletePaper) 

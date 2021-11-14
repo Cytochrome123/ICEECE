@@ -281,7 +281,7 @@
                             <div class="card-header">
                                 <h4 class="card-title">Session Detail</h4>
                                 <% if (User.role == "Super Admin" || User.role == "Program Manager" || User.role == "Speaker" ) { %>
-                                    <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 card-text d-inline  mt-3" data-toggle="modal" data-target="#speakerModalCenter">Add Info</a>
+                                    <a href="#" class="btn btn-ouline-primary shadow btn-xs sharp mr-1 card-text d-inline  mt-3" data-toggle="modal" data-target="#speakerModalCenter">Add Info</a>
                                 <% } %>
 
                                 <div class="modal fade" id="speakerModalCenter">
@@ -331,7 +331,7 @@
                                 </div>
 
                                 <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                                    <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 card-text d-inline  mt-3" data-toggle="modal" data-target="#editModalCenter">Edit</a>
+                                    <a href="#" class="btn btn-ouline-primary shadow btn-xs sharp mr-1 card-text d-inline  mt-3" data-toggle="modal" data-target="#editModalCenter">Edit</a>
                                 <% } %>
 
                                 <div class="modal fade" id="editModalCenter">
@@ -363,10 +363,6 @@
                                                         <div class="form-group col-md-6">
                                                             <input type="text" name="topic" id="" class="form-control mb-3" placeholder="Topic" value="<%= session.topic %> ">
                                                         </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="file">File</label>
-                                                            <input type="file" name="file" id="file" class="form-control mb-3" placeholder="Files" multiple class="mb-3 btn btn-outline-primary btn form-control-file">
-                                                        </div>
                                                     </div>
                                                         
                                                     
@@ -379,6 +375,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                // delete 
+                                <a href="/admin/session/<%= session._id %>?_method=DELETE">Delete</a>
                             </div>
                             <div class="card-body">
                                 <%= session.name %> 
