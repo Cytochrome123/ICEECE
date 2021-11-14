@@ -359,7 +359,7 @@ exports.handleApprovePayment = async(req,res)=>{
 // }
 exports.handleAddSession = async(req,res)=>{
     const {day,name,type,duration,startDate,startTime,endDate,endTime,access,role,moderator,speakers} = req.body
-    // const start = starts.toDateString()
+    // startDate = startDate.toLocaleDateString()
     // console.log(start)
     const session = new Session(req.body).save()
     .then(session=>{
