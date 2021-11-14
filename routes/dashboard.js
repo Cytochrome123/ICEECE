@@ -54,7 +54,7 @@ router.route("/admin/review/edit/:id")
 
 // ########SPEAKER###########
 
-router.route("/speaker/add-info/:id")
+router.route("/session/add-info/:id")
 // .get(dashboard.getSpeakerForm)
 .post(dashboard.handleSpeakerForm)
 
@@ -86,6 +86,7 @@ router.route("/admin/add-sessions")
 // .get(dashboard.getAddSession)
 .post(dashboard.handleAddSession)
 
+router.put("admin/session/:id" , dashboard.handleEditSession)
 
 router.route("/admin/delete/:id")
 .get(dashboard.deletePaper) 

@@ -280,9 +280,109 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Session Detail</h4>
+                                <% if (User.role == "Super Admin" || User.role == "Program Manager" || User.role == "Speaker" ) { %>
+                                    <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 card-text d-inline  mt-3" data-toggle="modal" data-target="#speakerModalCenter">Add Info</a>
+                                <% } %>
+
+                                <div class="modal fade" id="speakerModalCenter">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Add Info</h5>
+                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="/session/add-info/<%= session._id %>" method="post" class="form-group" enctype="multipart/form-data">
+                                                <div class="modal-body">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="name"  id="" class="form-control mb-3" placeholder="Session Name" value="<%= session.name %> " disabled>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="type"  id="" class="form-control mb-3" placeholder="Type" value="<%= session.type %> " disabled>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="duration"  id="" class="form-control mb-3" placeholder="Duration" value="<%= session.duration %> " disabled>
+                                                        </div>    
+                                                        <div class="form-group col-md-6">
+                                                            <input type="time" name="starts"  id="" class="form-control mb-3" placeholder="Starts" value="<%= session.starts %> " disabled>
+                                                        </div>    
+                                                        <div class="form-group col-md-6">
+                                                            <input type="time" name="ends" id="" class="form-control mb-3" placeholder="Ends" value="<%= session.ends %> " disabled>
+                                                        </div>    
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="topic" id="" class="form-control mb-3" placeholder="Topic">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="file">File</label>
+                                                            <input type="file" name="file" id="file" class="form-control mb-3" placeholder="Files" multiple class="mb-3 btn btn-outline-primary btn form-control-file">
+                                                        </div>
+                                                    </div>
+                                                        
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Add</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
+                                    <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 card-text d-inline  mt-3" data-toggle="modal" data-target="#editModalCenter">Edit</a>
+                                <% } %>
+
+                                <div class="modal fade" id="editModalCenter">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit</h5>
+                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="/session/edit/<%= session._id %>?_method=PUT" method="post" class="form-group" enctype="multipart/form-data">
+                                                <div class="modal-body">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="name"  id="" class="form-control mb-3" placeholder="Session Name" value="<%= session.name %> ">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="type"  id="" class="form-control mb-3" placeholder="Type" value="<%= session.type %> ">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="duration"  id="" class="form-control mb-3" placeholder="Duration" value="<%= session.duration %> ">
+                                                        </div>    
+                                                        <div class="form-group col-md-6">
+                                                            <input type="time" name="starts"  id="" class="form-control mb-3" placeholder="Starts" value="<%= session.starts %> ">
+                                                        </div>    
+                                                        <div class="form-group col-md-6">
+                                                            <input type="time" name="ends" id="" class="form-control mb-3" placeholder="Ends" value="<%= session.ends %> ">
+                                                        </div>    
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" name="topic" id="" class="form-control mb-3" placeholder="Topic" value="<%= session.topic %> ">
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="file">File</label>
+                                                            <input type="file" name="file" id="file" class="form-control mb-3" placeholder="Files" multiple class="mb-3 btn btn-outline-primary btn form-control-file">
+                                                        </div>
+                                                    </div>
+                                                        
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <%= session.name %> 
+                                <%= session.topic %>
                             </div>
                         </div>
                     </div>

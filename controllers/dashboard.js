@@ -367,6 +367,12 @@ exports.handleAddSession = async(req,res)=>{
     })
     
 }
+exports.handleEditSession = async(req,res)=>{
+    const {id} = req.params
+    const session = await Session.findByIdAndUpdate(id, req.body, {new:true})
+    .then(session => res.redirect("/speaker/edit/" + session._id))
+    .catch(e=>res.send(e))
+}
 
 exports.getAttendance = async(req,res)=>{
     const attendance = await Attendance.find()
