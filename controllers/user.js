@@ -111,12 +111,10 @@ exports.handleCreation = async(req,res)=>{
         .catch(e=>console.log(e.message))
 
         res.redirect('/admin/role-player')
-
-        // passport.authenticate('local')(req,res, ()=>{
-        //     res.redirect('/admin/papers')
-        // })
+        
     } catch (error) {
-        console.log(error);
+        res.send(error)
+        // console.log(error);
     } 
 }
 exports.getRP = async(req,res)=>{
