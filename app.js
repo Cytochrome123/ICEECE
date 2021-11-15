@@ -1,6 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const path = require("path")
+const methodOverride = require("method-override");
 const mongoose = require("mongoose")
 const Paper = require("./model/paper")
 const Review = require("./model/review")
@@ -78,6 +79,7 @@ app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
+app.use(methodOverride("_method"));
 app.use(cookieParser())
 app.use(session(sessionConfig))
 app.use(flash())

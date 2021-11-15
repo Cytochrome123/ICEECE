@@ -98,7 +98,7 @@ exports.getMarkAttendance = async(req,res)=>{
         //     onTimeout: function () { console.warn('TIMEOUT'); } // optional
         // })
 
-        res.render("user/mark-attendance" , {sessions})
+        res.render("superAdmin/mark-attendance" , {sessions})
     })
 }
 exports.handleMarkAttendance = async(req,res)=>{
@@ -370,14 +370,14 @@ exports.handleAddSession = async(req,res)=>{
 exports.handleEditSession = async(req,res)=>{
     const {id} = req.params
     const session = await Session.findByIdAndUpdate(id, req.body, {new:true})
-    .then(session => res.redirect("/speaker/edit/" + session._id))
+    .then(session => res.redirect(`/speaker/edit/${session._id}`))
     .catch(e=>res.send(e))
 }
 exports.deleteEditSession = async(req,res)=>{
     const {id} = req.params;
     const session = await Session.findByIdAndDelete(id)
     .then(session=>{
-        res.redirect("/speaker/edit/" + session._id)
+        res.redirect("/session")
     })
     .catch(e=>res.send(e))
 }
