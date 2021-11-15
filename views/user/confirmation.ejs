@@ -265,15 +265,15 @@
 			<div class="container-fluid">
 				<div class="page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Payment</a></li>
+						<li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+						<li class="breadcrumb-item active"><a href="/user/payment-confirmation">Payment</a></li>
 					</ol>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Payments Confirmation</h4>
+                                <h4 class="card-title">Payment Confirmation</h4>
                             </div>
                             <div class="card-body">
                                 <form action="/user/payment-confirmation" method="post">
@@ -297,16 +297,16 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-6">
-                                            <label for="rrr">RRR</label>
-                                            <input type="number" name="rrr" class="form-control mb-3" id="" placeholder="RRR">
+                                            <label for="rrr">RRR <span style="color: red;">*</span></label>
+                                            <input type="number" name="rrr" class="form-control mb-3" id="" placeholder="RRR" required>
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="amount">Amount</label>
                                             <input type="number" name="amount" class="form-control mb-3" placeholder="Amount">
                                         </div>
                                         <div class=" form-group col-6">
-                                            <label class="text-label"><h5 class="mb-2"><i class="fa fa-paperclip"></i> Proof of Payment</h5></label>
-                                            <input name="file" type="file" multiple class="mb-3 btn btn-outline-primary btn form-control-file"/>
+                                            <label class="text-label"><h5 class="mb-2"><i class="fa fa-paperclip"></i> Proof of Payment  <span style="color: red;">*</span></h5></label>
+                                            <input name="file" type="file" multiple class="mb-3 btn btn-outline-primary btn form-control-file" required/>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary">Submit</button>
