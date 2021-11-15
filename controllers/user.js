@@ -80,8 +80,8 @@ exports.getCreation = async(req,res)=>{
 }
 exports.handleCreation = async(req,res)=>{
     const {fName,lName,email,role}= req.body
-    try {
-        const pass = crypto.randomBytes(8).toString("hex")
+    
+        const pass = crypto.randomBytes(3).toString("hex")
         let salt = await bcrypt.genSalt()
         let password = await bcrypt.hash(pass,salt)
         const code = await qrcode.toDataURL(email + fName+" "+lName + role)
@@ -96,29 +96,32 @@ exports.handleCreation = async(req,res)=>{
             rp:"rp"
         }).save()
         // const auto 
-        console.log(pass);
-        const message = {
-            from: " 'ICEECE' <hoismail2017@gmail.com>",
-            to: email,
-            subject: "Demo",
-            text:`Your Username is ${email} and Passwprd is ${pass}`,
-            html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p></div>`
+        .then(async(player)=>{
+           console.log(pass); 
+        //    const message = {
+        //         from: " 'ICEECE' <hoismail2017@gmail.com>",
+        //         to: email,
+        //         subject: "Demo",
+        //         text:`Your Username is ${email} and Passwprd is ${pass}`,
+        //         html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p></div>`
 
-        };
-        
-        await sgMail.send(message)
-        .then(response=> console.log("Email Sent"))
-        .catch(e=>console.log(e.message))
+        //     };
+            
+        //     await sgMail.send(message)
+        //     .then(response=> console.log("Email Sent"))
+        //     .catch(e=>console.log(e.message))
 
-        res.redirect('/admin/role-player')
+            res.redirect('/admin/role-player')
+        })
+        .catch(e=>{
+            res.send(e)
+        })
         
-    } catch (error) {
-        res.send(error)
-        // console.log(error);
-    } 
+        
+       
 }
 exports.getRP = async(req,res)=>{
-    await User.findOne({rp:"rp"})
+    await User.find({rp:"rp"})
     .then(rp=>{
         res.render("superAdmin/role-player" , {rp})
     })
