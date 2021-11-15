@@ -76,7 +76,7 @@ exports.handleRegister = async(req,res)=>{
     // .catch(e=>console.log(e))
 }
 exports.getCreation = async(req,res)=>{
-    res.render("SuperAdmin/create")
+    res.render("superAdmin/create")
 }
 exports.handleCreation = async(req,res)=>{
     const {fName,lName,email,role}= req.body
@@ -110,7 +110,7 @@ exports.handleCreation = async(req,res)=>{
         .then(response=> console.log("Email Sent"))
         .catch(e=>console.log(e.message))
 
-        res.redirect('/admin/role-players')
+        res.redirect('/admin/role-player')
 
         // passport.authenticate('local')(req,res, ()=>{
         //     res.redirect('/admin/papers')
@@ -122,7 +122,7 @@ exports.handleCreation = async(req,res)=>{
 exports.getRP = async(req,res)=>{
     await User.findOne({rp:"rp"})
     .then(rp=>{
-        res.render("SuperAdmin/role-player" , {rp})
+        res.render("superAdmin/role-player" , {rp})
     })
 }
 exports.getVerifiedEmail = async(req,res)=>{
