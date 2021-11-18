@@ -10,6 +10,8 @@ router.route("/admin/create")
 .post(user.handleCreation)
 
 router.get("/admin/role-player" , user.getRP)
+
+router.put("/admin/role-player/:id/edit" , user.handleEditRP)
 // SIGN UP ROUTES
 
 // router.route('/signUp') 
@@ -26,8 +28,9 @@ router.route("/user/send-verification-email")
 
 router.get("/user/verifyEmail" , user.getVerify)
 
-
-
+// #####
+// NOT IN YET IN USEED ---------LATER
+// #####
 router.post("/admin/assign/:id", user.handleAssign) 
 
  

@@ -287,8 +287,13 @@
 													</div>
 												</th>
                                                 <th>S/N</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
                                                 <th>Email</th>
+                                                <th>Phone Number</th>
+                                                <th>Role</th>
                                                 <th>Status</th>
+                                                <th>Manage</th>
                                             </tr>
                                         </thead>
                                         <% if (rp) { %>
@@ -302,7 +307,11 @@
                                                             </div>
                                                         </td>
                                                         <td><strong>.</strong></td>
+                                                        <td><%= r.fName %> </td>
+                                                        <td><%= r.lName %> </td>
                                                         <td><%= r.email %> </td>
+                                                        <td><%= r.phoneNumber %> </td>
+                                                        <td><%= r.role %> </td>
                                                         <td><%= r.status %> </td>
                                                         <td>
                                                             <div class="d-flex">
@@ -323,15 +332,32 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form action="/admin/assign/<%=r._id%>" method="post" class="form-group">
-                                                                                    <input type="text" name="role"  id="" class="form-control mb-3">
-                                                                                    <div class="text-left">
-                                                                                        <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                                                    </div>
+                                                                                <form action="/admin/role-player/<%=r._id%>/edit?_method=PUT" method="post" class="form-group">
+                                                                                    <input type="text" name="fName" class="form-control mb-3" placeholder="First Name" value="<%=r.fName%>">
+                                                                                    <input type="text" name="lName" class="form-control mb-3" placeholder="Last Name" value="<%= r.lName %> ">
+                                                                                    <input type="text" name="email" class="form-control mb-3" placeholder="Email" value="<%=r.email%>">
+                                                                                    <input type="number" name="phoneNumber" class="form-control mb-3" placeholder="Phone Number" value="<%=r.phoneNumber%>">
+                                                                                    <!-- <input type="password" name="Password" id="" placeholder="Password"> -->
+                                                                                    <label for="role">Role </label>
+                                                                                    <select name="role" id="role" class="form-control mb-3">
+                                                                                        <option value="<%= r.role %> "><%= r.role %></option>
+                                                                                        <option value="Super Admin">Super Admin</option>
+                                                                                        <option value="Program Manager">Program Manager</option>
+                                                                                        <option value="Speaker">Speaker</option>
+                                                                                        <option value="Reviewer">Reviewer</option>
+                                                                                        <option value="Presenter">Presenter</option>
+                                                                                        <option value="Protocol Officer">Protocol Officer</option>
+                                                                                        <option value="Sales-Manager">Sales-Manager</option>
+                                                                                    </select>
+                                                                                    
                                                                                 </form>
                                                                             </div>
-                                                                            
+                                                                            <div class="modal-footer">
+                                                                                <div class="text-left">
+                                                                                    <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                </div>
+                                                                            </div>
                                                                                 
                                                                             
                                                                         </div>

@@ -89,6 +89,7 @@ exports.handleCreation = async(req,res)=>{
             fName: fName,
             lName: lName,
             email: email,
+            phoneNumber: phoneNumber,
             Username: fName,
             Password: password,
             qrcode : code,
@@ -125,6 +126,15 @@ exports.getRP = async(req,res)=>{
     .then(rp=>{
         res.render("superAdmin/role-player" , {rp})
     })
+}
+exports.handleEditRP = async(req,res)=>{
+    const {id }= req.params.id
+    const user = await (await User.findByIdAndUpdate(id,req.body, {new:true})).save()
+    .then((rp => {
+        console.log(rp)
+        res.redirect("/admin/role-player")
+    }))
+    .catch(e => res.send(e))
 }
 exports.getVerifiedEmail = async(req,res)=>{
     const {Username,isVerified} = req.user

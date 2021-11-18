@@ -56,7 +56,7 @@ router.route("/admin/review/edit/:id")
 
 router.route("/session/add-info/:id")
 // .get(dashboard.getSpeakerForm)
-.post(dashboard.handleSpeakerForm)
+.put(dashboard.handleSpeakerForm)
 
 // ########ADMIN###########
 
