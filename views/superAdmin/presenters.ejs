@@ -12,14 +12,12 @@
                 <div class="page-titles">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Speakers</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Presenters</a></li>
                     </ol>
 
                     <h5><a href="#" data-toggle="modal" data-target="#createRp" class="btn btn-primary mt-5"><i
-                                class="fa fa-pencil"></i> Add Speaker</a></h5>
+                                class="fa fa-pencil"></i> Add Presenter</a></h5>
                 </div>
-
-
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -29,7 +27,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">
-                                            Add Speaker
+                                            Add Presenter
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                         </button>
@@ -44,7 +42,6 @@
                             </div>
 
                         </div>
-
 
                         <div class="custom-tab-1">
                             <ul class="nav nav-pills mb-4 light">
@@ -61,7 +58,7 @@
                                 <div class="tab-pane fade show active" id="summary" role="tabpanel">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Speakers</h4>
+                                            <h4 class="card-title">Presenters</h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
@@ -77,62 +74,65 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <% for (let speaker of speakers){%>
-                                                            <tr>
-                                                                <% let arr=Object.values(speakers)%>
-                                                                    <td><strong>
-                                                                            <%=arr.indexOf(speaker) + 1 %>
-                                                                        </strong></td>
-                                                                    <td>
-                                                                        <%= speaker.fName %>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%= speaker.email %>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%= speaker.phoneNumber %>
-                                                                    </td>
-                                                                    <td>Completed/Not completed</td>
-                                                                    <td><a href="#" data-toggle="modal" data-email='<%= speaker.email %>' data-target="#manage" class="btn btn-primary shadow btn-xs sharp mr-1"><i
-                                                                                class="fa fa-eye"></i></a></td>
-                                                            </tr>
-                                                            <div class="modal fade" id="manage">
-                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <% if (presenters) { %>
+                                                            <% for (let presenter of presenters){%>
+                                                                <tr>
+                                                                    <% let arr=Object.values(presenter)%>
+                                                                        <td><strong>
+                                                                                <%=arr.indexOf(presenter) + 1 %>
+                                                                            </strong></td>
+                                                                        <td>
+                                                                            <%= presenter.fName %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= presenter.email %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= presenter.phoneNumber %>
+                                                                        </td>
+                                                                        <td>Completed/Not completed</td>
+                                                                        <td><a href="#" data-toggle="modal" data-email='<%= presenter.email %>' data-target="#manage" class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                                                    class="fa fa-eye"></i></a></td>
+                                                                </tr>
+                                                                <div class="modal fade" id="manage">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
 
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title">
-                                                                                Contact Speaker
-                                                                            </h5>
-                                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                            </button>
-                                                                        </div>
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">
+                                                                                    Contact Presenter
+                                                                                </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
 
-                                                                        <div class="modal-body">
-                                                                            <form action="#">
-                                                                                <div class="form-group">
-                                                                                    <textarea class="form-control" rows="4" id="manageMessage" placeholder="Write a message to the speaker"></textarea>
-                                                                                </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="#">
+                                                                                    <div class="form-group">
+                                                                                        <textarea class="form-control" rows="4" id="manageMessage" placeholder="Write a message to the presenter"></textarea>
+                                                                                    </div>
 
-                                                                                <input type="text" name="email" class="form-control mb-3" placeholder="Email" value="<%= speaker.email %>">
+                                                                                    <input type="text" name="email" class="form-control mb-3" placeholder="Email" value="<%= presenter.email %>">
 
-                                                                                <button type="submit" class="btn btn-primary">Send
-                                                                                    Message</button>
-                                                                            </form>
+                                                                                    <button type="submit" class="btn btn-primary">Send
+                                                                                        Message</button>
+                                                                                </form>
+                                                                            </div>
+
                                                                         </div>
 
                                                                     </div>
 
                                                                 </div>
+                                                                <% }%>
+                                                                    <% } %>
 
-                                                            </div>
-                                                            <% }%>
+
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                         <div class="card-footer">
-
 
                                         </div>
                                     </div>
@@ -146,22 +146,22 @@
                                             </div>
                                         </div>
                                         <div class="card-body d-flex justify-content-around flex-wrap">
-                                            <% if (speakers) {%>
-                                                <% for (let speaker of speakers) {%>
+                                            <% if (presenters) {%>
+                                                <% for (let presenter of presenters) {%>
                                                     <div class="items col-lg-3 col-md-4 col-sm-6">
                                                         <div class="card text-center">
-                                                            <div class="card-body">speaker
+                                                            <div class="card-body">presenter
 
                                                                 <h5 class="fs-16 font-w500 mb-1">
-                                                                    <img src=<%=speaker.qrcode %> alt="QR Code">
+                                                                    <img src=<%=presenter.qrcode %> alt="QR Code">
                                                                 </h5>
                                                                 <p class="font-w500 text-black">
-                                                                    <%=speaker.fName%>
-                                                                        <%=speaker.lName%>
+                                                                    <%=presenter.fName%>
+                                                                        <%=presenter.lName%>
                                                                 </p>
                                                                 <div class="d-flex align-items-center justify-content-center">
                                                                     <span class="text-black ">
-                                                                        <%=speaker.role%>
+                                                                        <%=presenter.role%>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -187,5 +187,6 @@
         </div>
         <!--**********************************
             Content body end
+            
         ***********************************-->
         <%- include('../partial/footer') -%>

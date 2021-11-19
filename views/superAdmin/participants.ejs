@@ -1,0 +1,71 @@
+<%- include('../partial/head') -%>
+
+    <%- include('../partial/sidebar') -%>
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="/admin/participants">Participants</a></li>
+                    </ol>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="mr-auto pr-3">
+                                            <h4 class="text-black font-w600 fs-20">Participants</h4>
+                                        </div>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-around flex-wrap">
+                                        <% if (doc) {%>
+                                            <% for (let d of doc) {%>
+                                                <div class="items col-lg-3 col-md-4 col-sm-6">
+                                                    <div class="card text-center">
+                                                        <div class="card-body">
+
+                                                            <h5 class="fs-16 font-w500 mb-1">
+                                                                <img src=<%=d.qrcode %> alt="QR Code">
+                                                            </h5>
+                                                            <p class="font-w500 text-black">
+                                                                <%=d.fName%>
+                                                                    <%=d.lName%>
+                                                            </p>
+                                                            <div class="d-flex align-items-center justify-content-center">
+                                                                <span class="text-black ">
+                                                                    <%=d.category%>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                                    <%}%>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <%- include('../partial/footer') -%>

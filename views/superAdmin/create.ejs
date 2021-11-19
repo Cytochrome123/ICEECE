@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,15 @@
     <title>ICEECE -</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/images/favicon.png">
-	<link rel="stylesheet" href="/public/assets/vendor/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="/public/assets/vendor/chartist/css/chartist.min.css">
     <link href="/public/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-	<link href="/public/assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="/public/assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="/public/assets/css/style.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <!--*******************
@@ -24,7 +28,7 @@
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div> 
+    </div>
     <!--*******************
         Preloader end
     ********************-->
@@ -53,16 +57,16 @@
         <!--**********************************
             Nav header end
         ***********************************-->
-		
-		<!--**********************************
+
+        <!--**********************************
             Chat box start
         ***********************************-->
 
-		<!--**********************************
+        <!--**********************************
             Chat box End
         ***********************************-->
-		
-		<!--**********************************
+
+        <!--**********************************
             Header start
         ***********************************-->
         <div class="header">
@@ -71,33 +75,50 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="dashboard_bar">
-								Dashboard
+                                Dashboard
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
-							
+
                             <li class="nav-item dropdown header-profile">
                                 <% if (User) { %>
-                                 
-                               
-                                <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
-                                    <img src="images/profile/17.jpg" width="20" alt=""/>
-									<div class="header-info">
-										<span class="text-black"><strong><%=User ?  User.Username: "" %> </strong></span>
-									  <p class="fs-12 mb-0"> <%=User.role%></p>  
-									</div>
-                                </a> 
-                                <% } %>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="/profile" class="dropdown-item ai-icon">
-                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                        <span class="ml-2">Profile </span>
+
+
+                                    <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
+                                        <img src="images/profile/17.jpg" width="20" alt="" />
+                                        <div class="header-info">
+                                            <span class="text-black"><strong>
+                                                    <%=User ? User.Username: "" %>
+                                                </strong></span>
+                                            <p class="fs-12 mb-0">
+                                                <%=User.role%>
+                                            </p>
+                                        </div>
                                     </a>
-                                    <a href="/logout" class="dropdown-item ai-icon">
-                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                        <span class="ml-2">Logout </span>
-                                    </a>
-                                </div>
+                                    <% } %>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="/profile" class="dropdown-item ai-icon">
+                                                <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg"
+                                                    class="text-primary" width="18" height="18" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                                <span class="ml-2">Profile </span>
+                                            </a>
+                                            <a href="/logout" class="dropdown-item ai-icon">
+                                                <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg"
+                                                    class="text-danger" width="18" height="18" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                                </svg>
+                                                <span class="ml-2">Logout </span>
+                                            </a>
+                                        </div>
                             </li>
                         </ul>
                     </div>
@@ -113,19 +134,19 @@
         ***********************************-->
         <div class="deznav">
             <div class="deznav-scroll">
-				<ul class="metismenu" id="menu">
+                <ul class="metismenu" id="menu">
                     <li>
                         <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">ICEECE</span>
-						</a>
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">ICEECE</span>
+                        </a>
                         <ul aria-expanded="false">
-							<li><a href="/dashboard">Dashboard</a></li>
-							<li><a href="/profile">Profile</a></li>
-						</ul>
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                        </ul>
                     </li>
-                    <% if (User.role == "Super Admin") { %>
-                       <li>
+                    <% if (User.role=="Super Admin" ) { %>
+                        <li>
                             <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                 <i class="flaticon-381-networking"></i>
                                 <span class="nav-text">Role Players</span>
@@ -134,145 +155,154 @@
                                 <li><a href="/admin/create">Add Role Player</a></li>
                                 <li><a href="/admin/role-player">View Role Player</a></li>
                             </ul>
-                        </li> 
-                    <% } %>
-                    <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                        <li>
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <i class="flaticon-381-networking"></i>
-                                <span class="nav-text">Conference Data</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                                    <li><a href="/admin/participants">Participants</a></li>
-                                    <li><a href="/admin/speakers">Speakers</a></li>
-                                    <li><a href="/admin/presenters">Presenters</a></li>
-                                    <li><a href="/admin/attendance">Attendance</a></li>
+                        </li>
+                        <% } %>
+                            <% if (User.role=="Super Admin" || User.role=="Program Manager" ) { %>
+                                <li>
+                                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                        <i class="flaticon-381-networking"></i>
+                                        <span class="nav-text">Conference Data</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <% if (User.role=="Super Admin" || User.role=="Program Manager" ) { %>
+                                            <li><a href="/admin/participants">Participants</a></li>
+                                            <li><a href="/admin/speakers">Speakers</a></li>
+                                            <li><a href="/admin/presenters">Presenters</a></li>
+                                            <li><a href="/admin/attendance">Attendance</a></li>
+                                            <% } %>
+                                                <% if (User.role=="Super Admin" ) { %>
+                                                    <li><a href="/admin/role-player">Role Players</a></li>
+                                                    <li><a href="/admin/payments">Payments</a></li>
+                                                    <li><a href="#">Material Receipt</a></li>
+                                                    <% } %>
+
+                                    </ul>
+                                </li>
                                 <% } %>
-                                <% if (User.role == "Super Admin") { %>
-                                    <li><a href="/admin/role-player">Role Players</a></li>
-                                    <li><a href="/admin/payments">Payments</a></li>
-                                    <li><a href="#">Material Receipt</a></li>
-                                <% } %>
-                                
-                            </ul>
-                        </li>
-                    <% } %>
-                    
-                    <li>
-                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Session</span>
-						</a>
-                        <ul aria-expanded="false">
-                                <li><a href="/session">Sessions</a></li>
-                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                                <li><a href="/admin/speakers">Speakers</a></li>
-                                <li><a href="#">Presenters</a></li>
-                            <% } %>
-							
-                            <% if (User.role == "Speaker" || User.role == "Presenter") { %>
-                                <li><a href="#">Your Session</a></li>
-							    <li><a href="/session">Other Sessions</a></li>
-                            <% } %>
-						</ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Live</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <% if (User.role == "Super Admin" || User.role == "Program Manager") { %>
-                                <li><a href="#">Go Live</a></li>
-                            <% } %>
-							
-						</ul>
-                    </li>
-                    <% if (User.role == "Super Admin" || User.role == "Presenter") { %>
-                        <li>
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <i class="flaticon-381-networking"></i>
-                                <span class="nav-text">Submissions</span>
-                            </a>
-                            <% if (User.role == "Super Admin") { %>
-                                <ul aria-expanded="false">
-                                    <li><a href="/submitPaper">Paper Submissions</a></li>
-                                    <li><a href="/">Reviewers</a></li>
-                                </ul>
-                            <% } %>
-                            <% if (User.role == "Presenter") { %>
-                                <li><a href="/submitPaper">Paper Submissions</a></li>
-                            <% } %>
-                            
-                        </li>
-                    <% } %>
-                    <% if (User.role == "Super Admin" || User.role == "Program Manager" || User.role == "Protocol Officer") { %>
-                        <li>
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <i class="flaticon-381-networking"></i>
-                                <span class="nav-text">Attendance</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="/admin/attendance">Overview</a></li>
-                                <li><a href="/admin/attendance">Attendance Data</a></li>
-                            </ul>
-                        </li>
-                    <% } %>
-                    
-                    <li>
-                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Payments</span>
-						</a>
-                        
-                        <ul aria-expanded="false">
-                            <% if (User.role == "Super Admin" || User.role == "Sales Manager") { %>
-                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
-                                <li><a href="/admin/payments">Approved Requests</a></li>
-                            <% } %>
-                            <% if (User.role == "user" || User.role == "Presenter") { %>
-                                <li><a href="/user/payment-confirmation">Request Approval</a></li>
-                            <% } %>
-							
-						</ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Others</span>
-						</a>
-                        <ul aria-expanded="false">
-							<li><a href="/">Conference Materials</a></li>
-							<li><a href="/profile">Profile</a></li>
-                            <li><a href="/contacts">Contacts</a></li>
-						</ul>
-                    </li>
-                    
+
+                                    <li>
+                                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                            <i class="flaticon-381-networking"></i>
+                                            <span class="nav-text">Session</span>
+                                        </a>
+                                        <ul aria-expanded="false">
+                                            <li><a href="/session">Sessions</a></li>
+                                            <% if (User.role=="Super Admin" || User.role=="Program Manager" ) { %>
+                                                <li><a href="/admin/speakers">Speakers</a></li>
+                                                <li><a href="#">Presenters</a></li>
+                                                <% } %>
+
+                                                    <% if (User.role=="Speaker" || User.role=="Presenter" ) { %>
+                                                        <li><a href="#">Your Session</a></li>
+                                                        <li><a href="/session">Other Sessions</a></li>
+                                                        <% } %>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                            <i class="flaticon-381-networking"></i>
+                                            <span class="nav-text">Live</span>
+                                        </a>
+                                        <ul aria-expanded="false">
+                                            <% if (User.role=="Super Admin" || User.role=="Program Manager" ) { %>
+                                                <li><a href="#">Go Live</a></li>
+                                                <% } %>
+
+                                        </ul>
+                                    </li>
+                                    <% if (User.role=="Super Admin" || User.role=="Presenter" ) { %>
+                                        <li>
+                                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                                <i class="flaticon-381-networking"></i>
+                                                <span class="nav-text">Submissions</span>
+                                            </a>
+                                            <% if (User.role=="Super Admin" ) { %>
+                                                <ul aria-expanded="false">
+                                                    <li><a href="/submitPaper">Paper Submissions</a></li>
+                                                    <li><a href="/">Reviewers</a></li>
+                                                </ul>
+                                                <% } %>
+                                                    <% if (User.role=="Presenter" ) { %>
+                                        <li><a href="/submitPaper">Paper Submissions</a></li>
+                                        <% } %>
+
+                                            </li>
+                                            <% } %>
+                                                <% if (User.role=="Super Admin" || User.role=="Program Manager" ||
+                                                    User.role=="Protocol Officer" ) { %>
+                                                    <li>
+                                                        <a class="has-arrow ai-icon" href="javascript:void()"
+                                                            aria-expanded="false">
+                                                            <i class="flaticon-381-networking"></i>
+                                                            <span class="nav-text">Attendance</span>
+                                                        </a>
+                                                        <ul aria-expanded="false">
+                                                            <li><a href="/admin/attendance">Overview</a></li>
+                                                            <li><a href="/admin/attendance">Attendance Data</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <% } %>
+
+                                                        <li>
+                                                            <a class="has-arrow ai-icon" href="javascript:void()"
+                                                                aria-expanded="false">
+                                                                <i class="flaticon-381-networking"></i>
+                                                                <span class="nav-text">Payments</span>
+                                                            </a>
+
+                                                            <ul aria-expanded="false">
+                                                                <% if (User.role=="Super Admin" ||
+                                                                    User.role=="Sales Manager" ) { %>
+                                                                    <li><a href="/user/payment-confirmation">Request
+                                                                            Approval</a></li>
+                                                                    <li><a href="/admin/payments">Approved Requests</a>
+                                                                    </li>
+                                                                    <% } %>
+                                                                        <% if (User.role=="user" ||
+                                                                            User.role=="Presenter" ) { %>
+                                                                            <li><a href="/user/payment-confirmation">Request
+                                                                                    Approval</a></li>
+                                                                            <% } %>
+
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <a class="has-arrow ai-icon" href="javascript:void()"
+                                                                aria-expanded="false">
+                                                                <i class="flaticon-381-networking"></i>
+                                                                <span class="nav-text">Others</span>
+                                                            </a>
+                                                            <ul aria-expanded="false">
+                                                                <li><a href="/">Conference Materials</a></li>
+                                                                <li><a href="/profile">Profile</a></li>
+                                                                <li><a href="/contacts">Contacts</a></li>
+                                                            </ul>
+                                                        </li>
+
                 </ul>
-				
-			</div>
+
+            </div>
         </div>
         <!--**********************************
             Sidebar end
         ***********************************-->
-		
-		<!--**********************************
+
+        <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
-			
+
             <!-- row -->
-			<div class="container-fluid">
-				<div class="page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Create Role</a></li>
-					</ol>
-				</div>
-				
-				<div class="row">
-					<div class="col-lg-12">
+            <div class="container-fluid">
+                <div class="page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Role</a></li>
+                    </ol>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Role Player</h4>
@@ -280,10 +310,11 @@
                             <div class="card-body">
                                 <form action="/admin/create" method="post">
                                     <input type="text" name="fName" class="form-control mb-3" placeholder="First Name">
-									<input type="text" name="lName" class="form-control mb-3" placeholder="Last Name">
+                                    <input type="text" name="lName" class="form-control mb-3" placeholder="Last Name">
                                     <input type="text" name="email" class="form-control mb-3" placeholder="Email">
-                                    <input type="number" name="phoneNumber" class="form-control mb-3" placeholder="Phone Number">
-									<!-- <input type="password" name="Password" id="" placeholder="Password"> -->
+                                    <input type="pNumber" name="pNumber" class="form-control mb-3"
+                                        placeholder="Phone Number">
+                                    <!-- <input type="password" name="Password" id="" placeholder="Password"> -->
                                     <label for="role">Role </label>
                                     <select name="role" id="role" class="form-control mb-3">
                                         <option value=""></option>
@@ -300,8 +331,8 @@
                             </div>
                         </div>
                     </div>
-					
-				</div>
+
+                </div>
             </div>
         </div>
         <!--**********************************
@@ -320,7 +351,7 @@
             Footer end
         ***********************************-->
 
-		<!--**********************************
+        <!--**********************************
            Support ticket button start
         ***********************************-->
 
@@ -339,59 +370,60 @@
     ***********************************-->
     <!-- Required vendors -->
     <script src="/public/assets/vendor/global/global.min.js"></script>
-	<script src="/public/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-	<script src="/public/assets/vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="/public/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="/public/assets/vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="/public/assets/js/custom.min.js"></script>
-	<script src="/public/assets/js/deznav-init.js"></script>
-	<script src="/public/assets/vendor/owl-carousel/owl.carousel.js"></script>
-	
-	<!-- Chart piety plugin files -->
+    <script src="/public/assets/js/deznav-init.js"></script>
+    <script src="/public/assets/vendor/owl-carousel/owl.carousel.js"></script>
+
+    <!-- Chart piety plugin files -->
     <script src="/public/assets/vendor/peity/jquery.peity.min.js"></script>
-	
-	<!-- Apex Chart -->
-	<script src="/public/assets/vendor/apexchart/apexchart.js"></script>
-	
-	<!-- Dashboard 1 -->
-	<script src="/public/assets/js/dashboard/dashboard-1.js"></script>
-	<script>
-		function carouselReview(){
-			/*  testimonial one function by = owl.carousel.js */
-			jQuery('.testimonial-one').owlCarousel({
-				loop:true,
-				autoplay:true,
-				margin:30,
-				nav:false,
-				dots: false,
-				left:true,
-				navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
-				responsive:{
-					0:{
-						items:1
-					},
-					484:{
-						items:2
-					},
-					882:{
-						items:3
-					},	
-					1200:{
-						items:2
-					},			
-					
-					1540:{
-						items:3
-					},
-					1740:{
-						items:4
-					}
-				}
-			})			
-		}
-		jQuery(window).on('load',function(){
-			setTimeout(function(){
-				carouselReview();
-			}, 1000); 
-		});
-	</script>
+
+    <!-- Apex Chart -->
+    <script src="/public/assets/vendor/apexchart/apexchart.js"></script>
+
+    <!-- Dashboard 1 -->
+    <script src="/public/assets/js/dashboard/dashboard-1.js"></script>
+    <script>
+        function carouselReview() {
+            /*  testimonial one function by = owl.carousel.js */
+            jQuery('.testimonial-one').owlCarousel({
+                loop: true,
+                autoplay: true,
+                margin: 30,
+                nav: false,
+                dots: false,
+                left: true,
+                navText: ['<i class="fa fa-chevron-left" aria-hidden="true"></i>', '<i class="fa fa-chevron-right" aria-hidden="true"></i>'],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    484: {
+                        items: 2
+                    },
+                    882: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 2
+                    },
+
+                    1540: {
+                        items: 3
+                    },
+                    1740: {
+                        items: 4
+                    }
+                }
+            })
+        }
+        jQuery(window).on('load', function () {
+            setTimeout(function () {
+                carouselReview();
+            }, 1000);
+        });
+    </script>
 </body>
+
 </html>

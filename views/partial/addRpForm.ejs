@@ -1,0 +1,19 @@
+<form action="/admin/create" method="post">
+    <input type="text" name="fName" class="form-control mb-3" placeholder="First Name" />
+    <input type="text" name="lName" class="form-control mb-3" placeholder="Last Name" />
+    <input type="text" name="email" class="form-control mb-3" placeholder="Email" />
+    <input type="pNumber" name="pNumber" class="form-control mb-3" placeholder="Phone Number" />
+    <!-- <input type="password" name="Password" id="" placeholder="Password"> -->
+    <label for="role">Role </label>
+    <select name="role" id="role" class="form-control mb-3">
+		<option value=""></option>
+		<option value="Super Admin">Super Admin</option>
+		<option value="Program Manager">Program Manager</option>
+		<option value="Speaker">Speaker</option>
+		<option value="Reviewer">Reviewer</option>
+		<option value="Presenter">Presenter</option>
+		<option value="Protocol Officer">Protocol Officer</option>
+		<option value="Sales-Manager">Sales-Manager</option>
+	</select>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
