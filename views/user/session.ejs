@@ -46,33 +46,16 @@
                                                                                     <h3 class="card-title">
                                                                                         <%= sesn.name %>
                                                                                     </h3>
-                                                                                    <i class="fa fa-circle text-success text-right mr-1"></i> Ongoing
+                                                                                    <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
                                                                                 </div>
                                                                             </div>
                                                                             <div class="card-body">
-                                                                                <div class="media mb-3">
-                                                                                    <div href="#"><img src="/public/assets/images/menus/8.png" alt="" class="rounded-circle mr-3" width="86"></div>
-                                                                                    <div class="media-body">
-                                                                                        <h6 class="fs-16 font-w500">
-                                                                                            <span href="#" class="text-black">
-                                                                                                <%= sesn.topic %>
-                                                                                            </span>
-                                                                                        </h6>
-                                                                                        <span class="fs-14">by DR</span>
-                                                                                    </div>
-                                                                                </div>
+                                                                                
                                                                                 <ul class="m-md-auto mt-2 pr-4">
                                                                                     <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                            <%= sesn.startTime %>- <%=
-                                                                                                    sesn.endTime %>
-                                                                                        </span></li>
-                                                                                    <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                            <%= sesn.duration %>
-                                                                                        </span></li>
-                                                                                    <li class="mb-2 text-nowrap"><i class="las la-calendar-alt scale5 mr-3"></i><span class="fs-14 text-black  font-w500">
-                                                                                            <%= sesn.startDate%>- <%=
-                                                                                                    sesn.endDate %>
-                                                                                        </span></li>
+                                                                                        <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
+                                                                                        </span>
+                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="card-footer">
@@ -287,9 +270,9 @@
                                                 <div class="row mt-5">
                                                     <% for(let sesn of session){%>
                                                         <% if (sesn.day=="day2" ) { %>
-                                                            <div class="col-3">
+                                                            <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
                                                                 <div class="row">
-                                                                    <div class="col-xl-12 col-md-6">
+                                                                    <div class="col-xl-12">
 
                                                                         <div class="card">
                                                                             <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
@@ -298,33 +281,16 @@
                                                                                     <h3 class="card-title">
                                                                                         <%= sesn.name %>
                                                                                     </h3>
-                                                                                    <i class="fa fa-circle text-success text-right mr-1"></i> Ongoing
+                                                                                    <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
                                                                                 </div>
                                                                             </div>
                                                                             <div class="card-body">
-                                                                                <div class="media mb-3">
-                                                                                    <div href="#"><img src="/public/assets/images/menus/8.png" alt="" class="rounded-circle mr-3" width="86"></div>
-                                                                                    <div class="media-body">
-                                                                                        <h6 class="fs-16 font-w500">
-                                                                                            <span href="#" class="text-black">
-                                                                                                <%= sesn.topic %>
-                                                                                            </span>
-                                                                                        </h6>
-                                                                                        <span class="fs-14">by DR</span>
-                                                                                    </div>
-                                                                                </div>
+                                                                                
                                                                                 <ul class="m-md-auto mt-2 pr-4">
                                                                                     <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                            <%= sesn.startTime %>- <%=
-                                                                                                    sesn.endTime %>
-                                                                                        </span></li>
-                                                                                    <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                            <%= sesn.duration %>
-                                                                                        </span></li>
-                                                                                    <li class="mb-2 text-nowrap"><i class="las la-calendar-alt scale5 mr-3"></i><span class="fs-14 text-black  font-w500">
-                                                                                            <%= sesn.startDate%>- <%=
-                                                                                                    sesn.endDate %>
-                                                                                        </span></li>
+                                                                                        <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
+                                                                                        </span>
+                                                                                    </li>
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="card-footer">
@@ -566,54 +532,39 @@
                                             <div class="row mt-5">
                                                 <% for(let sesn of session){%>
                                                     <% if (sesn.day=="day3" ) { %>
-                                                        <div class="col-3">
-                                                            <div class="row">
-                                                                <div class="col-xl-12 col-md-6">
+                                                        <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+                                                                <div class="row">
+                                                                    <div class="col-xl-12">
 
-                                                                    <div class="card">
-                                                                        <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
-                                                                        <div class="card-header border-0">
-                                                                            <div class="mr-auto pr-3">
-                                                                                <h3 class="card-title">
-                                                                                    <%= sesn.name %>
-                                                                                </h3>
-                                                                                <i class="fa fa-circle text-success text-right mr-1"></i> Ongoing
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                            <div class="media mb-3">
-                                                                                <div href="#"><img src="/public/assets/images/menus/8.png" alt="" class="rounded-circle mr-3" width="86"></div>
-                                                                                <div class="media-body">
-                                                                                    <h6 class="fs-16 font-w500"><span href="#" class="text-black">
-                                                                                            <%= sesn.topic %>
-                                                                                        </span></h6>
-                                                                                    <span class="fs-14">by DR</span>
+                                                                        <div class="card">
+                                                                            <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
+                                                                            <div class="card-header border-0">
+                                                                                <div class="mr-auto pr-3">
+                                                                                    <h3 class="card-title">
+                                                                                        <%= sesn.name %>
+                                                                                    </h3>
+                                                                                    <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
                                                                                 </div>
                                                                             </div>
-                                                                            <ul class="m-md-auto mt-2 pr-4">
-                                                                                <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                        <%= sesn.startTime %>- <%=
-                                                                                                sesn.endTime %>
-                                                                                    </span></li>
-                                                                                <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                        <%= sesn.duration %>
-                                                                                    </span></li>
-                                                                                <li class="mb-2 text-nowrap"><i class="las la-calendar-alt scale5 mr-3"></i><span class="fs-14 text-black  font-w500">
-                                                                                        <%= sesn.startDate%>- <%=
-                                                                                                sesn.endDate %>
-                                                                                    </span></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="card-footer">
-                                                                            <div class="text-right">
-                                                                                <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
+                                                                            <div class="card-body">
+                                                                                
+                                                                                <ul class="m-md-auto mt-2 pr-4">
+                                                                                    <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
+                                                                                        <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="card-footer">
+                                                                                <div class="text-right">
+                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         <% } %>
                                                             <% } %>
 

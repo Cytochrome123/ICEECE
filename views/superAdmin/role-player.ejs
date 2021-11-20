@@ -93,7 +93,7 @@
                                                             <%= r.email %>
                                                         </td>
                                                         <td>
-                                                            <%= r.email %>
+                                                            <%= r.phoneNumber %>
                                                         </td>
                                                         <td>
                                                             <%= r.status %>
@@ -130,47 +130,22 @@
                                                                                         <input type="pNumber" name="pNumber" class="form-control mb-3" value="<%= r.pNumber %>" placeholder="Phone Number">
                                                                                         <!-- <input type="password" name="Password" id="" placeholder="Password"> -->
                                                                                         <label for="role">Role </label>
-                                                                                        <select name="role" id="role" class="form-control mb-3" value="<%= r.role %>">
-                                                                                            <option value=""></option>
-                                                                                            <option value="Super Admin" <%if(r.role === "Super Admin"){%>
-                                                                                                selected
-                                                                                                <%} %>>
-                                                                                                Super Admin</option>
-                                                                                            <option
-                                                                                                value="Program Manager" <%if(r.role === "Program Manager"){%>
-                                                                                                    selected
-                                                                                                    <%} %>>
-                                                                                                Program Manager</option>
-                                                                                            <option value="Speaker" <%if(r.role === "Speaker"){%>
-                                                                                                selected
-                                                                                                <%} %>>
-                                                                                                Speaker</option>
-                                                                                            <option value="Reviewer" <%if(r.role === "Reviewer"){%>
-                                                                                                selected
-                                                                                                <%} %>>
-                                                                                                Reviewer</option>
-                                                                                            <option value="Presenter" <%if(r.role === "Presenter"){%>
-                                                                                                selected
-                                                                                                <%} %>>
-                                                                                                Presenter</option>
-                                                                                            <option
-                                                                                                value="Protocol Officer" <%if(r.role === "Protocol Officer"){%>
-                                                                                                    selected
-                                                                                                    <%} %>>
-                                                                                                Protocol Officer
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="Sales-Manager" <%if(r.role === "Sales-Manager"){%>
-                                                                                                    selected
-                                                                                                    <%} %>>
-                                                                                                Sales-Manager</option>
+                                                                                        <select name="role" id="role" class="form-control mb-3">
+                                                                                            <option value="<%= r.role %>" selected> <%= r.role %> </option>
+                                                                                            <option value="Super Admin">Super Admin</option>
+                                                                                            <option value="Program Manager">Program Manager</option>
+                                                                                            <option value="Speaker">Speaker</option>
+                                                                                            <option value="Reviewer">Reviewer</option>
+                                                                                            <option value="Presenter">Presenter</option>
+                                                                                            <option value="Protocol Officer">Protocol Officer</option>
+                                                                                            <option value="Sales-Manager">Sales-Manager</option>
+                                                                                        
                                                                                         </select>
 
 
                                                                                         <div class="text-left">
                                                                                             <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                                                            <button type="button" class="btn btn-primary">Save
-                                                                                                changes</button>
+                                                                                            <button type="button" class="btn btn-primary">Save changes</button>
                                                                                         </div>
                                                                                     </form>
                                                                             </div>

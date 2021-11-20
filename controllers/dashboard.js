@@ -317,8 +317,10 @@ exports.getAll = async(req, res) => {
     });
 };
 exports.getPresenters = async(req, res) => {
-    const presenters = await User.find({ role: "Presenter" }).then(
-        (presenters) => {
+    const presenters = await User.find({ role: "Presenter" })
+    .then(
+        async(presenters) => {
+            // Session.find
             res.render("superAdmin/presenters", { presenters });
         },
     );

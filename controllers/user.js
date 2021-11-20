@@ -79,7 +79,7 @@ exports.getCreation = async(req,res)=>{
     res.render("superAdmin/create")
 }
 exports.handleCreation = async(req,res)=>{
-    const {fName,lName,email,role}= req.body
+    const {fName,lName,email,phoneNumber,role}= req.body
     
         const pass = crypto.randomBytes(3).toString("hex")
         let salt = await bcrypt.genSalt()
@@ -91,6 +91,7 @@ exports.handleCreation = async(req,res)=>{
             email: email,
             Username: fName,
             Password: password,
+            phoneNumber: phoneNumber,
             qrcode : code,
             role: role,
             rp:"rp"
