@@ -4,17 +4,20 @@ const sessionSchema = new mongoose.Schema({
     name: String,
     type: String,
     duration: String,
-    startDate: String,
     startTime: String,
-    endDate: String,
     endTime: String,
+    live: String,
     access: [String],
     role: [String],
     moderator: [String],
     speakers: [String],
     topic: String,
-    fileName: String,
-    filePath: String,
+    cameraReady: [
+        Object
+    ], 
+    slide: [
+        Object
+    ],
     status: {
         type: String,
         enum: ["ongoing", "finished"],

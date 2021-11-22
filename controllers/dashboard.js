@@ -3,7 +3,7 @@ const multer = require("multer");
 const { storage, upload } = require("../config/multer");
 const path = require("path");
 const mongoose = require("mongoose");
-
+const methodOverride = require("method-override");
 const User = mongoose.model("User");
 const Paper = require("../model/paper");
 const Review = require("../model/review");
@@ -295,18 +295,19 @@ exports.handleREreview = async(req, res) => {
 // }
 exports.handleSpeakerForm = async(req, res) => {
     const { id } = req.params;
-    const { name, type, duration, starts, ends, access, roles, topic, pDetails } =
-    req.body;
+    const { name, type, duration, starts, ends, access, roles, topic, pDetails } = req.body;
     const x = req.file.path;
-    const session = await Session.findByIdAndUpdate({ id: id }, {
-            topic: topic,
-            fileName: req.file.originalname,
-            filePath: x,
-        }, )
-        .save()
-        .then((session) => {
-            res.redirect("/dashboard");
-        });
+    const cameraReady1 = {
+        fileName: req.file.originalname,
+        filePath: x,
+    }
+    const session = await Session.findById(id)
+    .then((session) => {
+        session.cameraReady.push(cameraReady1)
+        session.save()
+        res.redirect(`/session/${session._id}`);
+    })
+    .catch(e=>res.send(e))
 };
 
 // ########ADMIN###########
@@ -369,10 +370,9 @@ exports.handleAddSession = async(req, res) => {
         name,
         type,
         duration,
-        startDate,
         startTime,
-        endDate,
         endTime,
+        live,
         access,
         role,
         moderator,
@@ -386,11 +386,21 @@ exports.handleAddSession = async(req, res) => {
 };
 exports.handleEditSession = async(req, res) => {
     const { id } = req.params;
-    const session = await Session.findByIdAndUpdate(id, req.body, { new: true })
-        .then((session) => res.redirect(`/speaker/edit/${session._id}`))
-        .catch((e) => res.send(e));
+    const { name, type, duration, starts, ends, access, roles, topic, pDetails } = req.body;
+    const x = req.file.path;
+    const slide1 = {
+        fileName: req.file.originalname,
+        filePath: x,
+    }
+    const session = await Session.findById(id)
+    .then((session) => {
+        session.slide.push(cameraReady1)
+        session.save()
+        res.redirect(`/session/${session._id}`);
+    })
+    .catch(e=>res.send(e))
 };
-exports.deleteEditSession = async(req, res) => {
+exports.deleteSession = async(req, res) => {
     const { id } = req.params;
     const session = await Session.findByIdAndDelete(id)
         .then((session) => {
@@ -422,7 +432,7 @@ exports.deletePaper = async(req, res) => {
 exports.downloadFile = async(req, res) => {
     const { id } = req.params;
 
-    await Paper.findById(id).then((doc) => {
+    await Session.findById(id).then((doc) => {
         // insert the path its gonna depend on cPanel
         const x = __dirname + "\\Documents\\iii\\" + doc.filePath;
         // const x =  __dirname + "/public/uploads/papers/Developer.jpg"

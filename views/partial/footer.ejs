@@ -3,7 +3,7 @@
         ***********************************-->
 <div class="footer">
     <div class="copyright">
-        <p>Copyright © Hud</p>
+        <p>Built with love by <strong><a href="digmpact.tech">Digimpact Technologies</a></strong></p>
     </div>
 </div>
 <!--**********************************
@@ -28,7 +28,22 @@
 <script src="../public/assets/vendor/lightgallery/js/lightgallery-all.min.js"></script>
 
 
+<!-- // script for qr scanner// -->
+<script type="text/javascript">
+    function onScanSuccess(qrCodeMessage) {
+        document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
+    }
 
+    function onScanError(errorMessage) {
+        //handle scan error
+    }
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", {
+            fps: 10,
+            qrbox: 250
+        });
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
+</script>
 
 
 

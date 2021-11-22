@@ -2,7 +2,7 @@ const router = require("express").Router();
 // const upload = require("../config/multer")
 const multer = require("multer");
 const { storage, upload } = require("../config/multer");
-
+const methodOverride = require("method-override");
 const dashboard = require("../controllers/dashboard");
 // const {isLoggedIn} = require("../app")
 
@@ -60,9 +60,9 @@ router
 // ########SPEAKER###########
 
 router
-    .route("/session/add-info/:id")
+    .route("/session/:id/add-info")
     // .get(dashboard.getSpeakerForm)
-    .post(dashboard.handleSpeakerForm);
+    .put(dashboard.handleSpeakerForm);
 
 // ########ADMIN###########
 
@@ -97,7 +97,7 @@ router
     .post(dashboard.handleAddSession);
 
 router.put("/admin/session/:id", dashboard.handleEditSession);
-router.delete("/admin/session/:id", dashboard.deleteEditSession);
+router.delete("/admin/session/:id", dashboard.deleteSession);
 
 router.route("/admin/delete/:id").get(dashboard.deletePaper);
 

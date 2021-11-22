@@ -1,5 +1,6 @@
 const passport = require('passport')
 const bcrypt = require("bcrypt")
+const methodOverride = require("method-override");
 const { model } = require('mongoose')
 const User = model('User')
 const Contact = require("../model/contact")

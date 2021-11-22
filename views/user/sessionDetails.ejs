@@ -37,7 +37,7 @@
                                             <% if (User.role=="Super Admin" || User.role=="Program Manager" ||
                                                 User.role=="Speaker" ) { %>
 
-                                                <a href="#" class="btn btn-ouline-primary shadow" data-toggle="modal" data-target="#cameraReadyPaper">Upload Camera Ready Paper</a>
+                                                <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#cameraReadyPaper">Upload Camera Ready Paper</a>
                                                 <% } %>
 
                                                     <div class="modal fade" id="cameraReadyPaper">
@@ -50,7 +50,7 @@
                                                                         <span>&times;</span>
                                                                     </button>
                                                                 </div>
-                                                                <form action="/session/add-info/<%= session._id %>" method="post" class="form-group" enctype="multipart/form-data">
+                                                                <form action="/session/<%= session._id %>/add-info?_method=PUT" method="post" class="form-group" enctype="multipart/form-data">
                                                                     <div class="modal-body">
                                                                         <div class="form-row">
                                                                             <div class="form-group col-md-6">
@@ -72,7 +72,7 @@
 
                                                     <% if (User.role=="Super Admin" || User.role=="Program Manager" ||
                                                         User.role=="Speaker" ) { %>
-                                                        <a href="#" class="btn btn-ouline-primary shadow" data-toggle="modal" data-target="#presentationSlide">Upload
+                                                        <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#presentationSlide">Upload
                                                             Presentation Slide</a>
                                                         <% } %>
 
@@ -108,7 +108,7 @@
 
                                                             <% if (User.role=="Super Admin" ||
                                                                 User.role=="Program Manager" ) { %>
-                                                                <a href="#" class="btn btn-ouline-primary shadow" data-toggle="modal" data-target="#editModalCenter">Edit Session Info</a>
+                                                                <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#editModalCenter">Edit Session Info</a>
 
                                                                 <!-- Modal -->
                                                                 <div class="modal fade" id="editModalCenter">
@@ -362,7 +362,7 @@
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body embed-responsive embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ZYzbalQ6Lg8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= session.live.split('/')[3]%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     </div>

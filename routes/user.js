@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const methodOverride = require("method-override");
 const user= require('../controllers/user');
 
 
