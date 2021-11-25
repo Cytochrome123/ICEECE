@@ -286,14 +286,8 @@ exports.handleREreview = async(req, res) => {
 };
 
 // #######SPEAKER#########
-// exports.getSpeakerForm = async(req,res)=>{
-//     const {id} = req.params
-//     const session = await Session.find({id})
-//     .then(session=>{
-//         res.render("speaker/addInfo" , {session})
-//     })
-// }
-exports.handleSpeakerForm = async(req, res) => {
+
+exports.handleCameraReady = async(req, res) => {
     const { id } = req.params;
     const { name, type, duration, starts, ends, access, roles, topic, pDetails } = req.body;
     const x = req.file.path;
@@ -309,6 +303,23 @@ exports.handleSpeakerForm = async(req, res) => {
     })
     .catch(e=>res.send(e))
 };
+exports.handleSlide = async(req, res) => {
+    const { id } = req.params;
+    const { name, type, duration, starts, ends, access, roles, topic, pDetails } = req.body;
+    const x = req.file.path;
+    const slide1 = {
+        fileName: req.file.originalname,
+        filePath: x,
+    }
+    const session = await Session.findById(id)
+    .then((session) => {
+        session.slide.push(slide1)
+        session.save()
+        res.redirect(`/session/${session._id}`);
+    })
+    .catch(e=>res.send(e))
+};
+
 
 // ########ADMIN###########
 
@@ -331,14 +342,6 @@ exports.getSpeakers = async(req, res) => {
         res.render("superAdmin/speakers", { speakers });
     });
 };
-
-// exports.getManageSpeaker = async(req,res)=>{
-//     const {id} = req.params
-//     const speaker = await User.findById({_id: id})
-//     .then(speaker=>{
-//         res.render("speakers" , {speaker})
-//     })
-// }
 exports.getPayments = async(req, res) => {
     const payment = await Payment.find()
         .then((payment) => {
@@ -357,13 +360,6 @@ exports.handleApprovePayment = async(req, res) => {
         });
     });
 };
-// exports.getAddSession = async(req,res)=>{
-//     const users = await User.find()
-//     .then(users=>{
-//         res.render("superAdmin/addSession", {users})
-//     })
-//     .catch(e=>console.log(e))
-// }
 exports.handleAddSession = async(req, res) => {
     const {
         day,
@@ -384,22 +380,12 @@ exports.handleAddSession = async(req, res) => {
         res.redirect("/session");
     });
 };
-exports.handleEditSession = async(req, res) => {
-    const { id } = req.params;
-    const { name, type, duration, starts, ends, access, roles, topic, pDetails } = req.body;
-    const x = req.file.path;
-    const slide1 = {
-        fileName: req.file.originalname,
-        filePath: x,
-    }
-    const session = await Session.findById(id)
-    .then((session) => {
-        session.slide.push(cameraReady1)
-        session.save()
-        res.redirect(`/session/${session._id}`);
-    })
-    .catch(e=>res.send(e))
-};
+exports.handleEditSession = async(req,res)=>{
+    const {id}= req.params
+    await Session.findByIdAndUpdate(id, req.body, {new:true})     
+    .then(sesssion => res.redirect(`/session/${session._id}`))
+    .catch(err => res.send(err))
+}
 exports.deleteSession = async(req, res) => {
     const { id } = req.params;
     const session = await Session.findByIdAndDelete(id)
@@ -433,11 +419,13 @@ exports.downloadFile = async(req, res) => {
     const { id } = req.params;
 
     await Session.findById(id).then((doc) => {
-        // insert the path its gonna depend on cPanel
-        const x = __dirname + "\\Documents\\iii\\" + doc.filePath;
+        // console.log(__dirname)
+        const x = "\\iii\\" + doc.cameraReady[0].filePath
         // const x =  __dirname + "/public/uploads/papers/Developer.jpg"
-        // const y = path.resol
-        // const x = process.env.HOME + "/Downloads/Edge_Downloads/ICEECE-master/public/uploads/papers/Developer.jpg"
-        res.download(x);
+        // Documents\\iii\\
+        .then(doc=>{
+          res.download(x);  
+        })
+        .catch(e=>res.send(e))
     });
 };

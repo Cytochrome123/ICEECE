@@ -46,7 +46,7 @@
                                                                                     <h3 class="card-title">
                                                                                         <%= sesn.name %>
                                                                                     </h3>
-                                                                                    <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
+                                                                                    <span class="float-right"><i class="fa fa-circle text-primary mr-1"></i> Upcoming</span>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="card-body">
@@ -79,11 +79,11 @@
                                                                                     <div class="card">
                                                                                         <div class="card-body">
                                                                                             <!-- Button trigger modal -->
-                                                                                            <a href="#" class="plus-icon text-white rounded bg-primary" data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                                                            <a href="#" class="plus-icon text-white rounded bg-primary" data-toggle="modal" data-target="#exampleModalCenterDay1"><i
                                                                                                     class="las la-plus scale-2"></i></a>
 
                                                                                             <!-- Modal -->
-                                                                                            <div class="modal fade" id="exampleModalCenter">
+                                                                                            <div class="modal fade" id="exampleModalCenterDay1">
                                                                                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                                                     <div class="modal-content">
                                                                                                         <div class="modal-header">
@@ -132,6 +132,7 @@
                                                                                                                     </div>
 
                                                                                                                     <div class="form-group col-md-6">
+                                                                                                                        <label for="live">Youtube Live Link</label>
                                                                                                                         <input type="text" name="live" id="live" class="form-control mb-3" placeholder="Youtube Live Link">
                                                                                                                     </div>
 
@@ -192,11 +193,8 @@
                                                                                                                         <% for(let
                                                                                                                             user
                                                                                                                             of
-                                                                                                                            users){
-                                                                                                                            %>
-                                                                                                                            <% if(user.role=="Speaker"
-                                                                                                                                ){
-                                                                                                                                %>
+                                                                                                                            users){%>
+                                                                                                                            <% if(user.role=="Speaker"){%>
                                                                                                                                 <div>
                                                                                                                                     <label class="radio-inline mr-3">
                                                                                                                                         <%= user.fName
@@ -210,10 +208,8 @@
                                                                                                                                                 name="speakers">
                                                                                                                                     </label>
                                                                                                                                 </div>
-                                                                                                                                <% }
-                                                                                                                                    %>
-                                                                                                                                    <% }
-                                                                                                                                        %>
+                                                                                                                            <% } %>
+                                                                                                                        <% } %>
                                                                                                                     </div>
 
                                                                                                                     <div class="form-group">
@@ -314,11 +310,11 @@
                                                                                     <div class="card">
                                                                                         <div class="card-body">
                                                                                             <!-- Button trigger modal -->
-                                                                                            <a href="#" class="plus-icon text-white rounded bg-primary" data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                                                            <a href="#" class="plus-icon text-white rounded bg-primary" data-toggle="modal" data-target="#exampleModalCenterDay2"><i
                                                                                                     class="las la-plus scale-2"></i></a>
 
                                                                                             <!-- Modal -->
-                                                                                            <div class="modal fade" id="exampleModalCenter">
+                                                                                            <div class="modal fade" id="exampleModalCenterDay2">
                                                                                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                                                     <div class="modal-content">
                                                                                                         <div class="modal-header">
@@ -365,16 +361,12 @@
                                                                                                                     <div class="form-group col-md-6">
                                                                                                                         <input type="text" name="duration" id="" class="form-control mb-3" placeholder="Duration">
                                                                                                                     </div>
+
                                                                                                                     <div class="form-group col-md-6">
-                                                                                                                        <label for="startDate">Start
-                                                                                                                            Date</label>
-                                                                                                                        <input type="date" name="startDate" id="" class="form-control mb-3" placeholder="Start Date">
+                                                                                                                        <label for="live">Youtube Live Link</label>
+                                                                                                                        <input type="text" name="live" id="live" class="form-control mb-3" placeholder="Youtube Live Link">
                                                                                                                     </div>
-                                                                                                                    <div class="form-group col-md-6">
-                                                                                                                        <label for="endDate">End
-                                                                                                                            Date</label>
-                                                                                                                        <input type="date" name="endDate" id="" class="form-control mb-3" placeholder="End Date">
-                                                                                                                    </div>
+
                                                                                                                     <div class="form-group col-md-6">
                                                                                                                         <label for="startTime">Start
                                                                                                                             Time</label>
@@ -392,68 +384,48 @@
                                                                                                                         </label>
                                                                                                                         <div>
                                                                                                                             <label class="radio-inline mr-3">International
-                                                                                                                                Participants<input
+                                                                                                                                Participants
+                                                                                                                                <input
                                                                                                                                     type="checkbox"
                                                                                                                                     value="International Participants"
                                                                                                                                     name="access"></label>
                                                                                                                             <label class="radio-inline mr-3">Local
-                                                                                                                                Participants<input
+                                                                                                                                Participants
+                                                                                                                                <input
                                                                                                                                     type="checkbox"
                                                                                                                                     value="Local Participants"
                                                                                                                                     name="access"></label>
                                                                                                                             <label class="radio-inline mr-3">International
-                                                                                                                                Student<input
+                                                                                                                                Student
+                                                                                                                                <input
                                                                                                                                     type="checkbox"
                                                                                                                                     value="International Student"
                                                                                                                                     name="access"></label>
                                                                                                                             <label class="radio-inline mr-3">Local
-                                                                                                                                Student<input
+                                                                                                                                Student
+                                                                                                                                <input
                                                                                                                                     type="checkbox"
                                                                                                                                     value="Local Student"
                                                                                                                                     name="access"></label>
                                                                                                                             <label class="radio-inline mr-3">Postgraduate
                                                                                                                                 Session
-                                                                                                                                Participant<input
+                                                                                                                                Participant
+                                                                                                                                <input
                                                                                                                                     type="checkbox"
                                                                                                                                     value="Postgraduate Session Participant"
                                                                                                                                     name="access"></label>
 
                                                                                                                         </div>
                                                                                                                     </div>
-                                                                                                                    <div class="form-group">
-                                                                                                                        <label for="roles"><strong>Roles</strong>
-                                                                                                                        </label>
-                                                                                                                        <div>
-                                                                                                                            <label class="radio-inline mr-3">Speaker<input
-                                                                                                                                    type="checkbox"
-                                                                                                                                    value="Speaker"
-                                                                                                                                    name="role"></label>
-                                                                                                                            <label class="radio-inline mr-3">Program
-                                                                                                                                Manager<input
-                                                                                                                                    type="checkbox"
-                                                                                                                                    value="Program Manager"
-                                                                                                                                    name="role"></label>
-                                                                                                                            <label class="radio-inline mr-3">Protocol
-                                                                                                                                Officer<input
-                                                                                                                                    type="checkbox"
-                                                                                                                                    value="Protocol Officer"
-                                                                                                                                    name="role"></label>
-
-                                                                                                                        </div>
-                                                                                                                    </div>
-
 
                                                                                                                     <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Moderator</strong>
+                                                                                                                        <label class="text-label"><strong>Speakers</strong>
                                                                                                                         </label>
                                                                                                                         <% for(let
                                                                                                                             user
                                                                                                                             of
-                                                                                                                            users){
-                                                                                                                            %>
-                                                                                                                            <% if(user.rp=="rp"
-                                                                                                                                ){
-                                                                                                                                %>
+                                                                                                                            users){%>
+                                                                                                                            <% if(user.role=="Speaker"){%>
                                                                                                                                 <div>
                                                                                                                                     <label class="radio-inline mr-3">
                                                                                                                                         <%= user.fName
@@ -464,26 +436,22 @@
                                                                                                                                             <input
                                                                                                                                                 type="checkbox"
                                                                                                                                                 value="<%=user.email %> "
-                                                                                                                                                name="moderator">
+                                                                                                                                                name="speakers">
                                                                                                                                     </label>
                                                                                                                                 </div>
-                                                                                                                                <% }
-                                                                                                                                    %>
-
-                                                                                                                                    <% }
-                                                                                                                                        %>
-
+                                                                                                                            <% } %>
+                                                                                                                        <% } %>
                                                                                                                     </div>
 
                                                                                                                     <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Speakers</strong>
+                                                                                                                        <label class="text-label"><strong>Presenters</strong>
                                                                                                                         </label>
                                                                                                                         <% for(let
                                                                                                                             user
                                                                                                                             of
                                                                                                                             users){
                                                                                                                             %>
-                                                                                                                            <% if(user.role=="Speakers"
+                                                                                                                            <% if(user.role=="Presenter"
                                                                                                                                 ){
                                                                                                                                 %>
                                                                                                                                 <div>
@@ -501,10 +469,8 @@
                                                                                                                                 </div>
                                                                                                                                 <% }
                                                                                                                                     %>
-
                                                                                                                                     <% }
                                                                                                                                         %>
-
                                                                                                                     </div>
                                                                                                                 </div>
 
@@ -527,256 +493,227 @@
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div id="day_3" class="tab-pane fade">
-                                            <div class="row mt-5">
-                                                <% for(let sesn of session){%>
-                                                    <% if (sesn.day=="day3" ) { %>
-                                                        <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
-                                                                <div class="row">
-                                                                    <div class="col-xl-12">
+                                        
+                                            <div id="day_3" class="tab-pane fade">
+                                                <div class="row mt-5">
+                                                    <% for(let sesn of session){%>
+                                                        <% if (sesn.day=="day3" ) { %>
+                                                            <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-12">
 
-                                                                        <div class="card">
-                                                                            <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
-                                                                            <div class="card-header border-0">
-                                                                                <div class="mr-auto pr-3">
-                                                                                    <h3 class="card-title">
-                                                                                        <%= sesn.name %>
-                                                                                    </h3>
-                                                                                    <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
+                                                                            <div class="card">
+                                                                                <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
+                                                                                <div class="card-header border-0">
+                                                                                    <div class="mr-auto pr-3">
+                                                                                        <h3 class="card-title">
+                                                                                            <%= sesn.name %>
+                                                                                        </h3>
+                                                                                        <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card-body">
+                                                                                    
+                                                                                    <ul class="m-md-auto mt-2 pr-4">
+                                                                                        <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
+                                                                                            <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
+                                                                                            </span>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div class="card-footer">
+                                                                                    <div class="text-right">
+                                                                                        <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="card-body">
-                                                                                
-                                                                                <ul class="m-md-auto mt-2 pr-4">
-                                                                                    <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                        <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
-                                                                                        </span>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="card-footer">
-                                                                                <div class="text-right">
-                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
-                                                                                </div>
-                                                                            </div>
+
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        <% } %>
                                                             <% } %>
+                                                                <% } %>
 
-                                                                <% if (User.role=="Super Admin" ) { %>
+                                                                    <% if (User.role=="Super Admin" ) { %>
 
-                                                                    <div class="col-3">
-                                                                        <div class="row">
-                                                                            <div class="col-xl-12 col-md-6">
-                                                                                <div class="card">
-                                                                                    <div class="card-body">
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <a href="#" class="plus-icon text-white rounded bg-primary" data-toggle="modal" data-target="#exampleModalCenter"><i
-                                                                                                class="las la-plus scale-2"></i></a>
+                                                                        <div class="col-3">
+                                                                            <div class="row">
+                                                                                <div class="col-xl-12 col-md-6">
+                                                                                    <div class="card">
+                                                                                        <div class="card-body">
+                                                                                            <!-- Button trigger modal -->
+                                                                                            <a href="#" class="plus-icon text-white rounded bg-primary" data-toggle="modal" data-target="#exampleModalCenterDay3"><i
+                                                                                                    class="las la-plus scale-2"></i></a>
 
-                                                                                        <!-- Modal -->
-                                                                                        <div class="modal fade" id="exampleModalCenter">
-                                                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                                                                                <div class="modal-content">
-                                                                                                    <div class="modal-header">
-                                                                                                        <h5 class="modal-title">
-                                                                                                            Create Session
-                                                                                                        </h5>
-                                                                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                                                        </button>
-                                                                                                    </div>
-                                                                                                    <form action="/admin/add-sessions" method="post" class="form-group">
-                                                                                                        <div class="modal-body">
-                                                                                                            <div class="form-row">
-                                                                                                                <label for="day">Day
-                                                                                                                    <span
-                                                                                                                        style="color: red;">*</span></label>
-                                                                                                                <select name="day" id="day" class="form-control mb-3" required>
-                                                                                                                    <option
-                                                                                                                        value="">
-                                                                                                                    </option>
-                                                                                                                    <option
-                                                                                                                        value="day1"
-                                                                                                                        name="day">
-                                                                                                                        Day
-                                                                                                                        1
-                                                                                                                    </option>
-                                                                                                                    <option
-                                                                                                                        value="day2"
-                                                                                                                        name="day">
-                                                                                                                        Day
-                                                                                                                        2
-                                                                                                                    </option>
-                                                                                                                    <option
-                                                                                                                        value="day3"
-                                                                                                                        name="day">
-                                                                                                                        Day
-                                                                                                                        3
-                                                                                                                    </option>
-                                                                                                                </select>
-                                                                                                                <input type="text" name="name" id="name" class="form-control mb-3 " placeholder="Session Name">
+                                                                                            <!-- Modal -->
+                                                                                            <div class="modal fade" id="exampleModalCenterDay3">
+                                                                                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                                                                    <div class="modal-content">
+                                                                                                        <div class="modal-header">
+                                                                                                            <h5 class="modal-title">
+                                                                                                                Create Session
+                                                                                                            </h5>
+                                                                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                                            </button>
+                                                                                                        </div>
+                                                                                                        <form action="/admin/add-sessions" method="post" class="form-group">
+                                                                                                            <div class="modal-body">
+                                                                                                                <div class="form-row">
+                                                                                                                    <label for="day">Day
+                                                                                                                        <span
+                                                                                                                            style="color: red;">*</span></label>
+                                                                                                                    <select name="day" id="day" class="form-control mb-3" required>
+                                                                                                                        <option
+                                                                                                                            value="">
+                                                                                                                        </option>
+                                                                                                                        <option
+                                                                                                                            value="day1"
+                                                                                                                            name="day">
+                                                                                                                            Day
+                                                                                                                            1
+                                                                                                                        </option>
+                                                                                                                        <option
+                                                                                                                            value="day2"
+                                                                                                                            name="day">
+                                                                                                                            Day
+                                                                                                                            2
+                                                                                                                        </option>
+                                                                                                                        <option
+                                                                                                                            value="day3"
+                                                                                                                            name="day">
+                                                                                                                            Day
+                                                                                                                            3
+                                                                                                                        </option>
+                                                                                                                    </select>
+                                                                                                                    <input type="text" name="name" id="name" class="form-control mb-3 " placeholder="Session Name">
 
-                                                                                                                <div class="form-group col-md-6">
-                                                                                                                    <input type="text" name="type" id="" class="form-control mb-3" placeholder="Type">
-                                                                                                                </div>
-                                                                                                                <div class="form-group col-md-6">
-                                                                                                                    <input type="text" name="duration" id="" class="form-control mb-3" placeholder="Duration">
-                                                                                                                </div>
-                                                                                                                <div class="form-group col-md-6">
-                                                                                                                    <label for="startDate">Start
-                                                                                                                        Date</label>
-                                                                                                                    <input type="date" name="startDate" id="" class="form-control mb-3" placeholder="Start Date">
-                                                                                                                </div>
-                                                                                                                <div class="form-group col-md-6">
-                                                                                                                    <label for="endDate">End
-                                                                                                                        Date</label>
-                                                                                                                    <input type="date" name="endDate" id="" class="form-control mb-3" placeholder="End Date">
-                                                                                                                </div>
-                                                                                                                <div class="form-group col-md-6">
-                                                                                                                    <label for="startTime">Start
-                                                                                                                        Time</label>
-                                                                                                                    <input type="time" name="startTime" id="" class="form-control mb-3" placeholder="Start Time">
-                                                                                                                </div>
-                                                                                                                <div class="form-group col-md-6">
-                                                                                                                    <label for="endTime">End
-                                                                                                                        Time</label>
-                                                                                                                    <input type="time" name="endTime" id="" class="form-control mb-3" placeholder="End Time">
-                                                                                                                </div>
-
-
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="text-label"><strong>Access</strong>
-                                                                                                                    </label>
-                                                                                                                    <div>
-                                                                                                                        <label class="radio-inline mr-3">International
-                                                                                                                            Participants<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="International Participants"
-                                                                                                                                name="access"></label>
-                                                                                                                        <label class="radio-inline mr-3">Local
-                                                                                                                            Participants<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="Local Participants"
-                                                                                                                                name="access"></label>
-                                                                                                                        <label class="radio-inline mr-3">International
-                                                                                                                            Student<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="International Student"
-                                                                                                                                name="access"></label>
-                                                                                                                        <label class="radio-inline mr-3">Local
-                                                                                                                            Student<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="Local Student"
-                                                                                                                                name="access"></label>
-                                                                                                                        <label class="radio-inline mr-3">Postgraduate
-                                                                                                                            Session
-                                                                                                                            Participant<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="Postgraduate Session Participant"
-                                                                                                                                name="access"></label>
-
+                                                                                                                    <div class="form-group col-md-6">
+                                                                                                                        <input type="text" name="type" id="" class="form-control mb-3" placeholder="Type">
                                                                                                                     </div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group">
-                                                                                                                    <label for="roles"><strong>Roles</strong>
-                                                                                                                    </label>
-                                                                                                                    <div>
-                                                                                                                        <label class="radio-inline mr-3">Speaker<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="Speaker"
-                                                                                                                                name="role"></label>
-                                                                                                                        <label class="radio-inline mr-3">Program
-                                                                                                                            Manager<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="Program Manager"
-                                                                                                                                name="role"></label>
-                                                                                                                        <label class="radio-inline mr-3">Protocol
-                                                                                                                            Officer<input
-                                                                                                                                type="checkbox"
-                                                                                                                                value="Protocol Officer"
-                                                                                                                                name="role"></label>
-
+                                                                                                                    <div class="form-group col-md-6">
+                                                                                                                        <input type="text" name="duration" id="" class="form-control mb-3" placeholder="Duration">
                                                                                                                     </div>
-                                                                                                                </div>
+
+                                                                                                                    <div class="form-group col-md-6">
+                                                                                                                        <label for="live">Youtube Live Link</label>
+                                                                                                                        <input type="text" name="live" id="live" class="form-control mb-3" placeholder="Youtube Live Link">
+                                                                                                                    </div>
+
+                                                                                                                    <div class="form-group col-md-6">
+                                                                                                                        <label for="startTime">Start
+                                                                                                                            Time</label>
+                                                                                                                        <input type="time" name="startTime" id="" class="form-control mb-3" placeholder="Start Time">
+                                                                                                                    </div>
+                                                                                                                    <div class="form-group col-md-6">
+                                                                                                                        <label for="endTime">End
+                                                                                                                            Time</label>
+                                                                                                                        <input type="time" name="endTime" id="" class="form-control mb-3" placeholder="End Time">
+                                                                                                                    </div>
 
 
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="text-label"><strong>Moderator</strong>
-                                                                                                                    </label>
-                                                                                                                    <% for(let
-                                                                                                                        user
-                                                                                                                        of
-                                                                                                                        users){
-                                                                                                                        %>
-                                                                                                                        <% if(user.rp=="rp"
-                                                                                                                            ){
+                                                                                                                    <div class="form-group">
+                                                                                                                        <label class="text-label"><strong>Access</strong>
+                                                                                                                        </label>
+                                                                                                                        <div>
+                                                                                                                            <label class="radio-inline mr-3">International
+                                                                                                                                Participants
+                                                                                                                                <input
+                                                                                                                                    type="checkbox"
+                                                                                                                                    value="International Participants"
+                                                                                                                                    name="access"></label>
+                                                                                                                            <label class="radio-inline mr-3">Local
+                                                                                                                                Participants
+                                                                                                                                <input
+                                                                                                                                    type="checkbox"
+                                                                                                                                    value="Local Participants"
+                                                                                                                                    name="access"></label>
+                                                                                                                            <label class="radio-inline mr-3">International
+                                                                                                                                Student
+                                                                                                                                <input
+                                                                                                                                    type="checkbox"
+                                                                                                                                    value="International Student"
+                                                                                                                                    name="access"></label>
+                                                                                                                            <label class="radio-inline mr-3">Local
+                                                                                                                                Student
+                                                                                                                                <input
+                                                                                                                                    type="checkbox"
+                                                                                                                                    value="Local Student"
+                                                                                                                                    name="access"></label>
+                                                                                                                            <label class="radio-inline mr-3">Postgraduate
+                                                                                                                                Session
+                                                                                                                                Participant
+                                                                                                                                <input
+                                                                                                                                    type="checkbox"
+                                                                                                                                    value="Postgraduate Session Participant"
+                                                                                                                                    name="access"></label>
+
+                                                                                                                        </div>
+                                                                                                                    </div>
+
+                                                                                                                    <div class="form-group">
+                                                                                                                        <label class="text-label"><strong>Speakers</strong>
+                                                                                                                        </label>
+                                                                                                                        <% for(let
+                                                                                                                            user
+                                                                                                                            of
+                                                                                                                            users){%>
+                                                                                                                            <% if(user.role=="Speaker"){%>
+                                                                                                                                <div>
+                                                                                                                                    <label class="radio-inline mr-3">
+                                                                                                                                        <%= user.fName
+                                                                                                                                            + "---"
+                                                                                                                                            +
+                                                                                                                                            user.email
+                                                                                                                                            %>
+                                                                                                                                            <input
+                                                                                                                                                type="checkbox"
+                                                                                                                                                value="<%=user.email %> "
+                                                                                                                                                name="speakers">
+                                                                                                                                    </label>
+                                                                                                                                </div>
+                                                                                                                            <% } %>
+                                                                                                                        <% } %>
+                                                                                                                    </div>
+
+                                                                                                                    <div class="form-group">
+                                                                                                                        <label class="text-label"><strong>Presenters</strong>
+                                                                                                                        </label>
+                                                                                                                        <% for(let
+                                                                                                                            user
+                                                                                                                            of
+                                                                                                                            users){
                                                                                                                             %>
-                                                                                                                            <div>
-                                                                                                                                <label class="radio-inline mr-3">
-                                                                                                                                    <%= user.fName
-                                                                                                                                        + "---"
-                                                                                                                                        +
-                                                                                                                                        user.email
-                                                                                                                                        %>
-                                                                                                                                        <input
-                                                                                                                                            type="checkbox"
-                                                                                                                                            value="<%=user.email %> "
-                                                                                                                                            name="moderator">
-                                                                                                                                </label>
-                                                                                                                            </div>
-                                                                                                                            <% }
+                                                                                                                            <% if(user.role=="Presenter"
+                                                                                                                                ){
                                                                                                                                 %>
-
+                                                                                                                                <div>
+                                                                                                                                    <label class="radio-inline mr-3">
+                                                                                                                                        <%= user.fName
+                                                                                                                                            + "---"
+                                                                                                                                            +
+                                                                                                                                            user.email
+                                                                                                                                            %>
+                                                                                                                                            <input
+                                                                                                                                                type="checkbox"
+                                                                                                                                                value="<%=user.email %> "
+                                                                                                                                                name="speakers">
+                                                                                                                                    </label>
+                                                                                                                                </div>
                                                                                                                                 <% }
                                                                                                                                     %>
-
-                                                                                                                </div>
-
-                                                                                                                <div class="form-group">
-                                                                                                                    <label class="text-label"><strong>Speakers</strong>
-                                                                                                                    </label>
-                                                                                                                    <% for(let
-                                                                                                                        user
-                                                                                                                        of
-                                                                                                                        users){
-                                                                                                                        %>
-                                                                                                                        <% if(user.role=="Speakers"
-                                                                                                                            ){
-                                                                                                                            %>
-                                                                                                                            <div>
-                                                                                                                                <label class="radio-inline mr-3">
-                                                                                                                                    <%= user.fName
-                                                                                                                                        + "---"
-                                                                                                                                        +
-                                                                                                                                        user.email
+                                                                                                                                    <% }
                                                                                                                                         %>
-                                                                                                                                        <input
-                                                                                                                                            type="checkbox"
-                                                                                                                                            value="<%=user.email %> "
-                                                                                                                                            name="speakers">
-                                                                                                                                </label>
-                                                                                                                            </div>
-                                                                                                                            <% }
-                                                                                                                                %>
-
-                                                                                                                                <% }
-                                                                                                                                    %>
-
+                                                                                                                    </div>
                                                                                                                 </div>
+
+
                                                                                                             </div>
-
-
-                                                                                                        </div>
-                                                                                                        <div class="modal-footer">
-                                                                                                            <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                                                                            <button type="submit" class="btn btn-primary">Add</button>
-                                                                                                        </div>
-                                                                                                    </form>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                                                <button type="submit" class="btn btn-primary">Add</button>
+                                                                                                            </div>
+                                                                                                        </form>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -784,8 +721,8 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <% } %>
+                                                                        <% } %>
+                                                </div>
                                             </div>
                                         </div>
 

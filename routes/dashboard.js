@@ -57,12 +57,15 @@ router
     .get(dashboard.getREreview)
     .post(dashboard.handleREreview);
 
-// ########SPEAKER###########
+// ########SPEAKER###########-------CAMERA READY
 
-router
-    .route("/session/:id/add-info")
-    // .get(dashboard.getSpeakerForm)
-    .put(dashboard.handleSpeakerForm);
+router.route("/session/:id/add-info")
+.put(upload.single("file"),dashboard.handleCameraReady);
+
+
+// ___SLIDE____
+router.put("/session/:id/add-slide", upload.single("file"), dashboard.handleSlide);
+
 
 // ########ADMIN###########
 
@@ -96,8 +99,10 @@ router
     // .get(dashboard.getAddSession)
     .post(dashboard.handleAddSession);
 
-router.put("/admin/session/:id", dashboard.handleEditSession);
-router.delete("/admin/session/:id", dashboard.deleteSession);
+
+router.route("/admin/session/:id")
+.put(dashboard.handleEditSession)
+.delete(dashboard.deleteSession)
 
 router.route("/admin/delete/:id").get(dashboard.deletePaper);
 

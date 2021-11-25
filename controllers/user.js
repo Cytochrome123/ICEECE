@@ -13,7 +13,40 @@ const sgMail = require("@sendgrid/mail")
 const mail = require("../config/mail")
 const path = require("path");
 const ejs = require("ejs");
+const reg = require("../utils/wordreg")
 
+
+const seed = async () => {
+    try{
+        for (let i = 0; i <= reg.length; i++) {
+            let pass = crypto.randomBytes(3).toString("hex")
+            let salt = await bcrypt.genSalt()
+            let password = await bcrypt.hash(pass,salt)
+            const role = "user"
+            const code = await qrcode.toDataURL(`<div><p>${reg.fName}</p><br></br><p>${role}</p></div>`)
+
+            const user = new User({
+                fName: `${reg[i].fName}`,
+                lName: `${reg[i].lName}`,
+                email: `${reg[i].email}`,
+                Username: `${reg[i].fName}`,
+                Password: password,
+                phoneNumber : `${reg[i].phoneNumber}`,
+                country: `${reg[i].country}`,
+                institution: `${reg[i].institution}`,
+                department: `${reg[i].department}`,
+                category : `${reg[i].category}`,
+                qrcode : code
+            })
+            await user.save();
+            console.log(pass)
+        }
+    }catch(e){
+        console.log(e)
+    }
+        
+}
+// seed()
 exports.getRegister = async(req,res)=>{
     let pass = crypto.randomBytes(3).toString("hex")
     res.render('register', {pass})
@@ -76,10 +109,10 @@ exports.handleRegister = async(req,res)=>{
     // })
     // .catch(e=>console.log(e))
 }
-exports.getCreation = async(req,res)=>{
+exports.getCreateRP = async(req,res)=>{
     res.render("superAdmin/create")
 }
-exports.handleCreation = async(req,res)=>{
+exports.handleCreateRP = async(req,res)=>{
     const {fName,lName,email,phoneNumber,role}= req.body
     
         const pass = crypto.randomBytes(3).toString("hex")
@@ -121,6 +154,20 @@ exports.handleCreation = async(req,res)=>{
         
         
        
+}
+exports.editRP = async(req,res)=>{
+    const {id} = req.params;
+    await User.findByIdAndUpdate(id, req.body, {new:true})     
+    .then(rp => res.redirect("/admin/role-player"))
+    .catch(err => console.log(err))
+}
+exports.deleteRP = async(req,res)=>{
+    const { id } = req.params;
+    const session = await User.findByIdAndDelete(id)
+        .then((user) => {
+            res.redirect("/admin/role-player");
+        })
+        .catch((e) => res.send(e));
 }
 exports.getRP = async(req,res)=>{
     await User.find({rp:"rp"})

@@ -49,10 +49,10 @@
                                                                     <button type="button" class="close" data-dismiss="modal">
                                                                         <span>&times;</span>
                                                                     </button>
-                                                                </div>
+                                                                </div> 
                                                                 <form action="/session/<%= session._id %>/add-info?_method=PUT" method="post" class="form-group" enctype="multipart/form-data">
                                                                     <div class="modal-body">
-                                                                        <div class="form-row">
+                                                                        <div class="form-row"> 
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="file">Paper</label>
                                                                                 <input type="file" name="file" id="file" class="form-control mb-3" placeholder="Files" multiple class="mb-3 btn btn-outline-primary btn form-control-file" />
@@ -70,13 +70,13 @@
                                                         </div>
                                                     </div>
 
-                                                    <% if (User.role=="Super Admin" || User.role=="Program Manager" ||
-                                                        User.role=="Speaker" ) { %>
-                                                        <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#presentationSlide">Upload
-                                                            Presentation Slide</a>
-                                                        <% } %>
+                                            <% if (User.role=="Super Admin" || User.role=="Program Manager" ||
+                                                User.role=="Speaker" ) { %>
+                                                <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#presentationSlide">Upload
+                                                     Presentation Slide</a>
+                                                <% } %>
 
-                                                            <div class="modal fade" id="presentationSlide">
+                                                    <div class="modal fade" id="presentationSlide">
                                                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -86,7 +86,7 @@
                                                                                 <span>&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <form action="/session/add-info/<%= session._id %>" method="post" class="form-group" enctype="multipart/form-data">
+                                                                        <form action="/session/<%= session._id %>/add-slide?_method=PUT" method="post" class="form-group" enctype="multipart/form-data">
                                                                             <div class="modal-body">
                                                                                 <div class="form-row">
                                                                                     <div class="form-group col-md-6">
@@ -104,14 +104,14 @@
                                                                         </form>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                    </div>
 
-                                                            <% if (User.role=="Super Admin" ||
-                                                                User.role=="Program Manager" ) { %>
-                                                                <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#editModalCenter">Edit Session Info</a>
+                                            <% if (User.role=="Super Admin" ||
+                                                User.role=="Program Manager" ) { %>
+                                                <a href="#" class="btn btn-ouline-primary m-1 col-xs-3" data-toggle="modal" data-target="#editModalCenter">Edit Session Info</a>
 
-                                                                <!-- Modal -->
-                                                                <div class="modal fade" id="editModalCenter">
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="editModalCenter">
                                                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -121,7 +121,7 @@
                                                                                     <span>&times;</span>
                                                                                 </button>
                                                                             </div>
-                                                                            <form action="/admin/add-sessions" method="post" class="form-group">
+                                                                            <form action="/admin/session/<%=session._id%>?_method=PUT" method="post" class="form-group">
                                                                                 <div class="modal-body">
                                                                                     <div class="form-row">
                                                                                         <label for="day">Day <span
@@ -282,13 +282,13 @@
                                                                             </form>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                </div>
 
                                                                 <!-- delete  -->
-                                                                <form action="/admin/session/<%= session._id %>?_method=DELETE" method="POST">
-                                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                                </form>
-                                                                <% } %>
+                                            <form action="/admin/session/<%= session._id %>?_method=DELETE" method="POST">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                            <% } %>
                                         </div>
                                         <div class="card-body">
                                             <div class="card-header border-0 pb-0">
@@ -339,13 +339,13 @@
                                                     <li class="list-group-item d-flex px-0 justify-content-between">
                                                         <strong>Access</strong>
                                                         <span class="mb-0">
-                                                            <%= session.access %>
+                                                            <%= session.access %> |
                                                         </span>
                                                     </li>
 
                                                     <li class="list-group-item d-flex px-0 justify-content-between">
                                                         <strong>Files</strong>
-                                                        <span class="mb-0"><%= session.fileName %> <a class="btn btn-primary" href="<%=session.filePath%>">
+                                                        <span class="mb-0"><%= session.fileName %> <a class="btn btn-primary" href="/download/<%= session._id %>">
                                                             Download</a>
                                                         </span>
                                                     </li>

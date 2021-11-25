@@ -52,70 +52,28 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-responsive-md">
+                                        
                                         <thead>
-                                            <tr>
-                                                <th class="width50">
-                                                    <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
-                                                        <input type="checkbox" class="custom-control-input" id="checkAll" required="">
-                                                        <label class="custom-control-label" for="checkAll"></label>
-                                                    </div>
-                                                </th>
-                                                <th>S/N</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Role</th>
-                                                <th>Email</th>
-                                                <th>Phone Number</th>
-                                                <th>Status</th>
-                                                <th>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#mailBc"><i
-                                                                class="fa fa-envelope"></i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
-                                                                class="fa fa-trash"></i></a>
-                                                        <!-- Button trigger modal -->
-
-
-                                                        <div class="modal fade" id="mailBc">
-                                                            <div class="modal-dialog modal-dialog-centered" role="document">
-
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">
-                                                                            Send Mail Broadcast
-                                                                        </h5>
-                                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-
-                                                                    <div class="modal-body">
-                                                                        <div class="modal-body">
-                                                                            <form action="#">
-                                                                                <div class="form-group">
-                                                                                    <textarea class="form-control" rows="4" id="Broadcast" placeholder="Send a broadcast to role-players"></textarea>
-                                                                                </div>
-
-                                                                                <input type="text" name="email" class="form-control mb-3" placeholder="Email">
-
-                                                                                <button type="submit" class="btn btn-primary">Send Broadcast</button>
-
-                                                                            </form>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-
+                                                <tr>
+                                                    <th class="width50">
+                                                        <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                                            <input type="checkbox" class="custom-control-input" id="checkAll" required="">
+                                                            <label class="custom-control-label" for="checkAll"></label>
                                                         </div>
-
-                                                    </div>
-                                                </th>
-                                            </tr>
+                                                    </th>
+                                                    <th>S/N</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Role</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Manage</th>
+                                                </tr>
                                         </thead>
-                                        <% if (rp) { %>
+                                        <% for (let r of rp){%>
                                             <tbody>
-                                                <% for (let r of rp){%>
+                                                
                                                     <tr>
                                                         <td>
                                                             <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
@@ -146,8 +104,13 @@
                                                             <div class="d-flex">
                                                                 <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#edit<%=r._id%>"><i
                                                                         class="fa fa-pencil"></i></a>
-                                                                <a href="#" class="btn btn-danger shadow btn-xs sharp"><i
-                                                                        class="fa fa-trash"></i></a>
+                                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#mailBc"><i
+                                                                        class="fa fa-envelope"></i></a>
+                                                                <form action="/admin/role-player/<%= r._id %>?_method=DELETE" method="post">
+                                                                    <a href=" " class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                                </form>
+                                                                
+
                                                                 <!-- Button trigger modal -->
 
 
@@ -164,9 +127,8 @@
                                                                             </div>
 
                                                                             <div class="modal-body">
-                                                                                <form action="/admin/assign/<%=r._id%>" method="post" class="form-group">
+                                                                                <form action="/admin/role-player/<%= r._id %>?_method=PUT" method="post" class="form-group">
 
-                                                                                    <form action="/admin/create" method="post">
 
                                                                                         <input type="text" name="fName" class="form-control mb-3" placeholder="First Name" value="<%= r.fName %>">
                                                                                         <input type="text" name="lName" class="form-control mb-3" value="<%= r.lName %>" placeholder="Last Name">
@@ -191,7 +153,7 @@
                                                                                             <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                                                             <button type="button" class="btn btn-primary">Save changes</button>
                                                                                         </div>
-                                                                                    </form>
+                                                                                </form>
                                                                             </div>
 
                                                                         </div>
@@ -199,12 +161,44 @@
                                                                     </div>
 
                                                                 </div>
+
+                                                                <div class="modal fade" id="mailBc">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+    
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">
+                                                                                    Send Mail Broadcast
+                                                                                </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+    
+                                                                            <div class="modal-body">
+                                                                                <div class="modal-body">
+                                                                                    <form action="#">
+                                                                                        <div class="form-group">
+                                                                                            <textarea class="form-control" rows="4" id="Broadcast" placeholder="Send a broadcast to role-players"></textarea>
+                                                                                        </div>
+    
+                                                                                        <input type="text" name="email" class="form-control mb-3" placeholder="Email">
+    
+                                                                                        <button type="submit" class="btn btn-primary">Send Broadcast</button>
+    
+                                                                                    </form>
+                                                                                </div>
+    
+                                                                            </div>
+    
+                                                                        </div>
+                                                                    </div>
+    
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <% }%>
                                             </tbody>
-                                            <% } %>
+                                        <% } %>
 
                                     </table>
                                 </div>

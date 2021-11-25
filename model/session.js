@@ -20,8 +20,8 @@ const sessionSchema = new mongoose.Schema({
     ],
     status: {
         type: String,
-        enum: ["ongoing", "finished"],
-        default: "ongoing",
+        enum: ["upcoming" , "ongoing", "finished"],
+        default: "upcoming",
     },
 });
 

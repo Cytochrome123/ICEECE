@@ -6,10 +6,12 @@ const user= require('../controllers/user');
 // *******ADMIN********
 
 router.route("/admin/create")
-.get(user.getCreation)
-.post(user.handleCreation)
+.get(user.getCreateRP)
+.post(user.handleCreateRP)
 
 router.get("/admin/role-player" , user.getRP)
+router.put("/admin/role-player/:id", user.editRP)
+router.delete("/admin/role-player/:id", user.deleteRP)
 // SIGN UP ROUTES
 
 // router.route('/signUp') 
