@@ -163,7 +163,7 @@ exports.editRP = async(req,res)=>{
 }
 exports.deleteRP = async(req,res)=>{
     const { id } = req.params;
-    const session = await User.findByIdAndDelete(id)
+    const user = await User.findByIdAndDelete(id)
         .then((user) => {
             res.redirect("/admin/role-player");
         })
