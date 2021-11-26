@@ -2,7 +2,7 @@ const nodemailer  = require("nodemailer")
 // const mailGun = require("nodemailer-mailgun-transport")
 const sgMail = require("@sendgrid/mail")
 
-sgMail.setApiKey(process.envs.MAIL)
+sgMail.setApiKey(process.env.MAIL)
 
 // const message = {
 //     from: "hoismail2017@gmail.com",
