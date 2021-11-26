@@ -229,48 +229,20 @@
                                                                                                     ){ %>
                                                                                                     <div>
                                                                                                         <label class="radio-inline mr-3">
-                                                                                                            <%= user.fName
-                                                                                                                + "---"
-                                                                                                                +
-                                                                                                                user.email
-                                                                                                                %>
+                                                                                                            <%= user.fName%>
+                                                                                                            <%= user.lName%>
                                                                                                                 <input
                                                                                                                     type="checkbox"
-                                                                                                                    value="<%=user.email %> "
-                                                                                                                    name="speakers" <%if( session.speakers.indexOf(user.fName) != -1 ){%>
-                                                                                                                        checked
-                                                                                                                        <%} %> />
+                                                                                                                    value="<%=user.fName %> 
+                                                                                                                    <%=user.lName %>"
+                                                                                                                    name="speakers" checked />
                                                                                                         </label>
                                                                                                     </div>
                                                                                                     <% } %>
                                                                                                         <% } %>
                                                                                         </div>
 
-                                                                                        <div class="form-group">
-                                                                                            <label class="text-label"><strong>Presenters</strong>
-                                                                                            </label>
-                                                                                            <% for(let user of users){
-                                                                                                %>
-                                                                                                <% if(user.role=="Presenter"
-                                                                                                    ){ %>
-                                                                                                    <div>
-                                                                                                        <label class="radio-inline mr-3">
-                                                                                                            <%= user.fName
-                                                                                                                + "---"
-                                                                                                                +
-                                                                                                                user.email
-                                                                                                                %>
-                                                                                                                <input
-                                                                                                                    type="checkbox"
-                                                                                                                    value="<%=user.email %> "
-                                                                                                                    name="speakers" <%if( session.speakers.indexOf(user.fName) != -1 ){%>
-                                                                                                                        checked
-                                                                                                                        <%} %> />
-                                                                                                        </label>
-                                                                                                    </div>
-                                                                                                    <% } %>
-                                                                                                        <% } %>
-                                                                                        </div>
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
@@ -297,14 +269,7 @@
                                                 </h2>
                                             </div>
                                             <div class="card-body pb-0">
-                                                <p><strong>TOPIC: <%= session.topic %> </strong></p>
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                                        <strong>Type</strong>
-                                                        <span class="mb-0">
-                                                            <%= session.type %>
-                                                        </span>
-                                                    </li>
                                                     <li class="list-group-item d-flex px-0 justify-content-between">
                                                         <strong>Duration</strong>
                                                         <span class="mb-0">
@@ -318,30 +283,20 @@
                                                         </span>
                                                     </li>
                                                     <li class="list-group-item d-flex px-0 justify-content-between">
-                                                        <strong>Speakers</strong>
+                                                        <strong>Speakers / Presenters</strong>
                                                         <span class="mb-0">
-                                                            <%= session.speakers %>
+                                                            <%= session.speakers, %> <%=session.institution%>
                                                         </span>
                                                     </li>
-                                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                                        <strong>Presenters</strong>
-                                                        <span class="mb-0">
-                                                            <%= session.presenters %>
-                                                        </span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                                        <strong>Moderator</strong>
-                                                        <span class="mb-0">
-                                                            <%= session.moderator %>
-                                                        </span>
-                                                    </li>
-
-                                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                                        <strong>Access</strong>
-                                                        <span class="mb-0">
-                                                            <%= session.access %> |
-                                                        </span>
-                                                    </li>
+                                                    <%if (User.role === "Super Admin" || User.role === "Program Manager") {%>
+                                                        <li class="list-group-item d-flex px-0 justify-content-between">
+                                                            <strong>Access</strong>
+                                                            <span class="mb-0">
+                                                                <%= session.access %> 
+                                                            </span>
+                                                        </li>
+                                                    <%}%>
+                                                    
 
                                                     <li class="list-group-item d-flex px-0 justify-content-between">
                                                         <strong>Files</strong>

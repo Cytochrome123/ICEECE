@@ -46,12 +46,14 @@
                                                                                     <h3 class="card-title">
                                                                                         <%= sesn.name %>
                                                                                     </h3>
-                                                                                    <span class="float-right"><i class="fa fa-circle text-primary mr-1"></i> Upcoming</span>
+                                                                                    <p><i class="fa fa-circle text-primary mr-1"></i> Upcoming</p>
                                                                                 </div>
+                                                                                
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 
-                                                                                <ul class="m-md-auto mt-2 pr-4">
+                                                                                <ul class="m-md-auto mt-2">
+                                                                                    <li><i class="las la-user scale5 mr-3"></i><%= sesn.speakers %></li>
                                                                                     <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
                                                                                         <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
                                                                                         </span>
@@ -60,7 +62,7 @@
                                                                             </div>
                                                                             <div class="card-footer">
                                                                                 <div class="text-right">
-                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
+                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">Details</a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -187,64 +189,28 @@
                                                                                                                         </div>
                                                                                                                     </div>
 
+                                                                                                                    
                                                                                                                     <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Speakers</strong>
-                                                                                                                        </label>
-                                                                                                                        <% for(let
-                                                                                                                            user
-                                                                                                                            of
-                                                                                                                            users){%>
-                                                                                                                            <% if(user.role=="Speaker"){%>
-                                                                                                                                <div>
-                                                                                                                                    <label class="radio-inline mr-3">
-                                                                                                                                        <%= user.fName
-                                                                                                                                            + "---"
-                                                                                                                                            +
-                                                                                                                                            user.email
-                                                                                                                                            %>
-                                                                                                                                            <input
-                                                                                                                                                type="checkbox"
-                                                                                                                                                value="<%=user.email %> "
-                                                                                                                                                name="speakers">
+                                                                                                                        <div class="">
+                                                                                                                            <strong>Speakers</strong>
+                                                                                                                        </div>
+                                                                                                                        <% for(let user of users){%>
+                                                                                                                            <% if(user.role=="Speaker" || user.role=="Presenter"){%>
+                                                                                                                                    <label for="speaker" class="radio-inline mr-3">
+                                                                                                                                        <%= user.fName%>
+                                                                                                                                        <%= user.lName%>
                                                                                                                                     </label>
-                                                                                                                                </div>
+                                                                                                                                            <input id="speaker"
+                                                                                                                                                type="checkbox"
+                                                                                                                                                value="<%= user.fName%>
+                                                                                                                                                        <%= user.lName%> "
+                                                                                                                                                name="speakers">
                                                                                                                             <% } %>
                                                                                                                         <% } %>
                                                                                                                     </div>
-
-                                                                                                                    <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Presenters</strong>
-                                                                                                                        </label>
-                                                                                                                        <% for(let
-                                                                                                                            user
-                                                                                                                            of
-                                                                                                                            users){
-                                                                                                                            %>
-                                                                                                                            <% if(user.role=="Presenter"
-                                                                                                                                ){
-                                                                                                                                %>
-                                                                                                                                <div>
-                                                                                                                                    <label class="radio-inline mr-3">
-                                                                                                                                        <%= user.fName
-                                                                                                                                            + "---"
-                                                                                                                                            +
-                                                                                                                                            user.email
-                                                                                                                                            %>
-                                                                                                                                            <input
-                                                                                                                                                type="checkbox"
-                                                                                                                                                value="<%=user.email %> "
-                                                                                                                                                name="speakers">
-                                                                                                                                    </label>
-                                                                                                                                </div>
-                                                                                                                                <% }
-                                                                                                                                    %>
-                                                                                                                                    <% }
-                                                                                                                                        %>
-                                                                                                                    </div>
+                                                                                                                    
+                                                                                                                    
                                                                                                                 </div>
-
-
-                                                                                                            </div>
                                                                                                             <div class="modal-footer">
                                                                                                                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                                                                                 <button type="submit" class="btn btn-primary">Add</button>
@@ -277,12 +243,14 @@
                                                                                     <h3 class="card-title">
                                                                                         <%= sesn.name %>
                                                                                     </h3>
-                                                                                    <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
+                                                                                    <p><i class="fa fa-circle text-primary mr-1"></i> Upcoming</p>
                                                                                 </div>
+                                                                                
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 
-                                                                                <ul class="m-md-auto mt-2 pr-4">
+                                                                                <ul class="m-md-auto mt-2">
+                                                                                    <li><i class="las la-user scale5 mr-3"></i><%= sesn.speakers %></li>
                                                                                     <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
                                                                                         <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
                                                                                         </span>
@@ -291,7 +259,7 @@
                                                                             </div>
                                                                             <div class="card-footer">
                                                                                 <div class="text-right">
-                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
+                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">Details</a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -418,64 +386,28 @@
                                                                                                                         </div>
                                                                                                                     </div>
 
+                                                                                                                    
                                                                                                                     <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Speakers</strong>
-                                                                                                                        </label>
-                                                                                                                        <% for(let
-                                                                                                                            user
-                                                                                                                            of
-                                                                                                                            users){%>
-                                                                                                                            <% if(user.role=="Speaker"){%>
-                                                                                                                                <div>
-                                                                                                                                    <label class="radio-inline mr-3">
-                                                                                                                                        <%= user.fName
-                                                                                                                                            + "---"
-                                                                                                                                            +
-                                                                                                                                            user.email
-                                                                                                                                            %>
-                                                                                                                                            <input
-                                                                                                                                                type="checkbox"
-                                                                                                                                                value="<%=user.email %> "
-                                                                                                                                                name="speakers">
+                                                                                                                        <div class="">
+                                                                                                                            <strong>Speakers</strong>
+                                                                                                                        </div>
+                                                                                                                        <% for(let user of users){%>
+                                                                                                                            <% if(user.role=="Speaker" || user.role=="Presenter"){%>
+                                                                                                                                    <label for="speaker" class="radio-inline mr-3">
+                                                                                                                                        <%= user.fName%>
+                                                                                                                                        <%= user.lName%>
                                                                                                                                     </label>
-                                                                                                                                </div>
+                                                                                                                                            <input id="speaker"
+                                                                                                                                                type="checkbox"
+                                                                                                                                                value="<%= user.fName%>
+                                                                                                                                                        <%= user.lName%> "
+                                                                                                                                                name="speakers">
                                                                                                                             <% } %>
                                                                                                                         <% } %>
                                                                                                                     </div>
-
-                                                                                                                    <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Presenters</strong>
-                                                                                                                        </label>
-                                                                                                                        <% for(let
-                                                                                                                            user
-                                                                                                                            of
-                                                                                                                            users){
-                                                                                                                            %>
-                                                                                                                            <% if(user.role=="Presenter"
-                                                                                                                                ){
-                                                                                                                                %>
-                                                                                                                                <div>
-                                                                                                                                    <label class="radio-inline mr-3">
-                                                                                                                                        <%= user.fName
-                                                                                                                                            + "---"
-                                                                                                                                            +
-                                                                                                                                            user.email
-                                                                                                                                            %>
-                                                                                                                                            <input
-                                                                                                                                                type="checkbox"
-                                                                                                                                                value="<%=user.email %> "
-                                                                                                                                                name="speakers">
-                                                                                                                                    </label>
-                                                                                                                                </div>
-                                                                                                                                <% }
-                                                                                                                                    %>
-                                                                                                                                    <% }
-                                                                                                                                        %>
-                                                                                                                    </div>
+                                                                                                                    
+                                                                                                                    
                                                                                                                 </div>
-
-
-                                                                                                            </div>
                                                                                                             <div class="modal-footer">
                                                                                                                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                                                                                 <button type="submit" class="btn btn-primary">Add</button>
@@ -501,31 +433,32 @@
                                                             <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
                                                                     <div class="row">
                                                                         <div class="col-xl-12">
-
                                                                             <div class="card">
-                                                                                <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
-                                                                                <div class="card-header border-0">
-                                                                                    <div class="mr-auto pr-3">
-                                                                                        <h3 class="card-title">
-                                                                                            <%= sesn.name %>
-                                                                                        </h3>
-                                                                                        <i class="fa fa-circle text-primary text-right mr-1"></i> Upcoming
-                                                                                    </div>
+                                                                            <img class="card-img-top img-fluid" src="/public/assets/images/dashboard.jpeg" alt="Session image">
+                                                                            <div class="card-header border-0">
+                                                                                <div class="mr-auto pr-3">
+                                                                                    <h3 class="card-title">
+                                                                                        <%= sesn.name %>
+                                                                                    </h3>
+                                                                                    <p><i class="fa fa-circle text-primary mr-1"></i> Upcoming</p>
                                                                                 </div>
-                                                                                <div class="card-body">
-                                                                                    
-                                                                                    <ul class="m-md-auto mt-2 pr-4">
-                                                                                        <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
-                                                                                            <%= sesn.duration %> | <%= sesn.startTime %> - <%=sesn.endTime %>
-                                                                                            </span>
-                                                                                        </li>
-                                                                                    </ul>
+                                                                                
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                
+                                                                                <ul class="m-md-auto mt-2">
+                                                                                    <li><i class="las la-user scale5 mr-3"></i><%= sesn.speakers %> , <%= sesn.institution %> </li>
+                                                                                    <li class="mb-2 text-nowrap"><i class="las la-clock scale5 mr-3"></i><span class="fs-14 text-black text-nowrap font-w500">
+                                                                                        <%= sesn.duration  %> | <%= sesn.startTime %> - <%=sesn.endTime %>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="card-footer">
+                                                                                <div class="text-right">
+                                                                                    <a href="/session/<%= sesn._id %> " class="btn-outline-primary">Details</a>
                                                                                 </div>
-                                                                                <div class="card-footer">
-                                                                                    <div class="text-right">
-                                                                                        <a href="/session/<%= sesn._id %> " class="btn-outline-primary">More</a>
-                                                                                    </div>
-                                                                                </div>
+                                                                            </div>
                                                                             </div>
 
                                                                         </div>
@@ -650,64 +583,28 @@
                                                                                                                         </div>
                                                                                                                     </div>
 
+                                                                                                                    
                                                                                                                     <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Speakers</strong>
+                                                                                                                        <label class="text-label">
+                                                                                                                            <strong>Speakers</strong>
                                                                                                                         </label>
-                                                                                                                        <% for(let
-                                                                                                                            user
-                                                                                                                            of
-                                                                                                                            users){%>
-                                                                                                                            <% if(user.role=="Speaker"){%>
-                                                                                                                                <div>
-                                                                                                                                    <label class="radio-inline mr-3">
-                                                                                                                                        <%= user.fName
-                                                                                                                                            + "---"
-                                                                                                                                            +
-                                                                                                                                            user.email
-                                                                                                                                            %>
-                                                                                                                                            <input
-                                                                                                                                                type="checkbox"
-                                                                                                                                                value="<%=user.email %> "
-                                                                                                                                                name="speakers">
+                                                                                                                        <% for(let user of users){%>
+                                                                                                                            <% if(user.role=="Speaker" || user.role=="Presenter"){%>
+                                                                                                                                    <label for="speaker" class="radio-inline mr-3">
+                                                                                                                                        <%= user.fName%>
+                                                                                                                                        <%= user.lName%>
                                                                                                                                     </label>
-                                                                                                                                </div>
+                                                                                                                                            <input id="speaker"
+                                                                                                                                                type="checkbox"
+                                                                                                                                                value="<%= user.fName%>
+                                                                                                                                                        <%= user.lName%> "
+                                                                                                                                                name="speakers">
                                                                                                                             <% } %>
                                                                                                                         <% } %>
                                                                                                                     </div>
-
-                                                                                                                    <div class="form-group">
-                                                                                                                        <label class="text-label"><strong>Presenters</strong>
-                                                                                                                        </label>
-                                                                                                                        <% for(let
-                                                                                                                            user
-                                                                                                                            of
-                                                                                                                            users){
-                                                                                                                            %>
-                                                                                                                            <% if(user.role=="Presenter"
-                                                                                                                                ){
-                                                                                                                                %>
-                                                                                                                                <div>
-                                                                                                                                    <label class="radio-inline mr-3">
-                                                                                                                                        <%= user.fName
-                                                                                                                                            + "---"
-                                                                                                                                            +
-                                                                                                                                            user.email
-                                                                                                                                            %>
-                                                                                                                                            <input
-                                                                                                                                                type="checkbox"
-                                                                                                                                                value="<%=user.email %> "
-                                                                                                                                                name="speakers">
-                                                                                                                                    </label>
-                                                                                                                                </div>
-                                                                                                                                <% }
-                                                                                                                                    %>
-                                                                                                                                    <% }
-                                                                                                                                        %>
-                                                                                                                    </div>
+                                                                                                                    
+                                                                                                                    
                                                                                                                 </div>
-
-
-                                                                                                            </div>
                                                                                                             <div class="modal-footer">
                                                                                                                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                                                                                 <button type="submit" class="btn btn-primary">Add</button>

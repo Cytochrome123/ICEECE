@@ -9,8 +9,8 @@ const sessionSchema = new mongoose.Schema({
     live: String,
     access: [String],
     role: [String],
-    moderator: [String],
     speakers: [String],
+    presenters : [String],
     topic: String,
     cameraReady: [
         Object

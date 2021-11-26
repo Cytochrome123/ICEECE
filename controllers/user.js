@@ -78,25 +78,26 @@ exports.handleRegister = async(req,res)=>{
         }).save()
         console.log(Password)
         const message = {
-            from: " 'ICEECE' <hoismail2017@gmail.com>",
-            to: "hoismail1435@gmail.com",
-            subject: "Demo",
-            text:`Your Username is ${email} and Passwprd is ${Password}`,
+            from: " 'ICEECE & AMF 2021' <iceece.amf.eee.ui@gmail.com>",
+            to: email,
+            subject: "Welcome to 1st ICEECE & AMF 2021 portal",
+            text:`Your Username is ${email} and Password is ${Password}`,
             
-            html:`<div><p>Dear ${fName},</p> <br><p>Thank you for registering to participate at the International Conference on Electrical Electronics and Communication Engineering and Allied Multidisciplinary Fields (ICEECE & AMF 2021) organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><p>You can access information about various sessions at the conference as well as your payment status through the Web App.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p></div>`
+            html:`<div><p>Dear ${fName},</p> <br><p>Thank you for registering to participate at the International Conference on Electrical Electronics and Communication Engineering and Allied Multidisciplinary Fields (ICEECE & AMF 2021) organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><p>You can access information about various sessions at the conference as well as your payment status through the Web App.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
            
 
         };
 
         await sgMail.send(message)
-        .then(response=> console.log("Email Sent"))
+        .then((response)=> {
+            console.log("Email Sent")
+        })
         .catch(e=>console.log(e.message))
         passport.authenticate('local')(req,res, ()=>{
             res.redirect('/dashboard')
         })
         
         console.log(user)
-        console.log(code)
 
     }catch(e){
         console.log(e)
@@ -113,7 +114,7 @@ exports.getCreateRP = async(req,res)=>{
     res.render("superAdmin/create")
 }
 exports.handleCreateRP = async(req,res)=>{
-    const {fName,lName,email,phoneNumber,role}= req.body
+    const {fName,lName,email,phoneNumber,institution,role}= req.body
     
         const pass = crypto.randomBytes(3).toString("hex")
         let salt = await bcrypt.genSalt()
@@ -126,30 +127,31 @@ exports.handleCreateRP = async(req,res)=>{
             Username: fName,
             Password: password,
             phoneNumber: phoneNumber,
+            institution: institution,
             qrcode : code,
             role: role,
             rp:"rp"
         }).save()
         // const auto 
         .then(async(player)=>{
-           console.log(pass); 
-        //    const message = {
-        //         from: " 'ICEECE' <hoismail2017@gmail.com>",
-        //         to: email,
-        //         subject: "Demo",
-        //         text:`Your Username is ${email} and Passwprd is ${pass}`,
-        //         html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p></div>`
-
-        //     };
+            console.log(pass); 
+            const invite = {
+                from: " 'ICEECE & AMF 2021' <iceece.amf.eee.ui@gmail.com>",
+                to: email,
+                subject: "Welcome to 1st ICEECE & AMF 2021 portal",
+                text:`Your Username is ${email} and Password is ${pass}`,
+                html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${pass}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
+            };
             
-        //     await sgMail.send(message)
-        //     .then(response=> console.log("Email Sent"))
-        //     .catch(e=>console.log(e.message))
-
-            res.redirect('/admin/role-player')
+            await sgMail.send(invite)
+            .then((response)=> {
+                console.log("Email Sent")
+                res.redirect('/admin/role-player')
+            })
+            .catch(e=>console.log(e.message))
         })
         .catch(e=>{
-            res.send(e)
+            console.log(e)
         })
         
         

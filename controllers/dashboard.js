@@ -18,7 +18,6 @@ exports.getHome = (req, res) => {
     res.send("WELCOME TO ICEECE");
 };
 exports.getDashboard = async(req, res) => {
-    console.log(req.user);
     const payment = await Payment.find()
         .then((payment) => {
             Session.find()
@@ -371,8 +370,8 @@ exports.handleAddSession = async(req, res) => {
         live,
         access,
         role,
-        moderator,
         speakers,
+        presenters,
     } = req.body;
     // startDate = startDate.toLocaleDateString()
     // console.log(start)
@@ -383,7 +382,7 @@ exports.handleAddSession = async(req, res) => {
 exports.handleEditSession = async(req,res)=>{
     const {id}= req.params
     await Session.findByIdAndUpdate(id, req.body, {new:true})     
-    .then(sesssion => res.redirect(`/session/${session._id}`))
+    .then(session => res.redirect(`/session/${session._id}`))
     .catch(err => res.send(err))
 }
 exports.deleteSession = async(req, res) => {
