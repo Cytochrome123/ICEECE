@@ -4,28 +4,28 @@ const multer = require("multer");
 const { storage, upload } = require("../config/multer");
 const methodOverride = require("method-override");
 const dashboard = require("../controllers/dashboard");
-// const {isLoggedIn} = require("../app")
+// const isLoggedIn = require("../app")
 
-router.get("/", dashboard.getHome);
-router.get("/dashboard", dashboard.getDashboard);
-router.get("/contacts", dashboard.getContacts);
+router.get("/", isLoggedIn , dashboard.getHome);
+router.get("/dashboard", isLoggedIn, dashboard.getDashboard);
+router.get("/contacts", isLoggedIn , dashboard.getContacts);
 
 //###########USER#######
 
 router
     .route("/user/payment-confirmation")
-    .get(dashboard.getPaymentConfirmation)
-    .post(dashboard.handlePaymentConfirmation);
+    .get(isLoggedIn , dashboard.getPaymentConfirmation)
+    .post(isLoggedIn , dashboard.handlePaymentConfirmation);
 
-router.get("/session", dashboard.getSession);
-router.get("/session/:id", dashboard.getSessionDetails);
+router.get("/session", isLoggedIn , dashboard.getSession);
+router.get("/session/:id", isLoggedIn , dashboard.getSessionDetails);
 
 router
     .route("/submitPaper")
-    .get(dashboard.getSubmitPaper)
-    .post(upload.single("file"), dashboard.handleSubmitPaper);
+    .get(isLoggedIn , dashboard.getSubmitPaper)
+    .post(upload.single("file"), isLoggedIn , dashboard.handleSubmitPaper);
 
-router.get("/user/paperDetails/:id", dashboard.getPaperDetails);
+router.get("/user/paperDetails/:id", isLoggedIn , dashboard.getPaperDetails);
 
 router.post(
     "/user/update/:id",
@@ -35,9 +35,9 @@ router.post(
 
 // ######REVIEWER###########
 
-router.route("/admin/papers").get(dashboard.getAllPapers);
+router.route("/admin/papers").get(isLoggedIn , dashboard.getAllPapers);
 
-router.get("/admin/viewPaper/:id", dashboard.getDetails);
+router.get("/admin/viewPaper/:id", isLoggedIn , dashboard.getDetails);
 
 router.post(
     "/admin/correction/:id",
@@ -45,17 +45,17 @@ router.post(
     dashboard.handlePaperCorrection,
 );
 
-router.get("/download/:id", dashboard.downloadFile);
+router.get("/download/:id", isLoggedIn , dashboard.downloadFile);
 
 router
     .route("/admin/review/:id")
-    .get(dashboard.reviewPaper)
-    .post(dashboard.handleReviewPaper);
+    .get(isLoggedIn , dashboard.reviewPaper)
+    .post(isLoggedIn , dashboard.handleReviewPaper);
 
 router
     .route("/admin/review/edit/:id")
-    .get(dashboard.getREreview)
-    .post(dashboard.handleREreview);
+    .get(isLoggedIn , dashboard.getREreview)
+    .post(isLoggedIn , dashboard.handleREreview);
 
 // ########SPEAKER###########-------CAMERA READY
 
@@ -76,29 +76,29 @@ router.put("/session/:id/add-slide", upload.single("file"), dashboard.handleSlid
 
 router
     .route("/mark-attendance")
-    .get(dashboard.getMarkAttendance)
-    .post(dashboard.handleMarkAttendance);
+    .get(isLoggedIn , dashboard.getMarkAttendance)
+    .post(isLoggedIn , dashboard.handleMarkAttendance);
 
-router.get("/admin/attendance", dashboard.getAttendance);
+router.get("/admin/attendance", isLoggedIn , dashboard.getAttendance);
 
-router.get("/admin/payments", dashboard.getPayments);
+router.get("/admin/payments", isLoggedIn , dashboard.getPayments);
 
 router
     .route("/admin/approve-payment/:id")
     // .get(dashboard.getAToApprove)
-    .post(dashboard.handleApprovePayment);
+    .post(isLoggedIn , dashboard.handleApprovePayment);
 
 router
     .route("/admin/add-sessions")
     // .get(dashboard.getAddSession)
-    .post(dashboard.handleAddSession);
+    .post(isLoggedIn , dashboard.handleAddSession);
 
 
 router.route("/admin/session/:id")
-.put(dashboard.handleEditSession)
-.delete(dashboard.deleteSession)
+.put(isLoggedIn , dashboard.handleEditSession)
+.delete(isLoggedIn , dashboard.deleteSession)
 
-router.route("/admin/delete/:id").get(dashboard.deletePaper);
+router.route("/admin/delete/:id").get(isLoggedIn , dashboard.deletePaper);
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

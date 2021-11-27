@@ -6,23 +6,23 @@ const user= require('../controllers/user');
 // *******ADMIN********
 
 router.route("/admin/create")
-.get(user.getCreateRP)
-.post(user.handleCreateRP)
+.get(isLoggedIn , user.getCreateRP)
+.post(isLoggedIn , user.handleCreateRP)
 
-router.get("/admin/role-player" , user.getRP)
-router.put("/admin/role-player/:id", user.editRP)
-router.delete("/admin/role-player/:id", user.deleteRP)
+router.get("/admin/role-player", isLoggedIn , user.getRP)
+router.put("/admin/role-player/:id" , isLoggedIn , user.editRP)
+router.delete("/admin/role-player/:id" , isLoggedIn , user.deleteRP)
 
-router.route("/participants").get(user.getAll);
+router.route("/participants").get(isLoggedIn ,user.getAll);
 
-router.get("/admin/participants", user.getAll);
+router.get("/admin/participants", isLoggedIn , user.getAll);
 
-router.get("/admin/presenters", user.getPresenters);
+router.get("/admin/presenters", isLoggedIn ,user.getPresenters);
 router.route("/admin/presenter/:id" )
-.put(user.editPresenter)
-.delete(user.deletePresenter)
+.put(isLoggedIn , user.editPresenter)
+.delete(isLoggedIn , user.deletePresenter)
 
-router.get("/admin/speakers", user.getSpeakers);
+router.get("/admin/speakers", isLoggedIn , user.getSpeakers);
 
 
 // REGISTER ROUTES
@@ -31,13 +31,13 @@ router.route('/register')
 .post(user.handleRegister)
 
 router.route("/user/send-verification-email")
-.get(user.getVerifiedEmail)
+.get(isLoggedIn , user.getVerifiedEmail)
 
-router.get("/user/verifyEmail" , user.getVerify)
+router.get("/user/verifyEmail" , isLoggedIn , user.getVerify)
 
 
 
-router.post("/admin/assign/:id", user.handleAssign) 
+router.post("/admin/assign/:id", isLoggedIn , user.handleAssign) 
 
  
 // LOGIN ROUTES
@@ -51,15 +51,22 @@ router.get("/logout", user.logout)
 // *******PROFILE*******
 
 router.route("/profile") 
-.get(user.getProfile)
+.get(isLoggedIn , user.getProfile)
 
 router.route("/public-profile")
-.post(user.handlePublicProfile)
+.post(isLoggedIn , user.handlePublicProfile)
 
 // DASH ROUTES
 router.get('/regDash', user.getRegDash)
 
 // DASH ROUTES
 router.get('/userDash', user.getUserDash)
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports =  router

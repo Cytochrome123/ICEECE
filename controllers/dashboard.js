@@ -13,9 +13,11 @@ const Payment = require("../model/payment");
 const Session = require("../model/session");
 const Attendance = require("../model/attendance");
 // const QRScanner = require("qr-code-scanner")
+// const AppError = require("../AppError")
 
 exports.getHome = (req, res) => {
     res.send("WELCOME TO ICEECE");
+    // throw new AppError ("Problematic server" , 401)
 };
 exports.getDashboard = async(req, res) => {
     console.log(req.user)

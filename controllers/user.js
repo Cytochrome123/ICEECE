@@ -13,37 +13,57 @@ const sgMail = require("@sendgrid/mail")
 const mail = require("../config/mail")
 const path = require("path");
 const ejs = require("ejs");
-const reg = require("../utils/wordreg")
+const reg = require("../utils/wordreg");
+const { deleteMany } = require('../model/contact');
+
 
 
 const seed = async () => {
     try{
-        for (let i = 0; i <= reg.length; i++) {
-            let pass = crypto.randomBytes(3).toString("hex")
-            let salt = await bcrypt.genSalt()
-            let password = await bcrypt.hash(pass,salt)
-            const role = "Participant"
-            const code = await qrcode.toDataURL(`${reg[i].fName} ${reg[i].category} ${role}`)
+    for (let i = 0; i <= reg.length; i++) {
+        let pass = crypto.randomBytes(3).toString("hex")
+        let salt = await bcrypt.genSalt()
+        let password = await bcrypt.hash(pass,salt)
+        const role = "Participant"
+        const code = await qrcode.toDataURL(`${reg[i].fName} ${reg[i].category} ${role}`)
 
-            const user = new User({
-                fName: `${reg[i].fName}`,
-                lName: `${reg[i].lName}`,
-                email: `${reg[i].email}`,
-                Username: `${reg[i].Username}`,
-                Password: password,
-                phoneNumber : `${reg[i].phoneNumber}`,
-                country: `${reg[i].country}`,
-                institution: `${reg[i].institution}`,
-                department: `${reg[i].department}`,
-                category : `${reg[i].category}`,
-                qrcode : code
-            })
-            await user.save();
-            console.log(pass)
-        }
-    }catch(e){
-        console.log(e)
+        const user = new User({
+            fName: `${reg[i].fName}`,
+            lName: `${reg[i].lName}`,
+            email: `${reg[i].email}`,
+            Username: `${reg[i].Username}`,
+            Password: password,
+            phoneNumber : `${reg[i].phoneNumber}`,
+            country: `${reg[i].country}`,
+            institution: `${reg[i].institution}`,
+            department: `${reg[i].department}`,
+            category : `${reg[i].category}`,
+            qrcode : code
+        })
+        await user.save();
+        console.log(pass)
+
+        const message = {
+            from: " 'ICEECE & AMF 2021' <iceece.amf.eee.ui@gmail.com>",
+            to: `${reg[i].email}`,
+            subject: "Welcome to 1st ICEECE & AMF 2021 portal",
+            text:`Your Username is ${reg[i].email} and Password is ${pass}`,
+            
+            html:`<div><p>Dear ${reg[i].fName},</p> <br><p>Thank you for registering to participate at the International Conference on Electrical Electronics and Communication Engineering and Allied Multidisciplinary Fields (ICEECE & AMF 2021) organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><p>You can access information about various sessions at the conference as well as your payment status through the Web App.</p><br><p>Your login credentials are:</p><br><p>Username: ${reg[i].email}</p> <p>Password: ${pass}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="http://portal.eeeuicon2021.org" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
+           
+
+        };
+
+        await sgMail.send(message)
+        .then((response)=> {
+            console.log("Email Sent")
+        })
+        .catch(e=>console.log(e.message))
     }
+}catch(e){
+    console.log(e)
+}   
+    
         
 }
 // seed()

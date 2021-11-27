@@ -44,6 +44,11 @@
                                             <li><a href="/admin/payments">Payments</a></li>
                                             <li><a href="#">Material Receipt</a></li>
                                             <% } %>
+                                <% if (User.role == "Reviewer") {
+                                    <li><a href="/admin/participants">Participants</a></li>
+                                
+                                    
+                                } %> 
 
                             </ul>
                         </li>
