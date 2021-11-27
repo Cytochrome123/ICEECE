@@ -22,14 +22,14 @@ const seed = async () => {
             let pass = crypto.randomBytes(3).toString("hex")
             let salt = await bcrypt.genSalt()
             let password = await bcrypt.hash(pass,salt)
-            const role = "user"
-            const code = await qrcode.toDataURL(`<div><p>${reg.fName}</p><br></br><p>${role}</p></div>`)
+            const role = "Participant"
+            const code = await qrcode.toDataURL(`${reg[i].fName} ${reg[i].category} ${role}`)
 
             const user = new User({
                 fName: `${reg[i].fName}`,
                 lName: `${reg[i].lName}`,
                 email: `${reg[i].email}`,
-                Username: `${reg[i].fName}`,
+                Username: `${reg[i].Username}`,
                 Password: password,
                 phoneNumber : `${reg[i].phoneNumber}`,
                 country: `${reg[i].country}`,
@@ -59,9 +59,9 @@ exports.handleRegister = async(req,res)=>{
         // let pass = crypto.randomBytes(8).toString("hex")
         let salt = await bcrypt.genSalt()
         let password = await bcrypt.hash(Password,salt)
-        const role = "user"
+        const role = "Participant"
         const Username = fName
-        const code = await qrcode.toDataURL(`<div><p>${fName}</p><br></br><p>${role}</p></div>`)
+        const code = await qrcode.toDataURL(`${fName} ${category} ${role}`)
         
         const user = await new User({
             fName: fName,
