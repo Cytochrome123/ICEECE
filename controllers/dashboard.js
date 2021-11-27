@@ -18,6 +18,7 @@ exports.getHome = (req, res) => {
     res.send("WELCOME TO ICEECE");
 };
 exports.getDashboard = async(req, res) => {
+    console.log(req.user)
     const payment = await Payment.find()
         .then((payment) => {
             Session.find()
@@ -322,25 +323,7 @@ exports.handleSlide = async(req, res) => {
 
 // ########ADMIN###########
 
-exports.getAll = async(req, res) => {
-    await User.find().then((doc) => {
-        res.render("superAdmin/participants", { doc });
-    });
-};
-exports.getPresenters = async(req, res) => {
-    const presenters = await User.find({ role: "Presenter" })
-    .then(
-        async(presenters) => {
-            // Session.find
-            res.render("superAdmin/presenters", { presenters });
-        },
-    );
-};
-exports.getSpeakers = async(req, res) => {
-    const speakers = await User.find({ role: "Speaker" }).then((speakers) => {
-        res.render("superAdmin/speakers", { speakers });
-    });
-};
+
 exports.getPayments = async(req, res) => {
     const payment = await Payment.find()
         .then((payment) => {
@@ -418,13 +401,15 @@ exports.downloadFile = async(req, res) => {
     const { id } = req.params;
 
     await Session.findById(id).then((doc) => {
-        // console.log(__dirname)
-        const x = "\\iii\\" + doc.cameraReady[0].filePath
-        // const x =  __dirname + "/public/uploads/papers/Developer.jpg"
-        // Documents\\iii\\
-        .then(doc=>{
-          res.download(x);  
-        })
-        .catch(e=>res.send(e))
+        try {
+            console.log(doc)
+            console.log(__dirname)
+            const x = __dirname +"\\Documents\\iii\\" + doc.cameraReady[0].filePath
+            // const x =  __dirname + "/public/uploads/papers/Developer.jpg"
+            // Documents\\iii\\
+            res.download(x);
+        } catch (error) {
+            res.send(error)
+        }
     });
 };

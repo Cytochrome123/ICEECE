@@ -1,6 +1,6 @@
-<%- include('../partial/head') -%>
+<%- include('../partial/head') %>
 
-    <%- include('../partial/sidebar') -%>
+    <%- include('../partial/sidebar') %>
 
         <!--**********************************
             Content body start
@@ -9,7 +9,7 @@
             <div class="container-fluid">
                 <div class="page-titles">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="javascript:void(0)">Sessions</a></li>
                     </ol>
                 </div>
@@ -32,10 +32,10 @@
 
                                         <div class="tab-content">
                                             <div id="day_1" class="tab-pane fade active show">
-                                                <div class="row mt-5">
+                                                <div class="row mt-5 ">
                                                     <% for(let sesn of session){%>
                                                         <% if (sesn.day=="day1" ) { %>
-                                                            <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+                                                            <div class="col-xl-4 col-md-4 col-sm-6 col-xs-12">
                                                                 <div class="row">
                                                                     <div class="col-xl-12">
 
@@ -70,12 +70,12 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <% } %>
-                                                                <% } %>
+                                                        <% } %>
+                                                    <% } %>
 
                                                                     <% if (User.role=="Super Admin" ) { %>
 
-                                                                        <div class="col-3">
+                                                                        <div class="col-xl-4 col-md-4 col-sm-6 col-xs-12">
                                                                             <div class="row">
                                                                                 <div class="col-xl-12 col-md-6">
                                                                                     <div class="card">
@@ -224,7 +224,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <% } %>
+                                                                    <% } %>
                                                 </div>
 
                                             </div>
@@ -232,7 +232,7 @@
                                                 <div class="row mt-5">
                                                     <% for(let sesn of session){%>
                                                         <% if (sesn.day=="day2" ) { %>
-                                                            <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+                                                            <div class="col-xl-4 col-md-4 col-sm-6 col-xs-12">
                                                                 <div class="row">
                                                                     <div class="col-xl-12">
 
@@ -272,7 +272,7 @@
 
                                                                     <% if (User.role=="Super Admin" ) { %>
 
-                                                                        <div class="col-3">
+                                                                        <div class="col-xl-4 col-md-4 col-sm-6 col-xs-12">
                                                                             <div class="row">
                                                                                 <div class="col-xl-12 col-md-6">
                                                                                     <div class="card">
@@ -430,7 +430,7 @@
                                                 <div class="row mt-5">
                                                     <% for(let sesn of session){%>
                                                         <% if (sesn.day=="day3" ) { %>
-                                                            <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+                                                            <div class="col-xl-4 col-md-4 col-sm-6 col-xs-12">
                                                                     <div class="row">
                                                                         <div class="col-xl-12">
                                                                             <div class="card">
@@ -469,7 +469,7 @@
 
                                                                     <% if (User.role=="Super Admin" ) { %>
 
-                                                                        <div class="col-3">
+                                                                        <div class="col-xl-4 col-md-4 col-sm-6 col-xs-12">
                                                                             <div class="row">
                                                                                 <div class="col-xl-12 col-md-6">
                                                                                     <div class="card">
@@ -585,9 +585,9 @@
 
                                                                                                                     
                                                                                                                     <div class="form-group">
-                                                                                                                        <label class="text-label">
+                                                                                                                        <div class="">
                                                                                                                             <strong>Speakers</strong>
-                                                                                                                        </label>
+                                                                                                                        </div>
                                                                                                                         <% for(let user of users){%>
                                                                                                                             <% if(user.role=="Speaker" || user.role=="Presenter"){%>
                                                                                                                                     <label for="speaker" class="radio-inline mr-3">
@@ -636,4 +636,4 @@
         <!--**********************************
             Content body end
         ***********************************-->
-        <%- include('../partial/footer') -%>
+        <%- include('../partial/footer') %>

@@ -83,7 +83,7 @@ exports.handleRegister = async(req,res)=>{
             subject: "Welcome to 1st ICEECE & AMF 2021 portal",
             text:`Your Username is ${email} and Password is ${Password}`,
             
-            html:`<div><p>Dear ${fName},</p> <br><p>Thank you for registering to participate at the International Conference on Electrical Electronics and Communication Engineering and Allied Multidisciplinary Fields (ICEECE & AMF 2021) organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><p>You can access information about various sessions at the conference as well as your payment status through the Web App.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
+            html:`<div><p>Dear ${fName},</p> <br><p>Thank you for registering to participate at the International Conference on Electrical Electronics and Communication Engineering and Allied Multidisciplinary Fields (ICEECE & AMF 2021) organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><p>You can access information about various sessions at the conference as well as your payment status through the Web App.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${Password}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="http://portal.eeeuicon2021.org" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
            
 
         };
@@ -140,7 +140,7 @@ exports.handleCreateRP = async(req,res)=>{
                 to: email,
                 subject: "Welcome to 1st ICEECE & AMF 2021 portal",
                 text:`Your Username is ${email} and Password is ${pass}`,
-                html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${pass}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="#" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
+                html:`<div><p>Dear ${fName},</p> <br><p>You have been assigned to the role of a ${role} at ICEECE & AMF 2021 organized by the Department of Electrical Electronics Engineering, University of Ibadan.</p><br><p>Your login credentials are:</p><br><p>Username: ${email}</p> <p>Password: ${pass}</p><p>Click the link below to login to your Account and access the WebApp.</p><br><a href="http://portal.eeeuicon2021.org" >Login</a><br><p>For further inquiries please contact- <a href="iceece.amf@ui.edu.ng" >iceece.amf@ui.edu.ng</a></p><br></br><p>Best Regards,</p><p>The ICEECE & AMF 2021 Team.</p></div>`
             };
             
             await sgMail.send(invite)
@@ -177,6 +177,39 @@ exports.getRP = async(req,res)=>{
         res.render("superAdmin/role-player" , {rp})
     })
 }
+exports.getAll = async(req, res) => {
+    await User.find().then((doc) => {
+        res.render("superAdmin/participants", { doc });
+    });
+};
+exports.getPresenters = async(req, res) => {
+    const presenters = await User.find({ role: "Presenter" })
+    .then(
+        async(presenters) => {
+            // Session.find
+            res.render("superAdmin/presenters", { presenters });
+        },
+    );
+};
+exports.editPresenter = async(req,res)=>{
+    const {id} = req.params;
+    await User.findByIdAndUpdate(id, req.body, {new:true})     
+    .then(rp => res.redirect("/admin/presenters"))
+    .catch(err => console.log(err))
+};
+exports.deletePresenter = async(req,res)=>{
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete(id)
+        .then((user) => {
+            res.redirect("/admin/presenters");
+        })
+        .catch((e) => res.send(e));
+}
+exports.getSpeakers = async(req, res) => {
+    const speakers = await User.find({ role: "Speaker" }).then((speakers) => {
+        res.render("superAdmin/speakers", { speakers });
+    });
+};
 exports.getVerifiedEmail = async(req,res)=>{
     const {Username,isVerified} = req.user
     if(isVerified){

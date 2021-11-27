@@ -69,13 +69,7 @@ router.put("/session/:id/add-slide", upload.single("file"), dashboard.handleSlid
 
 // ########ADMIN###########
 
-router.route("/participants").get(dashboard.getAll);
 
-router.get("/admin/participants", dashboard.getAll);
-
-router.get("/admin/presenters", dashboard.getPresenters);
-
-router.get("/admin/speakers", dashboard.getSpeakers);
 
 // router.route("/admin/speaker/:id")
 // .get(dashboard.getManageSpeaker)

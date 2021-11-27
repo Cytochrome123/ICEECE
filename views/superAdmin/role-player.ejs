@@ -1,6 +1,6 @@
-<%- include('../partial/head') -%>
+<%- include('../partial/head') %>
 
-    <%- include('../partial/sidebar') -%>
+    <%- include('../partial/sidebar') %>
 
         <!--**********************************
             Content body start
@@ -81,7 +81,8 @@
                                                                 <label class="custom-control-label" for="customCheckBox3"></label>
                                                             </div>
                                                         </td>
-                                                        <td><strong>.</strong></td>
+                                                        <% let arr = Object.values(rp)%>
+													    <td><strong><%=arr.indexOf(r) + 1 %></strong></td>
                                                         <td>
                                                             <%= r.fName %>
                                                         </td>
@@ -104,9 +105,9 @@
                                                                         class="fa fa-pencil"></i></a>
                                                                 <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#mailBc"><i
                                                                         class="fa fa-envelope"></i></a>
-                                                                <form action="/admin/role-player/<%= r._id %>?_method=DELETE" method="post">
-                                                                    <a href=" " class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                                </form>
+                                                                <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#delete"><i
+                                                                    class="fa fa-trash"></i></a>
+                                                                
                                                                 
 
                                                                 <!-- Button trigger modal -->
@@ -147,7 +148,7 @@
                                                                                         </select>
 
 
-                                                                                        <div class="text-left">
+                                                                                        <div class="text-right">
                                                                                             <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
                                                                                             <button type="submit" class="btn btn-primary">Save changes</button>
                                                                                         </div>
@@ -192,6 +193,33 @@
                                                                     </div>
     
                                                                 </div>
+
+                                                                <div class="modal fade" id="delete">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h2 class="modal-title">
+                                                                                    Are you sure you want to delete <em> <%=r.fName%> <%= r.lName %>  ?</em>
+                                                                                </h2>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <form action="/admin/role-player/<%= r._id %>?_method=DELETE" method="post">
+                                                                                    <div class="text-right">
+                                                                                        <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -210,4 +238,4 @@
         <!--**********************************
             Content body end
         ***********************************-->
-        <%- include('../partial/footer') -%>
+        <%- include('../partial/footer') %>

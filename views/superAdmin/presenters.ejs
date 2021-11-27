@@ -1,6 +1,6 @@
-<%- include('../partial/head') -%>
+<%- include('../partial/head') %>
 
-    <%- include('../partial/sidebar') -%>
+    <%- include('../partial/sidebar') %>
 
         <!--**********************************
             Content body start
@@ -91,39 +91,120 @@
                                                                             <%= presenter.phoneNumber %>
                                                                         </td>
                                                                         <td>Completed/Not completed</td>
-                                                                        <td><a href="#" data-toggle="modal" data-email='<%= presenter.email %>' data-target="#manage" class="btn btn-primary shadow btn-xs sharp mr-1"><i
-                                                                                    class="fa fa-eye"></i></a></td>
+                                                                        <td>
+                                                                            <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#edit<%=presenter._id%>"><i
+                                                                                class="fa fa-pencil"></i></a>
+                                                                            <a href="#" data-toggle="modal" data-email='<%= presenter.email %>' data-target="#manage" class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                                                    class="fa fa-envelope"></i></a>
+                                                                            <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#delete"><i
+                                                                                class="fa fa-trash"></i></a>
+                                                                        </td>
                                                                 </tr>
-                                                                <div class="modal fade" id="manage">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                            <div class="modal fade" id="manage">
+                                                                                <div class="modal-dialog modal-dialog-centered" role="document">
 
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title">
-                                                                                    Contact Presenter
-                                                                                </h5>
-                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                                </button>
-                                                                            </div>
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title">
+                                                                                                Contact Presenter
+                                                                                            </h5>
+                                                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                            </button>
+                                                                                        </div>
 
-                                                                            <div class="modal-body">
-                                                                                <form action="#">
-                                                                                    <div class="form-group">
-                                                                                        <textarea class="form-control" rows="4" id="manageMessage" placeholder="Write a message to the presenter"></textarea>
+                                                                                        <div class="modal-body">
+                                                                                            <form action="#">
+                                                                                                <div class="form-group">
+                                                                                                    <textarea class="form-control" rows="4" id="manageMessage" placeholder="Write a message to the presenter"></textarea>
+                                                                                                </div>
+
+                                                                                                <input type="text" name="email" class="form-control mb-3" placeholder="Email" value="<%= presenter.email %>">
+
+                                                                                                <button type="submit" class="btn btn-primary">Send
+                                                                                                    Message</button>
+                                                                                            </form>
+                                                                                        </div>
+
                                                                                     </div>
 
-                                                                                    <input type="text" name="email" class="form-control mb-3" placeholder="Email" value="<%= presenter.email %>">
+                                                                                </div>
 
-                                                                                    <button type="submit" class="btn btn-primary">Send
-                                                                                        Message</button>
-                                                                                </form>
                                                                             </div>
 
-                                                                        </div>
+                                                                            <div class="modal fade" id="edit<%=presenter._id%>">
+                                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+            
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title">
+                                                                                                <%=presenter.fName%>
+                                                                                            </h5>
+                                                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+            
+                                                                                        <div class="modal-body">
+                                                                                            <form action="/admin/presenter/<%= presenter._id %>?_method=PUT" method="post" class="form-group">
+            
+            
+                                                                                                    <input type="text" name="fName" class="form-control mb-3" placeholder="First Name" value="<%= presenter.fName %>">
+                                                                                                    <input type="text" name="lName" class="form-control mb-3" value="<%= presenter.lName %>" placeholder="Last Name">
+                                                                                                    <input type="text" name="email" class="form-control mb-3" value="<%= presenter.email %>" placeholder="Email">
+                                                                                                    <input type="pNumber" name="pNumber" class="form-control mb-3" value="<%= presenter.pNumber %>" placeholder="Phone Number">
+                                                                                                    <!-- <input type="password" name="Password" id="" placeholder="Password"> -->
+                                                                                                    <label for="role">Role </label>
+                                                                                                    <select name="role" id="role" class="form-control mb-3">
+                                                                                                        <option value="<%= presenter.role %>" selected> <%= presenter.role %> </option>
+                                                                                                        <option value="Super Admin">Super Admin</option>
+                                                                                                        <option value="Program Manager">Program Manager</option>
+                                                                                                        <option value="Speaker">Speaker</option>
+                                                                                                        <option value="Reviewer">Reviewer</option>
+                                                                                                        <option value="Presenter">Presenter</option>
+                                                                                                        <option value="Protocol Officer">Protocol Officer</option>
+                                                                                                        <option value="Sales-Manager">Sales-Manager</option>
+                                                                                                    
+                                                                                                    </select>
+            
+            
+                                                                                                    <div class="text-left">
+                                                                                                        <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                                                    </div>
+                                                                                            </form>
+                                                                                        </div>
+            
+                                                                                    </div>
+            
+                                                                                </div>
+            
+                                                                            </div>
 
-                                                                    </div>
-
-                                                                </div>
+                                                                            <div class="modal fade" id="delete">
+                                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+            
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h2 class="modal-title">
+                                                                                                Are you sure you want to delete <em> <%=presenter.fName%> <%= presenter.lName %>  ?</em>
+                                                                                            </h2>
+                                                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+            
+                                                                                        <div class="modal-body">
+                                                                                            <form action="/admin/presenter/<%= presenter._id %>?_method=DELETE" method="post">
+                                                                                                <div class="text-right">
+                                                                                                    <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </div>
+            
+                                                                                    </div>
+            
+                                                                                </div>
+            
+                                                                            </div>
                                                                 <% }%>
                                                                     <% } %>
 
@@ -150,7 +231,7 @@
                                                 <% for (let presenter of presenters) {%>
                                                     <div class="items col-lg-3 col-md-4 col-sm-6">
                                                         <div class="card text-center">
-                                                            <div class="card-body">presenter
+                                                            <div class="card-body">
 
                                                                 <h5 class="fs-16 font-w500 mb-1">
                                                                     <img src=<%=presenter.qrcode %> alt="QR Code">
@@ -189,4 +270,4 @@
             Content body end
             
         ***********************************-->
-        <%- include('../partial/footer') -%>
+        <%- include('../partial/footer') %>

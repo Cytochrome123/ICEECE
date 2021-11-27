@@ -12,11 +12,18 @@ router.route("/admin/create")
 router.get("/admin/role-player" , user.getRP)
 router.put("/admin/role-player/:id", user.editRP)
 router.delete("/admin/role-player/:id", user.deleteRP)
-// SIGN UP ROUTES
 
-// router.route('/signUp') 
-// .get(user.getSignUp)
-// .post(user.handleSignUp)
+router.route("/participants").get(user.getAll);
+
+router.get("/admin/participants", user.getAll);
+
+router.get("/admin/presenters", user.getPresenters);
+router.route("/admin/presenter/:id" )
+.put(user.editPresenter)
+.delete(user.deletePresenter)
+
+router.get("/admin/speakers", user.getSpeakers);
+
 
 // REGISTER ROUTES
 router.route('/register')
