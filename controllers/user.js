@@ -14,7 +14,7 @@ const mail = require("../config/mail")
 const path = require("path");
 const ejs = require("ejs");
 const reg = require("../utils/wordreg");
-const { deleteMany } = require('../model/contact');
+const Contact = require('../model/contact');
 
 
 
