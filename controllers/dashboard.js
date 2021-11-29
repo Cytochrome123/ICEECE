@@ -187,7 +187,7 @@ exports.handlePaperUpdate = async(req, res) => {
                     })
                     .catch((e) => res.send("The updated file is missing!!!"));
             })
-            .catch((e) => res.send("Failed t upload update!!!"));
+            .catch((e) => res.send("Failed to upload update!!!"));
     });
 };
 
@@ -293,14 +293,17 @@ exports.handleCameraReady = async(req, res) => {
     const { id } = req.params;
     const { name, type, duration, starts, ends, access, roles, topic, pDetails } = req.body;
     const x = req.file.path;
+    const y = req.file.destination;
     const cameraReady1 = {
         fileName: req.file.originalname,
         filePath: x,
+        fileDestination: y
     }
     const session = await Session.findById(id)
     .then((session) => {
         session.cameraReady.push(cameraReady1)
         session.save()
+        console.log(req.file)
         res.redirect(`/session/${session._id}`);
     })
     .catch(e=>res.send(e))
@@ -399,19 +402,25 @@ exports.deletePaper = async(req, res) => {
     }
 };
 
-exports.downloadFile = async(req, res) => {
-    const { id } = req.params;
+// exports.downloadFile = async(req, res) => {
+//     const { id } = req.params;
 
-    await Session.findById(id).then((doc) => {
-        try {
-            console.log(doc)
-            console.log(__dirname)
-            const x = __dirname +"\\Documents\\iii\\" + doc.cameraReady[0].filePath
-            // const x =  __dirname + "/public/uploads/papers/Developer.jpg"
-            // Documents\\iii\\
-            res.download(x);
-        } catch (error) {
-            res.send(error)
-        }
-    });
-};
+//     await Session.findById(id).then((doc) => {
+//         try {
+//             console.log(doc)
+//             console.log(__dirname)
+//             const x = __dirname +"\\" + doc.cameraReady[0].filePath
+//             // const x =  __dirname + "/public/uploads/papers/Developer.jpg"
+//             console.log("******xxxx*****")
+//             console.log(x)
+//             const y = __dirname + "/" + doc.cameraReady[0].fileDestination
+//             console.log("******yyyy*****")
+//             console.log(y)
+//             res.download(x);
+//             // res.download(y)
+//         } catch (error) {
+//             res.send(error)
+//         }
+//     });
+
+// };

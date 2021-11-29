@@ -33,7 +33,7 @@ const User = mongoose.model('User')
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
         // console.log(file)
-        cb(null, "public/uploads/papers")
+        cb(null, "public/uploads/pass")
     },
     filename:(req,file,cb)=>{
         // console.log(req.user)
@@ -46,8 +46,40 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage})
 
-// const {storage,upload} = module.exports
+const storageCam = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        // console.log(file)
+        cb(null, "public/uploads/cameraReady")
+    },
+    filename:(req,file,cb)=>{
+        // console.log(req.user)
+        const {originalname} = file
+        // const custom = `${req.user._id} -- originalname`
+        cb(null, originalname)
+    }
+})
 
-module.exports = {storage,upload}
+
+const uploadCam = multer({storage:storageCam})
+
+
+const storageSli = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        // console.log(file)
+        cb(null, "public/uploads/slide")
+    },
+    filename:(req,file,cb)=>{
+        // console.log(req.user)
+        const {originalname} = file
+        // const custom = `${req.user._id} -- originalname`
+        cb(null, originalname)
+    }
+})
+
+
+const uploadSli = multer({storage:storageSli})
+
+
+module.exports = {upload,storage,storageCam,uploadCam,storageSli,uploadSli}
 
 

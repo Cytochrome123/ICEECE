@@ -15,6 +15,7 @@ const flash = require("connect-flash")
 const http = require('http')
 const fs = require("fs")
 const { serializeDeserialize, passportLocalStrategy } = require("./config/passport")
+const Session = require("./model/session")
 
 // const AWS = require("aws-sdk")
 
@@ -101,11 +102,34 @@ app.use(function (req, res, next) {
 });
 
 
+// app.get("/download/:id" , async(req,res)=>{
+//   console.log(__dirname)
+
+//   const { id } = req.params;
+
+//     await Session.findById(id).then((doc) => {
+//         try {
+//             console.log(doc)
+//             console.log(__dirname)
+//             const x = __dirname +"\\" + doc.cameraReady[0].filePath
+//             // const x =  __dirname + "/public/uploads/papers/Developer.jpg"
+//             console.log("******xxxx*****")
+//             console.log(x)
+//             const y = __dirname + "/" + doc.cameraReady[0].fileDestination
+//             console.log("******yyyy*****")
+//             console.log(y)
+//             res.download(x);
+//             // res.download(y)
+//         } catch (error) {
+//             res.send(error)
+//         }
+//     });
+// })
 
 
 app.use(require('./routes/user'))
 app.use(require('./routes/dashboard'))
-
+app.use(require("./download"))
 
 module.exports.isLoggedIn = (req ,res ,next)=>{
   if(req.isAuthenticated()){
@@ -114,9 +138,6 @@ module.exports.isLoggedIn = (req ,res ,next)=>{
   }
   res.redirect("/login")
 }
-
-
-
 
 
 

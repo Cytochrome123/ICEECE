@@ -1,7 +1,7 @@
 const router = require("express").Router();
 // const upload = require("../config/multer")
 const multer = require("multer");
-const { storage, upload } = require("../config/multer");
+const { upload, storage1, uploadCam ,uploadSli } = require("../config/multer");
 const methodOverride = require("method-override");
 const dashboard = require("../controllers/dashboard");
 // const isLoggedIn = require("../app")
@@ -15,7 +15,7 @@ router.get("/contacts", isLoggedIn , dashboard.getContacts);
 router
     .route("/user/payment-confirmation")
     .get(isLoggedIn , dashboard.getPaymentConfirmation)
-    .post(isLoggedIn , dashboard.handlePaymentConfirmation);
+    .post(upload.single("file"), isLoggedIn , dashboard.handlePaymentConfirmation);
 
 router.get("/session", isLoggedIn , dashboard.getSession);
 router.get("/session/:id", isLoggedIn , dashboard.getSessionDetails);
@@ -45,7 +45,7 @@ router.post(
     dashboard.handlePaperCorrection,
 );
 
-router.get("/download/:id", isLoggedIn , dashboard.downloadFile);
+// router.get("/download/:id", isLoggedIn , dashboard.downloadFile);
 
 router
     .route("/admin/review/:id")
@@ -60,11 +60,11 @@ router
 // ########SPEAKER###########-------CAMERA READY
 
 router.route("/session/:id/add-info")
-.put(upload.single("file"),dashboard.handleCameraReady);
+.put(uploadCam.single("file"),dashboard.handleCameraReady);
 
 
 // ___SLIDE____
-router.put("/session/:id/add-slide", upload.single("file"), dashboard.handleSlide);
+router.put("/session/:id/add-slide", uploadSli.single("file"), dashboard.handleSlide);
 
 
 // ########ADMIN###########
