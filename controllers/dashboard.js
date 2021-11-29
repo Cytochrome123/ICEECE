@@ -83,8 +83,10 @@ exports.getSessionDetails = async(req, res) => {
 };
 exports.getMarkAttendance = async(req, res) => {
     const date = new Date().toDateString();
-    const sessions = await Session.find({ starts: { $gte: date } }).then(
-        (sessions) => {
+    const sessions = await Session.find({ starts: { $gte: date } })
+    .then(async(sessions) => {
+        await User.findById(req.user._id)
+        .then(ind=>{
             console.log(sessions);
 
             // QRScanner.initiate({
@@ -94,9 +96,12 @@ exports.getMarkAttendance = async(req, res) => {
             //     onTimeout: function () { console.warn('TIMEOUT'); } // optional
             // })
 
-            res.render("superAdmin/mark-attendance", { sessions });
+            res.render("superAdmin/mark-attendance", { sessions,ind });
+        })
+         .catch(e=>console.log("User Not Found"))   
         },
-    );
+    )
+    .catch(e=>console.log(e))
 };
 exports.handleMarkAttendance = async(req, res) => {
     const { session, email, role } = req.body;

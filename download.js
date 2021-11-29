@@ -17,7 +17,7 @@ router.get("/download/camera-ready/:id" , async(req,res)=>{
             for (let i = 0; i <= 5; i++){
                 console.log(doc)
                 console.log(__dirname)
-                let x = __dirname +"\\" + doc.cameraReady[0].filePath
+                let x =  doc.cameraReady[0].filePath
                 
                 res.download(x);
             }
