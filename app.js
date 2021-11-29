@@ -39,9 +39,9 @@ const sessionConfig = {
   
   };
 
-// mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
+mongoose.connect("mongodb://localhost:27017/ICEECE",{useUnifiedTopology: true, useNewUrlParser:true});
  
-mongoose.connect(process.env.MONGOURI,{useUnifiedTopology: true, useNewUrlParser:true});
+// mongoose.connect(process.env.MONGOURI,{useUnifiedTopology: true, useNewUrlParser:true});
 
 mongoose.connection.on("error", console.error.bind(console, "connection error"));
 mongoose.connection.once("open", ()=>console.log("Database connected!!!"));
