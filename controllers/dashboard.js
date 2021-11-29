@@ -85,10 +85,7 @@ exports.getMarkAttendance = async(req, res) => {
     const date = new Date().toDateString();
     const sessions = await Session.find({ starts: { $gte: date } })
     .then(async(sessions) => {
-        await User.findById(req.user._id)
-        .then(ind=>{
-            console.log(sessions);
-
+        console.log(sessions);
             // QRScanner.initiate({
             //     // match: /^[a-zA-Z0-9]{16,18}$/, // optional
             //     onResult: (result)=> { console.info('DONE: ', result); },
@@ -96,21 +93,25 @@ exports.getMarkAttendance = async(req, res) => {
             //     onTimeout: function () { console.warn('TIMEOUT'); } // optional
             // })
 
-            res.render("superAdmin/mark-attendance", { sessions,ind });
-        })
-         .catch(e=>console.log("User Not Found"))   
-        },
-    )
+            res.render("superAdmin/mark-attendance", { sessions});
+    })
     .catch(e=>console.log(e))
 };
 exports.handleMarkAttendance = async(req, res) => {
-    const { session, email, role } = req.body;
-    const attendance = await new Attendance(req.body)
-        .save()
-        .then((attendance) => {
-            res.redirect("/mark-attendance");
-        })
-        .catch((e) => console.log(e));
+    const { session,rec,fName,email,role } = req.body;
+    console.log(fName)
+    await User.findOne({fName:fName})
+    .then(delegate=>{
+        if(rec == "Allowed"){
+            delegate.isVerified = true
+            delegate.save()
+            res.redirect("/mark-attendance")
+        }else{
+            res.redirect("/mark-attendance")
+        }
+        
+    })
+    .catch(e=>console.log(e))
 };
 exports.getSubmitPaper = (req, res) => {
     // console.log(req.user)
