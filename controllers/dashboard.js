@@ -12,6 +12,7 @@ const Update = require("../model/update");
 const Payment = require("../model/payment");
 const Session = require("../model/session");
 const Attendance = require("../model/attendance");
+const Material = require("../model/material")
 // const QRScanner = require("qr-code-scanner")
 // const AppError = require("../AppError")
 
@@ -92,8 +93,11 @@ exports.getMarkAttendance = async(req, res) => {
             //     onError: function (err) { console.error('ERR :::: ', err); }, // optional
             //     onTimeout: function () { console.warn('TIMEOUT'); } // optional
             // })
-
-            res.render("superAdmin/mark-attendance", { sessions});
+        await Material.find()
+        .then(materials=>{
+            res.render("superAdmin/mark-attendance", { sessions, materials});
+        })
+            
     })
     .catch(e=>console.log(e))
 };
@@ -113,6 +117,24 @@ exports.handleMarkAttendance = async(req, res) => {
     })
     .catch(e=>console.log(e))
 };
+exports.getMaterials = async(req,res)=>{
+    await Material.find()
+    .then(materials=>{
+        res.render("SuperAdmin/materials" , {materials})
+    })
+    
+}
+exports.handleMaterials = async(req,res)=>{
+    const {name,amount} = req.body
+    const material = new Material({
+        Name:name,
+        Amount: amount
+    })
+    material.save()
+    .then(mat=>{
+        res.redirect("/admin/materials")
+    })
+}
 exports.getSubmitPaper = (req, res) => {
     // console.log(req.user)
     res.render("user/paperSubmission", { success: "" });

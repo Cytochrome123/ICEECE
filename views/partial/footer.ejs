@@ -44,8 +44,10 @@
 
 <!-- // script for qr scanner// -->
 <script type="text/javascript">
+    // '<span class="result">' +  + '</span>'
     function onScanSuccess(qrCodeMessage) {
-        document.getElementById('result').innerHTML = prompt('<span class="result">' + qrCodeMessage + '</span>') ;
+
+        document.getElementById('result').innerHTML = prompt(qrCodeMessage) ;
     }
 
     function onScanError(errorMessage) {

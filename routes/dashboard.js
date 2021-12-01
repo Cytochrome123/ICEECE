@@ -81,6 +81,10 @@ router
 
 router.get("/admin/attendance", isLoggedIn , dashboard.getAttendance);
 
+router.route("/admin/materials")
+.get(dashboard.getMaterials)
+.post(dashboard.handleMaterials)
+
 router.get("/admin/payments", isLoggedIn , dashboard.getPayments);
 
 router

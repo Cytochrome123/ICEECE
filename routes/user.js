@@ -5,6 +5,10 @@ const user= require('../controllers/user');
 
 // *******ADMIN********
 
+router.route("/direct-live/attendance")
+.get(user.getDirectAttendance)
+.post(user.directAttendance)
+router.get("/direct-live" , user.directLive)
 router.route("/admin/create")
 .get(isLoggedIn , user.getCreateRP)
 .post(isLoggedIn , user.handleCreateRP)

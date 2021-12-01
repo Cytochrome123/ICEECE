@@ -53,7 +53,7 @@
                                             <div class="form-group col-lg-6 col-md-12">
                                                 <div class="col-lg-6 col-md-9">
                                                     <div class="text-center"><h3>Scanner</h3></div>
-                                                    <div style="width:500px;" id="reader"></div>
+                                                    <div style="width:400px;" id="reader"></div>
                                                     
                                                     <div class="col" style="padding:30px;"></div>
                                                     
@@ -93,14 +93,14 @@
                                         <h4 class="text-black font-w600 fs-20">Materials</h4>
                                     </div>
                                 </div>
-                                <div class="card-body d-flex justify-content-around flex-wrap">
+                                <div class="card-body">
                                     <form action="/mark-attendance" method="post">
                                         <div class="form-row">
                                             <div class="form-group col-6">
-                                                <label for="session">Ongoing Sessions</label>
+                                                <label for="session">Available Materilals</label>
                                                 <select name="session" id="session" class="form-control mb-3">
-                                                    <% for( let session of sessions) { %>
-                                                        <option value="<%= session.name %> "><%= session.name %></option>
+                                                    <% for( let mat of materials) { %>
+                                                        <option value="<%= mat.Name %> "><%= mat.Name %>---<%= mat.Amount %></option>
                                                     <% } %>
                                                 </select>
                                             </div>
@@ -125,21 +125,6 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <h4>SCAN RESULT</h4>
                                                     <div id="result">Result Here</div>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="form-group col-lg-6 col-md-12">
-                                                <div class="text-center"><h3>Alternative</h3></div>
-                                                <input type="text" name="fName" id="" class="form-control mb-3" placeholder="First Name">
-                                                <input type="text" name="email" id="email" class="form-control mb-3" placeholder="Email">
-                                                <select name="role" id="role" class="form-control mb-3">
-                                                    <option name="role" id="">Role</option>
-                                                    <option value="Participant">Participant</option>
-                                                    <option value="Speaker">Speaker</option>
-                                                    <option value="Presenter">Presenter</option>
-                                                </select>
-                                                <div class="text-right mt-5">
-                                                    <button type="submit" class="btn btn-primary">Confirm</button>
                                                 </div>
                                             </div>
                                             

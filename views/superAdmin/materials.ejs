@@ -1,0 +1,185 @@
+<%- include('../partial/head') %>
+
+    <%- include('../partial/sidebar') %>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Materials</a></li>
+                    </ol>
+
+                    <h5><a href="#" data-toggle="modal" data-target="#createRp" class="btn btn-primary mt-5"><i
+                                class="fa fa-pencil"></i> Add Material</a></h5>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="modal fade" id="createRp">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">
+                                            Add Material
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="/admin/materials" method="post">
+                                            <input type="text" name="name" id="" placeholder="Name">
+                                            <input type="number" name="amount" id="" placeholder="Amount Available">
+                                            <button type="submit">Add</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Materials</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        
+                                        <thead>
+                                                <tr>
+                                                    <th class="width50">
+                                                        <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                                            <input type="checkbox" class="custom-control-input" id="checkAll" required="">
+                                                            <label class="custom-control-label" for="checkAll"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th>S/N</th>
+                                                    <th>Name</th>
+                                                    <th>Amount Available</th>
+                                                    <th>Given Out</th>
+                                                    <th>Remain</th>
+                                                    <th>Manage</th>
+                                                </tr>
+                                        </thead>
+                                        <% for (let mat of materials){%>
+                                            <tbody>
+                                                
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                                                <input type="checkbox" class="custom-control-input" id="customCheckBox3" required="">
+                                                                <label class="custom-control-label" for="customCheckBox3"></label>
+                                                            </div>
+                                                        </td>
+                                                        <% let arr = Object.values(materials)%>
+													    <td><strong><%=arr.indexOf(mat) + 1 %></strong></td>
+                                                        <td>
+                                                            <%= mat.Name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= mat.Amount %>
+                                                        </td>
+                                                        <td>
+                                                            <%=  %>
+                                                        </td>
+                                                        <td>
+                                                            <%=  %>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#edit<%=mat._id%>"><i
+                                                                        class="fa fa-pencil"></i></a>
+                                                                <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#delete"><i
+                                                                    class="fa fa-trash"></i></a>
+                                                                
+                                                                
+
+                                                                <!-- Button trigger modal -->
+
+
+                                                                <div class="modal fade" id="edit<%=mat._id%>">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">
+                                                                                    <%=mat.Name%>
+                                                                                </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <form action="/admin/materials/<%= mat._id %>?_method=PUT" method="post" class="form-group">
+
+
+
+                                                                                        <div class="text-right">
+                                                                                            <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                                        </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="modal fade" id="delete">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h2 class="modal-title">
+                                                                                    Are you sure you want to delete <em> <%=mat.Name%> ?</em>
+                                                                                </h2>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <form action="/admin/materials/<%= mat._id %>?_method=DELETE" method="post">
+                                                                                    <div class="text-right">
+                                                                                        <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                            </tbody>
+                                        <% } %>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <%- include('../partial/footer') %>

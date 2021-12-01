@@ -14,6 +14,8 @@ const mail = require("../config/mail")
 const path = require("path");
 const ejs = require("ejs");
 const reg = require("../utils/wordreg");
+const Session = require("../model/session");
+const Attendance = require('../model/attendance');
 
 
 
@@ -102,6 +104,40 @@ const seedRP = async () => {
             // }      
 }
 // seedRP()
+exports.getDirectAttendance = (req,res)=>{
+    res.render("user/directAttendance")
+}
+exports.directLive = async(req,res)=>{
+    // const {id} = req.params
+    const player = await new User({
+        fName: "ICEECE & AMF",
+        lName: "AMF",
+        email: "Eail",
+        Username: "ICEECE & AMF",
+        role: "direct",
+        rp:"direct"
+    }).save()
+    .then(async(player)=>{
+        // Session.findById(id)
+        // .then(session=>{
+            res.render("user/directLive")
+        // })
+        
+    })
+    .catch(e=>console.log(e))
+}
+exports.directAttendance = async(req,res)=>{
+    const {name,email,institution} = req.body
+    const attendance = await new Attendance({
+        name: name,
+        email:email,
+        institution: institution,
+        role: "Direct"
+    }).save()
+    .then(attend=>{
+        res.redirect("/direct-live")
+    })
+}
 exports.getRegister = async(req,res)=>{
     let pass = crypto.randomBytes(3).toString("hex")
     res.render('register', {pass})

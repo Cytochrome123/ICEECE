@@ -301,15 +301,62 @@
                                                       <li class="list-group-item d-flex px-0 justify-content-between">
                                                         <strong>Files</strong>
                                                         <span class="mb-0"><%= session.fileName %> 
-                                                            <a class="btn btn-primary" href="/download/camera-ready/<%= session._id %>">
+                                                            <a class="btn btn-primary" href="/download/camera-ready/<%= session._id %>" >
                                                             Download
                                                             </a>
+                                                            <div class="modal fade" id="downloadModalCenter">
+                                                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Upload Camera Ready Paper
+                                                                            </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal">
+                                                                                <span>&times;</span>
+                                                                            </button>
+                                                                        </div> 
+                                                                        <form action="/download/camera-ready/<%= session._id %>" method="post" class="form-group" enctype="multipart/form-data">
+                                                                            <div class="modal-body">
+                                                                                <div class="form-row"> 
+                                                                                    <div class="form-group col-md-6">
+                                                                                        <select name="which" id="">
+                                                                                            <% session.cameraReady.forEach(cam => {%>
+                                                                                                
+                                                                                                <% for (let i = 0; i <= 5; i++){ %>
+                                                                                                    <option value="<%= i %>"><%= cam.fileName %></option>
+                                                                                                <% } %>
+                                                                                            <% }) %>
+                                                                                            
+                                                                                        </select>
+                                                                                        // <select name="" id="">
+                                                                                        //     <% session.slide.forEach(sli => {%>
+                                                                                        //         <option value="<%= sli.filePath %>"><%= sli.fileName %></option>
+                                                                                        //     <% }) %>
+                                                                                        // </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger light" data-dismiss="modal">
+                                                                                    Close
+                                                                                </button>
+                                                                                <button type="submit" class="btn btn-primary">Add</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <form action="/download/camera-ready/<%= session._id %>" method="get">
                                                                 <select name="" id="">
                                                                     <% session.cameraReady.forEach(cam => {%>
                                                                         <option value="<%= cam.filePath %>"><%= cam.fileName %></option>
                                                                     <% }) %>
                                                                 </select>
+                                                                <select name="" id="">
+                                                                    <% session.slide.forEach(sli => {%>
+                                                                        <option value="<%= sli.filePath %>"><%= sli.fileName %></option>
+                                                                    <% }) %>
+                                                                </select> 
+                                                                
                                                             </form>
                                                         </span>
                                                         
@@ -325,7 +372,7 @@
                                 <div class="tab-pane fade" id="goLive">
                                     <div class="card row align-items-center">
                                         <div class="card-header">
-                                            <h4 class="card-title">Live Session</h4>
+                                            <h4 class="card-title">Live Session <%=session.live%></h4>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body embed-responsive embed-responsive-16by9">
