@@ -14,13 +14,13 @@ router.get("/download/camera-ready/:id" , async(req,res)=>{
   
       await Session.findById(id).then((doc) => {
           try {
-              for (let i = 0; i <= 5; i++){
+            //   for (let i = 0; i <= 5; i++){
                   console.log(doc)
                   console.log(__dirname)
                 //   let x =  doc.cameraReady[0].filePath
                 let x =  doc.slide[0].filePath
                   res.download(x);
-              }
+            //   }
               
               // res.download(y)
           } catch (error) {
