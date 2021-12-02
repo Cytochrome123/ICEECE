@@ -113,9 +113,9 @@
                                                         <td><%= contact.institution %> </td>
                                                         <td>
                                                             <div class="d-flex">
-                                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#edit<%=contact._id%>"><i
-                                                                        class="fa fa-pencil"></i></a>
-                                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#mailBc"><i
+                                                                <a href="callto:<%= contact.phoneNumber %> " class="btn btn-primary shadow btn-xs sharp mr-1"><i
+                                                                        class="fa fa-phone"></i></a>
+                                                                <a href= "mailto:<%= contact.email %>" class="btn btn-primary shadow btn-xs sharp mr-1" ><i
                                                                         class="fa fa-envelope"></i></a>
                                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#delete"><i
                                                                     class="fa fa-trash"></i></a>
@@ -125,74 +125,6 @@
                                                                 <!-- Button trigger modal -->
 
 
-                                                                <div class="modal fade" id="edit<%=contact._id%>">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title">
-                                                                                    <%=contact.fName%>
-                                                                                </h5>
-                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                                </button>
-                                                                            </div>
-
-                                                                            <div class="modal-body">
-                                                                                <form action="" method="post">
-                                                                                    <div class="form-group col-lg-6 col-md-12">
-                                                                                        <div class="col-lg-6 col-md-9">
-                                                                                            <div class="text-center"><h3>Scanner</h3></div>
-                                                                                            <div style="width:500px;" id="reader"></div>
-                                                                                            
-                                                                                            <div class="col" style="padding:30px;"></div>
-                                                                                            
-                                                                                        </div>
-                                                                                        <div class="col-lg-6 col-md-12">
-                                                                                            <h4>SCAN RESULT</h4>
-                                                                                            <div id="result">Result Here</div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="modal fade" id="mailBc">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-    
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title">
-                                                                                    Send Mail Broadcast
-                                                                                </h5>
-                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                                </button>
-                                                                            </div>
-    
-                                                                            <div class="modal-body">
-                                                                                <div class="modal-body">
-                                                                                    <form action="#">
-                                                                                        <div class="form-group">
-                                                                                            <textarea class="form-control" rows="4" id="Broadcast" placeholder="Send a broadcast to role-players"></textarea>
-                                                                                        </div>
-    
-                                                                                        <input type="text" name="email" class="form-control mb-3" placeholder="Email">
-    
-                                                                                        <button type="submit" class="btn btn-primary">Send Broadcast</button>
-    
-                                                                                    </form>
-                                                                                </div>
-    
-                                                                            </div>
-    
-                                                                        </div>
-                                                                    </div>
-    
-                                                                </div>
 
                                                                 <div class="modal fade" id="delete">
                                                                     <div class="modal-dialog modal-dialog-centered" role="document">
