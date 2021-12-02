@@ -48,6 +48,8 @@
     function onScanSuccess(qrCodeMessage) {
 
         document.getElementById('result').innerHTML = '<input type="text" class="result form-control mb-3" name="fName" value=' + qrCodeMessage + 'placeholder=' + qrCodeMessage + '></input>' ;
+
+        html5QrcodeScanner.clear();
     }
 
     function onScanError(errorMessage) {
@@ -56,7 +58,7 @@
     var html5QrcodeScanner = new Html5QrcodeScanner(
         "reader", {
             fps: 10,
-            qrbox: 250
+            qrbox: 250,
         });
     html5QrcodeScanner.render(onScanSuccess, onScanError);
 </script>
