@@ -47,7 +47,7 @@
     // '<span class="result">' +  + '</span>'
     function onScanSuccess(qrCodeMessage) {
 
-        document.getElementById('result').innerHTML = prompt(qrCodeMessage) ;
+        document.getElementById('result').innerHTML = '<input type="text" class="result form-control mb-3" name="fName" value=' + qrCodeMessage + 'placeholder=' + qrCodeMessage + '></input>' ;
     }
 
     function onScanError(errorMessage) {

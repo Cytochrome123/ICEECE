@@ -1,7 +1,5 @@
 const mongoose = require("mongoose")
 const contactSchema = new mongoose.Schema({
-    fileName: String,
-    filePath:String,
     fName: String,
     lName: String,
     email: String,
@@ -10,8 +8,7 @@ const contactSchema = new mongoose.Schema({
     country : String,
     institution: String,
     department: String,
-    category: String,
-    qrcode: String
+    iD: String
 })
 
 // userSchema.pre('^find', function(next){

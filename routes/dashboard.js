@@ -8,7 +8,7 @@ const dashboard = require("../controllers/dashboard");
 
 router.get("/", isLoggedIn , dashboard.getHome);
 router.get("/dashboard", isLoggedIn, dashboard.getDashboard);
-router.get("/contacts", isLoggedIn , dashboard.getContacts);
+// router.get("/contacts", isLoggedIn , dashboard.getContacts);
 
 //###########USER#######
 

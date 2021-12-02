@@ -400,13 +400,32 @@ exports.handlePublicProfile = async(req,res)=>{
     })
 }
 exports.getContact = async(req,res)=>{
-    await Contact.find()
+    await Contact.find({iD:req.user._id})
     .then(contacts=>{
-        res.render("user/contact")
+        res.render("user/contact", {contacts})
     })
 }
 exports.handleContact = async(req,res)=>{
-    
+    const {fName} = req.body
+    console.log(req.body)
+    await User.findOne({fName:fName})
+    .then(doc=>{
+        const saving = new Contact({
+            fName: doc.fName,
+            lName: doc.lName,
+            email: doc.email,
+            phoneNumber: doc.phoneNumber,
+            country : doc.country,
+            institution: doc.institution,
+            department: doc.department,
+            iD: req.user._id
+        }).save()
+        .then(saved=>{
+            res.redirect("/contacts")
+        })
+        
+    })
+    // await User.findOne({})
 }
 
 

@@ -32,7 +32,7 @@ exports.getDashboard = async(req, res) => {
         })
         .catch((e) => console.log(e, "out"));
 };
-exports.getContacts = async(req, res) => {};
+// exports.getContacts = async(req, res) => {};
 
 // ########USER#########
 exports.getPaymentConfirmation = (req, res) => {
