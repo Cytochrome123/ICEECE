@@ -399,7 +399,15 @@ exports.handlePublicProfile = async(req,res)=>{
         res.redirect("/profile" , {msg:"filled"})
     })
 }
-
+exports.getContact = async(req,res)=>{
+    await Contact.find()
+    .then(contacts=>{
+        res.render("user/contact")
+    })
+}
+exports.handleContact = async(req,res)=>{
+    
+}
 
 
 

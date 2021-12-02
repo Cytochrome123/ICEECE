@@ -1,0 +1,240 @@
+<%- include('../partial/head') %>
+
+    <%- include('../partial/sidebar') %>
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="/admin/role-player">Role Player</a></li>
+                    </ol>
+
+                    <h5><a href="#" data-toggle="modal" data-target="#createRp" class="btn btn-primary mt-5"><i
+                                class="fa fa-pencil"></i> Add Role
+                            Player</a></h5>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="modal fade" id="createRp">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">
+                                            Add Contact
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="" method="post">
+                                            <div class="form-group col-lg-6 col-md-12">
+                                                <div class="col-lg-6 col-md-9">
+                                                    <div class="text-center"><h3>Scanner</h3></div>
+                                                    <div style="width:500px;" id="reader"></div>
+                                                    
+                                                    <div class="col" style="padding:30px;"></div>
+                                                    
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <h4>SCAN RESULT</h4>
+                                                    <div id="result">Result Here</div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Contacts</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        
+                                        <thead>
+                                                <tr>
+                                                    <th class="width50">
+                                                        <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                                            <input type="checkbox" class="custom-control-input" id="checkAll" required="">
+                                                            <label class="custom-control-label" for="checkAll"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th>S/N</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Role</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Institution</th>
+                                                    <th>Manage</th>
+                                                </tr>
+                                        </thead>
+                                        <% for (let contact of contacts){%>
+                                            <tbody>
+                                                
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox checkbox-success check-lg mr-3">
+                                                                <input type="checkbox" class="custom-control-input" id="customCheckBox3" required="">
+                                                                <label class="custom-control-label" for="customCheckBox3"></label>
+                                                            </div>
+                                                        </td>
+                                                        <% let arr = Object.values(contacts)%>
+													    <td><strong><%=arr.indexOf(contact) + 1 %></strong></td>
+                                                        <td>
+                                                            <%= contact.fName %>
+                                                        </td>
+                                                        <td>
+                                                            <%= contact.lName %>
+                                                        </td>
+                                                        <td>
+                                                            <%= contact.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= contact.phoneNumber %>
+                                                        </td>
+                                                        <td><%= contact.institution %> </td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#edit<%=contact._id%>"><i
+                                                                        class="fa fa-pencil"></i></a>
+                                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#mailBc"><i
+                                                                        class="fa fa-envelope"></i></a>
+                                                                <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" data-toggle="modal" data-target="#delete"><i
+                                                                    class="fa fa-trash"></i></a>
+                                                                
+                                                                
+
+                                                                <!-- Button trigger modal -->
+
+
+                                                                <div class="modal fade" id="edit<%=contact._id%>">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">
+                                                                                    <%=contact.fName%>
+                                                                                </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <form action="" method="post">
+                                                                                    <div class="form-group col-lg-6 col-md-12">
+                                                                                        <div class="col-lg-6 col-md-9">
+                                                                                            <div class="text-center"><h3>Scanner</h3></div>
+                                                                                            <div style="width:500px;" id="reader"></div>
+                                                                                            
+                                                                                            <div class="col" style="padding:30px;"></div>
+                                                                                            
+                                                                                        </div>
+                                                                                        <div class="col-lg-6 col-md-12">
+                                                                                            <h4>SCAN RESULT</h4>
+                                                                                            <div id="result">Result Here</div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="modal fade" id="mailBc">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+    
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">
+                                                                                    Send Mail Broadcast
+                                                                                </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+    
+                                                                            <div class="modal-body">
+                                                                                <div class="modal-body">
+                                                                                    <form action="#">
+                                                                                        <div class="form-group">
+                                                                                            <textarea class="form-control" rows="4" id="Broadcast" placeholder="Send a broadcast to role-players"></textarea>
+                                                                                        </div>
+    
+                                                                                        <input type="text" name="email" class="form-control mb-3" placeholder="Email">
+    
+                                                                                        <button type="submit" class="btn btn-primary">Send Broadcast</button>
+    
+                                                                                    </form>
+                                                                                </div>
+    
+                                                                            </div>
+    
+                                                                        </div>
+                                                                    </div>
+    
+                                                                </div>
+
+                                                                <div class="modal fade" id="delete">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h2 class="modal-title">
+                                                                                    Are you sure you want to delete <em> <%=contact.fName%> <%= contact.lName %>  ?</em>
+                                                                                </h2>
+                                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <form action="/admin/role-player/<%= contact._id %>?_method=DELETE" method="post">
+                                                                                    <div class="text-right">
+                                                                                        <button type="submit" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                            </tbody>
+                                        <% } %>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        <%- include('../partial/footer') %>
