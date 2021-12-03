@@ -61,8 +61,8 @@ router.route("/public-profile")
 .post(isLoggedIn , user.handlePublicProfile)
 
 router.route("/contacts")
-.get(user.getContact)
-.post(user.handleContact)
+.get(isLoggedIn , user.getContact)
+.post(isLoggedIn , user.handleContact)
 
 // DASH ROUTES
 router.get('/regDash', user.getRegDash)

@@ -429,7 +429,9 @@ exports.deletePaper = async(req, res) => {
         res.send(error);
     }
 };
-
+exports.getFiles = async(req,res)=>{
+    res.render("user/files")
+}
 // exports.downloadFile = async(req, res) => {
 //     const { id } = req.params;
 

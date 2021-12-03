@@ -102,7 +102,11 @@ router.route("/admin/session/:id")
 .put(isLoggedIn , dashboard.handleEditSession)
 .delete(isLoggedIn , dashboard.deleteSession)
 
-router.route("/admin/delete/:id").get(isLoggedIn , dashboard.deletePaper);
+router.route("/admin/delete/:id")
+.get(isLoggedIn , dashboard.deletePaper);
+
+
+router.get("/files", isLoggedIn , dashboard.getFiles)
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
